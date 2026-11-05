@@ -1,0 +1,32 @@
+.integration-toolbar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:0 0 20px; }
+.integration-toolbar input { width:auto; }
+.material-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px; }
+.material { border:1px solid var(--line, #343d48); border-radius:16px; padding:20px; background:var(--panel, #151c25); }
+.material h3 { margin:12px 0; line-height:1.45; }
+.material .material-preview { white-space:pre-wrap; max-height:180px; overflow:auto; font-size:0.8125rem; }
+.material select { width:100%; margin:12px 0; }
+.material .material-project { margin-bottom:4px; }
+.material .actions { margin-top:12px; flex-wrap:wrap; }
+.material progress { width:100%; height:6px; accent-color:var(--accent, #9acd86); }
+.source-warning { color:var(--warning, #e4b561); font-size:0.8125rem; }
+.week-grid { display:grid; grid-template-columns:repeat(7,minmax(165px,1fr)); gap:10px; overflow-x:auto; padding-bottom:15px; }
+.plan-day { min-height:200px; border:1px solid var(--line, #343d48); border-radius:14px; padding:12px; }
+.plan-day h3 { margin:0 0 15px; font-size:0.875rem; }
+.plan-item { display:block; width:100%; text-align:left; background:var(--panel, #151c25); padding:12px; margin-bottom:10px; border-left:3px solid var(--accent, #9acd86); border-radius:8px; line-height:1.5; }
+.plan-item small { display:block; opacity:.65; }
+.plan-item.due { border-left-color:var(--warning, #e4b561); }
+.plan-item.calendar { border-left-color:#7aa2dc; }
+.plan-item.article { border-left-color:#b393ce; }
+.plan-item.conflict { outline:1px solid #d97575; }
+.planning-conflicts { border:1px solid #d97575; border-radius:12px; padding:14px; margin-bottom:20px; }
+.integration-detail .entry { margin-bottom:12px; }
+.material-links { display:flex; flex-wrap:wrap; gap:8px 16px; margin:12px 0; }
+.material-links a { overflow-wrap:anywhere; }
+.task-article-actions { border:1px solid var(--accent, #9acd86); border-radius:12px; padding:14px 18px; margin:16px 0; }
+.task-article-actions h3 { margin:0 0 12px; }
+.task-article-actions > div + div { border-top:1px solid var(--line, #343d48); margin-top:12px; padding-top:12px; }
+.task-article-link summary { cursor:pointer; }
+.task-article-link label { display:grid; gap:8px; margin:14px 0; }
+.task-article-link select { width:100%; min-width:0; }
+html[data-theme="light"] .material, html[data-theme="light"] .plan-item { background:#fff; }
+@media(max-width:760px) { .week-grid { grid-template-columns:repeat(7,220px); } }

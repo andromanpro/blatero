@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Проекты · Blatero</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/blatero-mark.svg?v=e1">
+  <link rel="stylesheet" href="/projects/assets/projects.css">
+  <link rel="stylesheet" href="/projects/assets/projects-integrations.css">
+  <link rel="stylesheet" href="/projects/assets/projects-layout.css">
+  <link rel="stylesheet" href="/assets/workspace.css">
+  <link rel="stylesheet" href="/assets/brand.css">
+  <link rel="stylesheet" href="/projects/assets/projects-daily.css">
+  <link rel="stylesheet" href="/projects/assets/projects-library.css">
+  <link rel="stylesheet" href="/projects/assets/projects-merge.css">
+  <link rel="stylesheet" href="/projects/assets/projects-lifecycle.css">
+  <script defer src="/assets/i18n.js"></script>
+  <script defer src="/projects/assets/projects-i18n.js"></script>
+  <script defer src="/projects/assets/projects.js"></script>
+  <script defer src="/projects/assets/projects-integrations.js"></script>
+  <script defer src="/projects/assets/projects-daily.js"></script>
+  <script defer src="/projects/assets/projects-library.js"></script>
+  <script defer src="/projects/assets/projects-closure.js"></script>
+  <script defer src="/projects/assets/projects-merge.js"></script>
+  <script defer src="/projects/assets/projects-lifecycle.js"></script>
+  <script defer src="/assets/brand.js"></script>
+  <script defer src="/assets/workspace.js"></script>
+  <script defer src="/assets/workspace-guide.js"></script>
+  <script defer src="/assets/workspace-preferences.js"></script>
+  <script defer src="/projects/assets/projects-motion.js"></script>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><div class="ambient-orbit"></div><div class="ambient-grid"></div></div>
+<header><a class="brand" href="/"><img src="/assets/blatero-mark.svg" alt="" width="34" height="34">blatero<span> / project space</span></a><span class="header-signal"><i aria-hidden="true"></i>ЛОКАЛЬНОЕ ПРОСТРАНСТВО</span><div class="header-tools"><time id="workspaceClock" aria-label="Время в Москве"></time><button id="motionToggle" aria-pressed="true" title="Включить или выключить анимации">Движение <span aria-hidden="true">◉</span></button><button id="themeToggle" aria-label="Переключить тему">Тема</button><button id="newProject">+ Проект</button></div></header>
+<div class="workspace-layout">
+<aside class="project-rail" aria-label="Проекты"><div class="rail-heading"><span>ПРОЕКТЫ</span><span id="projectTotal"></span></div><label class="sr-only" for="projectSearch">Найти проект</label><input id="projectSearch" type="search" placeholder="Поиск по пространству"><nav id="projectNav" aria-label="Выбор проекта"></nav><div class="rail-note"><span class="connection-dot" aria-hidden="true"></span><span>ПАМЯТЬ НА СВЯЗИ<br><small>Люди + агенты. Общий контекст.</small></span></div></aside>
+<main>
+  <section class="page-heading"><div class="hero-copy"><p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span>РАБОТА × ПАМЯТЬ</p><h1 id="workspaceTitle">Вся работа. <em>В поле зрения.</em></h1><p id="projectDescription" class="quiet">Задачи, решения и следующий шаг — в одном месте.</p><div class="actions"><button class="primary" id="newTask">Новая задача <span aria-hidden="true">↗</span></button><button id="projectInfo" hidden>О проекте</button><span class="hero-hint">Понимать сейчас.<br>Помнить потом.</span></div></div>
+    <div class="memory-map" aria-hidden="true"><span class="map-caption">КОНТУР РАБОТЫ / 01</span><svg viewBox="0 0 340 190" fill="none"><defs><linearGradient id="memoryGradient"><stop stop-color="#d6ff62"/><stop offset="1" stop-color="#6de5ff"/></linearGradient></defs><g class="map-traces" stroke="currentColor"><path d="M6 95H73L100 68H163M173 106H230L257 133H334M170 19V53M170 137V177M43 44H102L121 63M219 123L238 148H288"/><path d="M24 150H93L122 121M218 65L241 40H315"/></g><g class="map-ring"><circle cx="170" cy="95" r="65" stroke="currentColor" stroke-dasharray="2 8"/><circle cx="170" cy="95" r="55" stroke="url(#memoryGradient)" stroke-dasharray="65 21 18 130"/></g><g class="map-core"><path d="M170 55L205 75V115L170 135L135 115V75Z" fill="currentColor" fill-opacity=".07" stroke="url(#memoryGradient)"/><path d="M170 70L192 83V108L170 121L148 108V83Z" stroke="url(#memoryGradient)"/><path d="M158 95H182M170 83V107" stroke="url(#memoryGradient)"/></g><g class="map-points" fill="currentColor"><circle cx="73" cy="95" r="3"/><circle cx="257" cy="133" r="3"/><circle cx="170" cy="19" r="3"/><circle cx="315" cy="40" r="3"/></g><circle class="map-packet" r="3" fill="#d6ff62"><animateMotion dur="5s" repeatCount="indefinite" path="M6 95H73L100 68H163"/></circle><circle class="map-packet" r="3" fill="#6de5ff"><animateMotion dur="6s" repeatCount="indefinite" path="M173 106H230L257 133H334"/></circle></svg><div class="map-legend"><span>01 / СУТЬ</span><span>02 / МЕТОД</span><span>03 / РЕЗУЛЬТАТ</span></div><div id="workSpectrum" class="work-spectrum"></div></div>
+  </section>
+  <section id="overview" class="overview" aria-label="Обзор рабочего пространства"></section>
+  <details class="history-notice"><summary><span class="history-symbol" aria-hidden="true">↳</span><span id="historySummary">История рабочего пространства</span><span class="history-expand">Подробнее +</span></summary><p id="importBanner" class="import-note" hidden></p></details>
+  <div class="toolbar"><label class="sr-only" for="projectFilter">Проект</label><select id="projectFilter"><option value="">Все проекты</option></select><label class="sr-only" for="search">Поиск задач</label><input id="search" type="search" placeholder="Найти задачу, метод или решение"><label class="sr-only" for="historyFilter">Период истории</label><select id="historyFilter"><option value="recent">Последние 30 дней</option><option value="all">Вся история</option><option value="native">Только новые задачи</option></select><span id="queue" class="quiet" role="status"></span></div>
+  <div class="tabs-row"><nav class="tabs" aria-label="Представление проектов"><button data-view="daily"><span aria-hidden="true">◈</span>Сегодня</button><button data-view="board" aria-current="page"><span aria-hidden="true">▥</span>Доска</button><button data-view="planning"><span aria-hidden="true">▦</span>План</button><button data-view="materials"><span aria-hidden="true">▤</span>Материалы</button><button data-view="list"><span aria-hidden="true">≡</span>Список</button><button data-view="knowledge"><span aria-hidden="true">◇</span>Библиотека</button></nav><details class="tabs-more" id="tabsMore"><summary><span aria-hidden="true">⋯</span>Ещё</summary><div class="tabs-more-menu"><button data-view="recall"><span aria-hidden="true">◎</span>Вспомнить</button><button data-view="efficiency"><span aria-hidden="true">↗</span>Эффективность</button><button data-view="merge"><span aria-hidden="true">⇄</span>Сравнение</button><button data-view="closed"><span aria-hidden="true">↳</span>Закрытые</button></div></details></div>
+  <div class="view-heading"><div><span id="viewCode" class="view-code">01 / WORKFLOW</span><h2 id="viewTitle">От замысла к результату</h2></div><p id="viewHint">Перетаскивайте карточки между колонками</p></div>
+  <section id="content" aria-live="polite"></section>
+</main>
+</div>
+<div id="toast" role="status" hidden></div>
+<dialog id="projectDialog"><form id="projectForm"><div class="dialog-heading"><h2>Новый проект</h2><button type="button" data-close aria-label="Закрыть">×</button></div><label>Название<input name="name" required maxlength="160"></label><label>Общее описание<textarea name="description" maxlength="8000"></textarea></label><label>Рабочая папка<input name="workspace" placeholder="Например, C:/Projects/blatero"></label><p class="quiet">Папка помогает агенту выбрать проект. Для общей рабочей папки привязку выбираем явно.</p><button class="primary">Создать проект</button></form></dialog>
+<dialog id="createDialog"><form id="createForm"><div class="dialog-heading"><h2>Новая задача</h2><button type="button" data-close aria-label="Закрыть">×</button></div><label>Проект<select name="project_id" id="createProject"></select></label><label>Название<input name="title" required maxlength="240"></label><label>Что должно получиться<textarea name="goal" maxlength="4000"></textarea></label><button class="primary">Создать и открыть</button></form></dialog>
+<dialog id="taskDialog" class="task-dialog"><div class="dialog-heading"><h2 id="detailTitle">Задача</h2><button data-close aria-label="Закрыть">×</button></div><div id="detail"></div></dialog>
+<dialog id="acceptDialog"><form id="acceptForm"><div class="dialog-heading"><h2>Принять результат</h2><button type="button" data-close aria-label="Закрыть">×</button></div><p>Карточка перейдет в «Завершено». Приемка сохранится в истории.</p><label>Какой результат проверен и принят<textarea name="reason" required maxlength="2000"></textarea></label><button class="primary">Принять и завершить</button></form></dialog>
+<dialog id="closeDialog"><form id="closeForm"><div class="dialog-heading"><h2>Закрыть задачу</h2><button type="button" data-close aria-label="Отмена">×</button></div><p id="closeTaskTitle"></p><p class="quiet">Карточка уйдёт из текущей доски. История и материалы сохранятся; восстановление доступно в разделе «Закрытые». Закрытие не означает приёмку результата.</p><label>Почему задача больше не актуальна<textarea name="reason" required maxlength="2000" placeholder="Завершён разовый аудит; задача отменена или заменена; служебная запись"></textarea></label><button class="primary">Закрыть задачу</button></form></dialog>
+<dialog id="recallDialog"><div class="dialog-heading"><h2>Вспомнить без подсказки</h2><button data-close aria-label="Закрыть">×</button></div><div id="recallContent"></div></dialog>
+<dialog id="projectInfoDialog" class="task-dialog"><div class="dialog-heading"><h2 id="projectInfoTitle">О проекте</h2><button data-close aria-label="Закрыть">×</button></div><div id="projectInfoContent"></div></dialog>
+</body></html>

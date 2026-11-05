@@ -1,0 +1,20 @@
+/* E / Resonance. Motion consumes capture levels and hint lifecycle, never a demo clock. */
+@font-face{font-family:Manrope;src:url('/assets/fonts/Manrope-800.ttf') format('truetype');font-style:normal;font-weight:800;font-display:swap}
+.space-brand .brand-emblem,.compact-brand .brand-emblem{display:block;position:relative;flex:none;width:34px;height:34px;color:var(--space-lime);line-height:0}
+.compact-brand{display:none;flex:none;align-items:center;text-decoration:none;margin-right:3px}
+body.meeting-recording:not(.meeting-controls-expanded) .compact-brand,body.meeting-minimal .compact-brand{display:inline-flex}
+.brand-emblem>img,.brand-emblem>svg{display:block;width:100%;height:100%;overflow:visible}
+.brand-emblem>svg{color:inherit!important}
+.brand-emblem .brand-tile{display:none}
+.brand-emblem .brand-body,.brand-emblem .brand-sound,.brand-emblem .brand-halo{transform-origin:32px 32px;transition:transform .17s ease-out,opacity .22s ease-out}
+.brand-emblem[data-brand-state=listening] .brand-body{transform:scale(var(--brand-x,1),var(--brand-y,1)) skewX(var(--brand-skew,0deg))}
+.brand-emblem[data-brand-state=listening] .brand-sound{opacity:var(--brand-voice,0);transform:scale(var(--brand-wave,1))}
+.brand-emblem[data-brand-state=thinking] .brand-sweep{opacity:1;animation:brand-light-pass 1.35s linear infinite}
+.brand-emblem[data-brand-state=ready] .brand-body{animation:brand-settle .55s cubic-bezier(.2,.9,.25,1) both}
+.brand-emblem[data-brand-state=ready] .brand-halo{animation:brand-ready .85s ease-out both}
+@keyframes brand-light-pass{from{transform:translateX(-8px)}to{transform:translateX(112px)}}
+@keyframes brand-settle{0%{transform:scale(.89,1.1)}45%{transform:scale(1.12,.91)}75%{transform:scale(.98,1.02)}100%{transform:scale(1)}}
+@keyframes brand-ready{0%{opacity:.8;transform:scale(.75)}100%{opacity:0;transform:scale(1.2)}}
+.brand-emblem[data-brand-motion=off] *{animation:none!important;transition:none!important;transform:none!important}
+.brand-emblem[data-brand-motion=off] .brand-sound,.brand-emblem[data-brand-motion=off] .brand-sweep,.brand-emblem[data-brand-motion=off] .brand-halo{opacity:0!important}
+@media(prefers-reduced-motion:reduce){.brand-emblem *{animation:none!important;transition:none!important;transform:none!important}.brand-emblem .brand-sound,.brand-emblem .brand-sweep,.brand-emblem .brand-halo{opacity:0!important}}

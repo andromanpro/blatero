@@ -1,0 +1,48 @@
+[project]
+name = "blatero"
+version = "1.0.2-rc.8"
+description = "Локальный ассистент встреч и технических интервью"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+authors = [{ name = "androman" }]
+keywords = ["meetings", "transcription", "whisper", "interview", "local-first"]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "av==18.0.0",
+  "caldav==3.2.1",
+  "cryptography==50.0.1",
+  "defusedxml==0.7.1",
+  "fastapi==0.139.2",
+  "faster-whisper==1.2.1",
+  "google-api-python-client==2.198.0",
+  "google-auth-oauthlib==1.4.0",
+  "grpcio==1.82.1",
+  "icalendar==7.2.2",
+  "keyring==25.7.0",
+  "natasha==1.6.0",
+  "markdown-it-py==4.0.0",
+  "python-docx==1.2.0",
+  "numpy==2.5.1",
+  "Pillow==13.0.0",
+  "protobuf==6.33.6",
+  "PyAudioWPatch==0.2.12.8",
+  "pypdf==6.21.4",
+  "requests==2.34.2",
+  "sherpa-onnx==1.13.1",
+  "uvicorn[standard]==0.51.0",
+  "yandexcloud==0.399.0",
+]
+
+[project.optional-dependencies]
+video = ["windows-capture==2.0.1; sys_platform == 'win32'", "opencv-python==5.0.0.93; sys_platform == 'win32'"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = [".venv", ".venv-tts", "sessions"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+# CLI-модули сначала настраивают UTF-8 stdout/stderr, поэтому E402 здесь ожидаем.
+ignore = ["E402"]

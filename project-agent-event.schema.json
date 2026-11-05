@@ -1,0 +1,729 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:blatero:agent-event:v1",
+  "title": "Контракт события агента Blatero v1",
+  "description": "Формат события. Полномочия, привязки и версии проверяет локальный сервис.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "event_type",
+    "project_id",
+    "work_item_id",
+    "actor",
+    "source",
+    "emitted_at",
+    "payload",
+    "references"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 160,
+      "pattern": "^[A-Za-z0-9:_-]+$",
+      "description": "Стабильный идентификатор исходного события; повтор доставки сохраняет его."
+    },
+    "event_type": {
+      "enum": [
+        "session.started",
+        "session.checkpoint",
+        "session.outcome",
+        "session.ended",
+        "task.created",
+        "task.updated",
+        "task.status_changed",
+        "knowledge.proposed",
+        "check.recorded",
+        "outcome.recorded"
+      ]
+    },
+    "project_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid",
+      "description": "null означает отсутствие подтвержденной привязки к проекту."
+    },
+    "work_item_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "expected_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "kind": {
+          "enum": [
+            "agent",
+            "hook",
+            "human",
+            "service"
+          ]
+        }
+      },
+      "description": "Заявленное происхождение. Сервис связывает его с аутентифицированным вызывающим; поле не предоставляет права."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "session_id",
+        "event_key",
+        "sequence"
+      ],
+      "properties": {
+        "system": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "turn_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160,
+          "pattern": "^[^\\u0000-\\u0020\\u007f]+$"
+        },
+        "event_key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "parent_run_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    "emitted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "references": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"event_type": {"const": "session.outcome"}}},
+      "then": {
+        "required": ["expected_revision"],
+        "properties": {
+          "work_item_id": {"type": "string", "format": "uuid"},
+          "source": {"required": ["turn_id"]},
+          "payload": {
+            "type": "object", "additionalProperties": false,
+            "required": ["summary", "method", "rationale", "next_step"],
+            "properties": {
+              "summary": {"type": "string", "minLength": 1, "maxLength": 4000},
+              "method": {"type": "string", "minLength": 1, "maxLength": 2000},
+              "rationale": {"type": "string", "minLength": 1, "maxLength": 2000},
+              "next_step": {"type": "string", "minLength": 1, "maxLength": 2000}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "task.created",
+              "task.updated",
+              "task.status_changed",
+              "knowledge.proposed",
+              "check.recorded",
+              "outcome.recorded"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "work_item_id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "task.updated",
+              "task.status_changed",
+              "session.checkpoint",
+              "outcome.recorded"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "expected_revision"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "session.started"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "context_requested"
+            ],
+            "properties": {
+              "context_requested": {
+                "type": "boolean"
+              },
+              "switch_task": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "session.ended"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "reason",
+              "next_step"
+            ],
+            "properties": {
+              "reason": {
+                "enum": [
+                  "turn_finished",
+                  "session_closed",
+                  "interrupted",
+                  "waiting_input",
+                  "failed"
+                ]
+              },
+              "next_step": {
+                "type": "string",
+                "maxLength": 2000
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "session.checkpoint"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "work_item_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "summary",
+              "next_step"
+            ],
+            "properties": {
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4000
+              },
+              "method": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "rationale": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "next_step": {
+                "type": "string",
+                "maxLength": 2000
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "task.created"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "initial_status"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "goal": {
+                "type": "string",
+                "maxLength": 4000
+              },
+              "initial_status": {
+                "const": "inbox"
+              },
+              "requires_binding": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "task.updated"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "patch"
+            ],
+            "properties": {
+              "patch": {
+                "$ref": "#/$defs/task_patch"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "task.status_changed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "from",
+              "to",
+              "reason"
+            ],
+            "properties": {
+              "from": {
+                "$ref": "#/$defs/status"
+              },
+              "to": {
+                "$ref": "#/$defs/status"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              "policy_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "task.status_changed"
+          },
+          "payload": {
+            "properties": {
+              "to": {
+                "const": "done"
+              }
+            },
+            "required": [
+              "to"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "references": {
+            "minItems": 1
+          },
+          "payload": {
+            "required": [
+              "policy_id"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {"const": "task.status_changed"},
+          "payload": {"properties": {"to": {"const": "closed"}}, "required": ["to"]}
+        }
+      },
+      "then": {"properties": {"references": {"minItems": 1}}}
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "knowledge.proposed"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "references": {
+            "minItems": 1
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "text",
+              "state"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "decision",
+                  "fact",
+                  "constraint",
+                  "open_question"
+                ]
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4000
+              },
+              "state": {
+                "const": "draft"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "check.recorded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "result",
+              "limitations"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "result": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "not_run"
+                ]
+              },
+              "limitations": {
+                "type": "string",
+                "maxLength": 4000
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "outcome.recorded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "result",
+              "policy_id",
+              "reason"
+            ],
+            "properties": {
+              "result": {
+                "enum": [
+                  "accepted",
+                  "needs_changes",
+                  "cancelled"
+                ]
+              },
+              "policy_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "outcome.recorded"
+          },
+          "payload": {
+            "properties": {
+              "result": {
+                "const": "accepted"
+              }
+            },
+            "required": [
+              "result"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "references": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "status": {
+      "enum": [
+        "inbox",
+        "active",
+        "waiting",
+        "review",
+        "done",
+        "closed"
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_id",
+        "kind",
+        "snapshot_sha256"
+      ],
+      "properties": {
+        "reference_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "kind": {
+          "enum": [
+            "source_span",
+            "artifact",
+            "check",
+            "acceptance"
+          ]
+        },
+        "snapshot_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "task_patch": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "goal": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "method": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "rationale": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "next_step": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "priority": {
+          "enum": [
+            "low",
+            "normal",
+            "high"
+          ]
+        },
+        "due": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "planned_start": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "estimate_minutes": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 1440
+        },
+        "parent_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        },
+        "project_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        }
+      }
+    }
+  }
+}

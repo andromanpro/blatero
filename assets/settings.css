@@ -1,0 +1,106 @@
+/* Settings have a single content column; extra parameters stay in local details. */
+#settingsOverlay { --acc:#d7ff58; --green:#8bdde5; --muted:#a8b6c1; --text:#eaf0f4; --panel:#10171e; --panel-hi:#172129; --bg:#090e12; --border:#2d3b46; --border-hi:#71814c; --yellow:#f6c76c; --settings-on-accent:#11170a; padding:28px 24px; overflow:auto; }
+:root[data-theme=light] #settingsOverlay { --acc:#3e6200; --green:#00636a; --muted:#4d626b; --text:#112d2f; --panel:#f7fbf9; --panel-hi:#e3ebe6; --bg:#edf3ef; --border:#b9c9c4; --border-hi:#718b78; --yellow:#855d00; --settings-on-accent:#fff; }
+#settingsOverlay.show { animation:none; }
+#settingsOverlay .settings-shell { max-width:1280px; margin:0 auto; }
+#settingsOverlay .settings-head { max-width:none; padding:0; gap:16px; align-items:start; position:relative; margin-bottom:26px; background:transparent; border:0; height:auto; min-height:0; top:auto; box-shadow:none; }
+#settingsOverlay .settings-head > div { flex:1; min-width:0; }
+#settingsOverlay h3 { font:700 1.5rem/1.3 var(--f-display); margin:0 0 8px; padding:0; }
+#settingsOverlay h3::before,#settingsOverlay .setting-card::before { content:none; }
+#settingsOverlay .ovclose { position:static; min-width:44px; min-height:44px; padding:6px; flex:none; font-size:22px; }
+#settingsOverlay p { font:400 .875rem/1.55 var(--f-body,Inter,'Segoe UI',sans-serif); color:var(--muted); margin:8px 0 16px; }
+#settingsOverlay button,#settingsOverlay input,#settingsOverlay select,#settingsOverlay summary { font:500 .875rem/1.4 var(--f-body,Inter,'Segoe UI',sans-serif); letter-spacing:normal; text-transform:none; }
+#settingsOverlay button { min-height:44px; border-radius:8px; white-space:normal; background:var(--panel); color:var(--text); border-color:var(--border); }
+#settingsOverlay button.primary { background:var(--acc); border-color:var(--acc); color:var(--settings-on-accent); }
+#settingsOverlay button.danger { color:#e58c9e; }
+:root[data-theme=light] #settingsOverlay button.danger { color:#9c1b37; }
+#settingsOverlay button:focus-visible,#settingsOverlay a:focus-visible,#settingsOverlay summary:focus-visible,#settingsOverlay input:focus-visible,#settingsOverlay select:focus-visible { outline:3px solid var(--acc); outline-offset:3px; }
+#settingsOverlay .settings-layout { display:grid; grid-template-columns:232px minmax(0,1fr); gap:32px; align-items:start; }
+#settingsOverlay .settings-sidebar { position:sticky; top:0; min-width:0; }
+#settingsSearch { width:100%; min-height:46px; margin-bottom:14px; padding:10px 12px; border:1px solid var(--border); border-radius:8px; background:var(--panel); color:var(--text); appearance:none; }
+#settingsNav { display:grid; gap:4px; }
+#settingsNav button { display:flex; align-items:center; gap:12px; text-align:left; border:1px solid transparent; padding:10px 12px; background:transparent; color:var(--muted); }
+#settingsNav button[aria-current="page"] { color:var(--acc); background:var(--panel-hi); border-color:var(--border-hi); box-shadow:inset 3px 0 var(--acc); }
+#settingsNav button:not([aria-current="page"]) { background:transparent; color:var(--muted); box-shadow:none; border-color:transparent; }
+#settingsNav svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.7; flex:none; }
+#settingsOverlay .settings-scope { margin:20px 10px; font-size:.8125rem; }
+#settingsOverlay .settings-scope p { font-size:.8125rem; margin-bottom:8px; }
+#settingsOverlay .settings-scope button { display:block; border:0; color:var(--acc); background:none; padding:6px 0; text-align:left; }
+#settingsOverlay .settings-mobile-nav { display:none; }
+#settingsOverlay .settings-content { min-width:0; }
+#settingsOverlay .setting-card { display:block; width:auto; margin:0; padding:22px; border:1px solid var(--border); border-radius:12px; background:var(--panel); break-inside:auto; }
+#settingsOverlay [hidden] { display:none!important; }
+#settingsOverlay .setting-card h4 { font:700 1.25rem/1.3 var(--f-display); color:var(--text); letter-spacing:normal; text-transform:none; margin:0 0 16px; }
+#settingsOverlay h5 { font:600 1rem/1.4 var(--f-body,Inter,'Segoe UI',sans-serif); margin:0 0 6px; color:var(--text); }
+#settingsOverlay .setting-row { display:grid; grid-template-columns:minmax(170px,.8fr) minmax(0,1.2fr); gap:20px; align-items:center; margin:0; padding:16px 0; border-bottom:1px solid var(--border); max-width:none; }
+#settingsOverlay .setting-row,#settingsOverlay .consent-check { scroll-margin-bottom:130px; }
+#settingsOverlay .setting-row > label { font:600 .875rem/1.45 var(--f-body,Inter,'Segoe UI',sans-serif); letter-spacing:normal; text-transform:none; color:var(--text); }
+#settingsOverlay .setting-row input,#settingsOverlay .setting-row select { padding:10px 12px; min-height:44px; min-width:0; width:100%; }
+#settingsOverlay .setting-row input[type=range] { padding:0; }
+#settingsOverlay .settings-help,#settingsOverlay .provider-guide,#settingsOverlay .workspace-status,#settingsOverlay #llmProviderHelp { font-size:.8125rem; line-height:1.55; overflow-wrap:anywhere; }
+#settingsOverlay .workspace-status { margin:12px 0; }
+#settingsOverlay .secret-control { min-width:0; }
+#settingsOverlay .consent-check { padding:16px 0; display:flex; gap:12px; align-items:start; }
+#settingsOverlay .consent-check input { flex:none; width:20px; height:20px; margin-top:2px; accent-color:var(--acc); }
+#settingsOverlay .consent-check strong { font:600 .875rem/1.5 var(--f-body,Inter,'Segoe UI',sans-serif); }
+#settingsOverlay .consent-detail { display:block; font:.8125rem/1.55 var(--f-body,Inter,'Segoe UI',sans-serif); color:var(--muted); margin-top:5px; }
+#settingsOverlay details { border:1px solid var(--border); border-radius:9px; padding:14px 16px; margin-top:18px; }
+#settingsOverlay summary { cursor:pointer; color:var(--text); min-height:32px; display:list-item; }
+#settingsOverlay details[open] > summary { margin-bottom:14px; }
+#settingsOverlay .settings-overview-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:22px; }
+#settingsOverlay .settings-overview-cards article { padding:18px; border:1px solid var(--border); border-radius:9px; display:flex; flex-direction:column; align-items:start; min-width:0; }
+#settingsOverlay .settings-overview-cards p { font-size:.8125rem; flex:1; overflow-wrap:anywhere; }
+#settingsOverlay .settings-overview-cards button { padding:8px 10px; }
+#settingsOverlay .settings-check-route { display:flex; gap:20px; align-items:center; justify-content:space-between; margin-top:22px; padding:20px; background:var(--panel-hi); border-radius:10px; }
+#settingsOverlay .settings-check-route p { margin-bottom:0; }
+#settingsOverlay .settings-check-route button { flex:none; }
+#settingsOverlay .settings-practice { display:grid; gap:12px; margin:20px 0; }
+#settingsOverlay .settings-practice button { display:grid; grid-template-columns:1fr auto; padding:18px; text-align:left; gap:5px 16px; }
+#settingsOverlay .settings-practice strong { font-size:1rem; }
+#settingsOverlay .settings-practice span { color:var(--muted); grid-column:1; font-weight:400; }
+#settingsOverlay .settings-practice b { grid-column:2; grid-row:1/3; align-self:center; color:var(--acc); }
+#settingsOverlay .settings-service-row { display:flex; gap:16px; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--border); }
+#settingsOverlay .settings-service-row p { margin-bottom:0; }
+#settingsOverlay .settings-service-row button { flex:none; }
+#settingsOverlay .action-label { display:inline!important; }
+#settingsOverlay .settings-footer { position:sticky; bottom:-28px; display:flex; align-items:center; justify-content:space-between; gap:18px; margin-top:20px; padding:16px 0 28px; background:var(--bg); border-top:1px solid var(--border); width:auto; height:auto; max-height:none; min-height:0; flex-wrap:wrap; }
+#settingsSaveState { font:.8125rem/1.5 var(--f-body,Inter,'Segoe UI',sans-serif); color:var(--muted); overflow-wrap:anywhere; }
+#settingsOverlay .settings-footer .setting-actions { margin:0; }
+#settingsOverlay .settings-footer[data-dirty="true"] #settingsSaveState { color:var(--yellow); }
+#settingsSearchResults { display:grid; gap:10px; }
+#settingsSearchResults button { text-align:left; padding:15px; }
+#settingsSearchResults small { display:block; color:var(--muted); margin-top:4px; }
+#settingsOverlay .settings-highlight { outline:3px solid var(--acc); outline-offset:5px; }
+#settingsOverlay .layout-panel-toggles { grid-template-columns:1fr; }
+#settingsOverlay .layout-panel-toggles label { font-size:.875rem; padding:12px; }
+#settingsOverlay #settingsWorkspace { margin-top:24px; }
+@media(max-width:1000px) {
+  #settingsOverlay .settings-layout { grid-template-columns:200px minmax(0,1fr); gap:20px; }
+  #settingsOverlay .settings-overview-cards { grid-template-columns:1fr; }
+  #settingsOverlay .setting-row { grid-template-columns:1fr; gap:8px; }
+}
+@media(max-width:600px) {
+  #settingsOverlay { padding:18px 16px; }
+  #settingsOverlay .settings-head { display:grid; grid-template-columns:1fr 44px; gap:12px; margin-bottom:20px; }
+  #settingsOverlay .settings-head h3 { font-size:1.25rem; }
+  #settingsOverlay .settings-home { grid-column:1; grid-row:2; justify-self:start; margin:0; }
+  #settingsOverlay .ovclose { grid-column:2; grid-row:1; }
+  #settingsOverlay .settings-layout { display:block; }
+  #settingsOverlay .settings-sidebar { position:static; }
+  #settingsNav,#settingsOverlay .settings-scope { display:none; }
+  #settingsOverlay .settings-mobile-nav { display:block; margin:0 0 20px; font-size:.8125rem; }
+  #settingsSectionSelect { width:100%; min-height:44px; padding:10px; margin-top:6px; }
+  #settingsOverlay .setting-card { padding:18px; }
+  #settingsOverlay .settings-check-route,#settingsOverlay .settings-service-row { flex-direction:column; align-items:start; }
+  #settingsOverlay .settings-check-route { padding:16px; }
+  #settingsOverlay .settings-footer { bottom:-18px; padding-bottom:18px; flex-direction:column; align-items:stretch; }
+  #settingsOverlay .settings-footer .setting-actions { display:grid; grid-template-columns:1fr 1fr; }
+  #settingsOverlay .secret-control { grid-template-columns:1fr; }
+}
+@media(forced-colors:active) {
+  #settingsNav button[aria-current=page] { border:2px solid Highlight; text-decoration:underline; }
+}
+.settings-change-count{margin-left:auto;min-width:1.5em;border:1px solid currentColor;border-radius:4px;text-align:center;color:var(--acc);font-weight:700;}
+.settings-change-count[hidden],#settingsJumpChanges[hidden]{display:none;}
+#settingsOverlay .settings-dirty{border-left:3px solid var(--acc);padding-left:12px;}
+#settingsOverlay [data-settings-dirty]{outline:1px solid var(--acc);outline-offset:2px;}

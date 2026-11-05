@@ -1,0 +1,5 @@
+# PyPI 0.1.7 всё ещё содержит только старый multilingual V2. Фиксируем
+# официальный commit с V3: он принимает t3_model="v3" и меньше галлюцинирует.
+chatterbox-tts @ git+https://github.com/resemble-ai/chatterbox.git@65b18437192794391a0308a8f705b1e33e633948
+# Perth 1.0.1 пока импортирует pkg_resources, удалённый из setuptools 81+.
+setuptools==80.9.0

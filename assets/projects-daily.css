@@ -1,0 +1,35 @@
+.daily-view .page-heading,.daily-view #overview,.daily-view .history-notice{display:none}
+.daily-view .toolbar #search,.daily-view .toolbar #historyFilter{display:none}
+.daily-view label[for=search],.daily-view label[for=historyFilter]{display:none}
+.daily-view .toolbar{margin-top:0}.daily-view .view-heading{margin-bottom:16px}
+.daily-date{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 22px;font-size:0.8125rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.daily-signal{font:0.625rem 'JetBrains Mono',monospace;letter-spacing:.1em}.daily-signal i{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;margin-right:8px;box-shadow:0 0 15px var(--accent)}
+.daily-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:start}
+.daily-column{display:grid;gap:20px;min-width:0}.daily-focus-picker{font-size:0.75rem}.daily-focus-picker form{margin-top:14px}
+.daily-panel{position:relative;min-width:0;border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:26px;overflow:hidden;animation:daily-arrive .45s ease both}
+.daily-panel:before{content:'';position:absolute;top:0;left:26px;right:26px;height:1px;background:linear-gradient(90deg,var(--accent),transparent);opacity:.7}
+.daily-focus{background:radial-gradient(ellipse at 100% 0,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%),var(--surface)}
+.daily-attention{animation-delay:.06s}.daily-plan{animation-delay:.12s}.daily-memory{animation-delay:.18s}
+.daily-section-label{display:flex;justify-content:space-between;gap:12px;font:0.625rem 'JetBrains Mono',monospace;letter-spacing:.09em;color:var(--muted);margin-bottom:22px}.daily-section-label>span:first-child{color:var(--accent)}
+.daily-panel h3{font-size:1.5rem;line-height:1.25;letter-spacing:-.6px;margin:0 0 12px;font-weight:600}.daily-focus h3{font-size:clamp(23px,2.2vw,33px);line-height:1.2}
+.daily-meta{display:block;color:var(--muted);font-size:0.6875rem;line-height:1.6}.daily-goal{font-size:0.9375rem;line-height:1.75;margin:20px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.daily-next{padding:15px 18px;border-left:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 5%,transparent);border-radius:0 8px 8px 0;margin:18px 0}.daily-next>span{color:var(--accent);font:0.5625rem 'JetBrains Mono',monospace;letter-spacing:.12em}.daily-next p{margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.daily-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0}.daily-actions .quiet{font-size:0.6875rem}
+.daily-method{margin:16px 0 22px}.daily-method p,.daily-question p,.daily-answer-history p{white-space:pre-wrap;overflow-wrap:anywhere}
+.daily-select-row{display:flex;gap:10px}.daily-select-row select{min-width:0;flex:1;font-size:0.75rem}.daily-select-row button{white-space:nowrap;font-size:0.75rem}
+.daily-footnote,.daily-scope{font-size:0.6875rem;color:var(--muted);line-height:1.75;margin:15px 0 0}.daily-text-button{border:0;background:none;padding:0;color:var(--muted);font-size:0.6875rem;text-decoration:underline}
+.daily-question{padding:12px 0;border-bottom:1px solid var(--line)}.daily-question:first-child{padding-top:6px}.daily-question h4,.daily-retrieval h4{font-size:0.9375rem;line-height:1.5;margin:8px 0;overflow-wrap:anywhere}.daily-question-task{font-size:0.6875rem;color:var(--muted);margin:6px 0}.daily-question details{font-size:0.6875rem;margin:8px 0}.daily-question button{font-size:0.6875rem;margin-top:4px;padding:6px 0;border:0;background:none;color:var(--cyan,var(--accent))}
+.daily-empty{padding:22px 0 30px;color:var(--muted)}.daily-empty>span{font-size:1.875rem;color:var(--accent)}.daily-empty p{margin:10px 0 2px}.daily-empty small{font-size:0.6875rem}
+.daily-reviews{margin:20px 0 0}.daily-reviews>summary{font-size:0.75rem}.daily-row{padding:12px 0;border-bottom:1px solid var(--line)}.daily-row button{background:none;border:0;color:var(--text);text-align:left;padding:5px 0}.daily-row p{font-size:0.6875rem;color:var(--muted);margin:4px 0;overflow-wrap:anywhere}
+.daily-slot{display:grid;grid-template-columns:100px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}.daily-slot time{font-size:0.6875rem;color:var(--muted);border-right:1px solid var(--line)}.daily-slot time b{display:block;font-weight:400;color:var(--accent);margin-top:7px;font-size:0.6875rem}.daily-slot button{border:0;background:none;padding:3px 0;text-align:left;line-height:1.5}.daily-slot strong{font-weight:400;display:block;margin-top:3px}.daily-slot a{display:block;font-size:0.6875rem;margin-top:5px}
+.daily-retrieval{display:flex;gap:17px;align-items:start;padding:19px 0;border-bottom:1px solid var(--line)}.daily-memory-index{font:1.75rem 'JetBrains Mono',monospace;color:color-mix(in srgb,var(--accent) 50%,var(--line));padding-top:4px}.daily-retrieval button{font-size:0.75rem;margin:8px 0 0}.daily-empty-text{padding:20px 0;color:var(--muted)}
+.daily-task-tools{border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:20px}.daily-task-tools h4{font-size:0.9375rem}.daily-task-tools form{margin-top:18px}.daily-answer-history{margin:16px 0;font-size:0.75rem}
+@keyframes daily-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+html[data-motion=off] .daily-panel{animation:none}
+@media(prefers-reduced-motion:reduce){.daily-panel{animation:none}}
+@media(max-width:1000px){.daily-grid{grid-template-columns:1fr}.daily-panel{padding:22px}.daily-signal{display:none}}
+@media(max-width:520px){.daily-panel{padding:19px;border-radius:13px}.daily-date{font-size:0.6875rem}.daily-panel h3{font-size:1.5rem}.daily-select-row{flex-direction:column}.daily-slot{grid-template-columns:84px minmax(0,1fr);gap:12px}.daily-section-label{font-size:0.5625rem}.daily-grid{gap:14px}}
+.daily-answered-group { margin-top: 16px; }
+.daily-answered-group > summary { cursor: pointer; }
+.daily-answered-group .daily-answer-history { padding: 12px 0; border-bottom: 1px solid var(--border, #344047); }
+.daily-answer-history p, .daily-answer-history code { overflow-wrap: anywhere; white-space: pre-wrap; }

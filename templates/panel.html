@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#030712">
+<link rel="icon" type="image/svg+xml" href="/assets/blatero-mark.svg?v=e1">
+<title>Blatero — помощник для встреч</title>
+<link rel="stylesheet" href="/assets/app.css">
+<link rel="stylesheet" href="/assets/workspace.css">
+<link rel="stylesheet" href="/assets/brand.css">
+<link rel="stylesheet" href="/assets/panel-cyber.css">
+<link rel="stylesheet" href="/assets/hint-lifecycle.css">
+<link rel="stylesheet" href="/assets/settings.css">
+<link rel="stylesheet" href="/assets/speech-training.css">
+<link rel="stylesheet" href="/assets/video-capture.css">
+ </head><body class="empty-state">
+ <svg class="icon-sprite" aria-hidden="true" focusable="false">
+  <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"/><path d="M19 3v4M17 5h4"/></symbol>
+  <symbol id="icon-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/></symbol>
+  <symbol id="icon-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M7 14h3M14 14h3M7 17h3"/></symbol>
+  <symbol id="icon-training" viewBox="0 0 24 24"><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 12v5c3 2 7 2 10 0v-5M21 9v6"/></symbol>
+  <symbol id="icon-emulation" viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 19c.5-3.2 2.2-5 5-5s4.5 1.8 5 5M14 14c3.6-.7 6 .9 7 4"/></symbol>
+  <symbol id="icon-tools" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h7M15 18h5"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="13" cy="18" r="2"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.2 8 8 9 4.8-1 8-4 8-9V6l-8-3Z"/><path d="m8 12 2.5 2.5L16 9"/></symbol>
+  <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="icon-agenda" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></symbol>
+  <symbol id="icon-report" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6V3Z"/><path d="M15 3v5h4M9 12h7M9 16h7"/></symbol>
+  <symbol id="icon-review" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6V3Z"/><path d="M15 3v5h4m-7 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm2.2 5.2L17 20"/></symbol>
+  <symbol id="icon-output" viewBox="0 0 24 24"><path d="M3 7h7l2 2h9v11H3V7Z"/><path d="M12 12v5m0 0-2-2m2 2 2-2"/></symbol>
+  <symbol id="icon-analysis" viewBox="0 0 24 24"><path d="M3 12h3l2-6 4 12 3-9 2 6h4"/><circle cx="17.5" cy="17.5" r="3.5"/><path d="m20 20 2 2"/></symbol>
+  <symbol id="icon-benchmark" viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m5 7H2"/><path d="m4 7 5-4 6 6 5-5"/></symbol>
+  <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+  <symbol id="icon-archive" viewBox="0 0 24 24"><path d="M4 7h16v13H4V7ZM3 3h18v4H3V3Z"/><path d="M9 11h6"/></symbol>
+  <symbol id="icon-memory" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol>
+  <symbol id="icon-models" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9V9ZM9 1v3m6-3v3M9 20v3m6-3v3M1 9h3m-3 6h3m16-6h3m-3 6h3"/></symbol>
+  <symbol id="icon-update" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 20h14"/></symbol>
+  <symbol id="icon-recovery" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 2 7M4 10V5m0 5h5"/><path d="M9 12h6M12 9v6"/></symbol>
+  <symbol id="icon-command" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m7 9 3 3-3 3m6 0h4"/></symbol>
+  <symbol id="icon-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.4 2.4 0 1 1 3.7 2c-1 .7-1.5 1.2-1.5 2.5M12 17h.01"/></symbol>
+  <symbol id="icon-power" viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M7.2 5.8a8 8 0 1 0 9.6 0"/></symbol>
+  <symbol id="icon-edit" viewBox="0 0 24 24"><path d="m4 16-1 5 5-1L19 9l-4-4L4 16Z"/><path d="m13.5 6.5 4 4M3 21h18"/></symbol>
+  <symbol id="icon-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></symbol>
+  <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 3h6l1 4H8l1-4ZM7 7l1 14h8l1-14M10 11v6M14 11v6"/></symbol>
+  <symbol id="icon-pin" viewBox="0 0 24 24"><path d="m8 3 8 3-2 5 3 4-5-1-3 7-1-8-4-3 5-2-1-5Z"/></symbol>
+  <symbol id="icon-expand" viewBox="0 0 24 24"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
+ </svg>
+<header class="app-header">
+  <div class="brandmark" aria-label="Blatero — продукт Androman.pro" data-meeting-aria-label="meeting.0">
+    <img class="brand-logo" src="/assets/blatero-mark.svg" alt="">
+    <span class="brand-wording"><span class="brand-name">blatero</span>
+      <span class="brand-meta"><span>by</span> androman.pro</span></span>
+  </div>
+  <div class="header-primary">
+    <button class="primary icon-action" id="pulse" data-tooltip="Подсказки — следующий вопрос" aria-label="Подсказки — следующий вопрос" data-meeting-aria-label="meeting.1" data-meeting-data-tooltip="meeting.1"><svg class="ui-icon" aria-hidden="true"><use href="#icon-spark"/></svg><span class="action-label"><span data-meeting-key="meeting.2">ещё подсказку</span></span></button>
+    <button class="primary icon-action" id="recbtn" data-tooltip="Начать запись" aria-label="Начать запись" data-meeting-aria-label="meeting.3" data-meeting-data-tooltip="meeting.3"><svg class="ui-icon" aria-hidden="true"><use href="#icon-record"/></svg><span class="action-label"><span data-meeting-key="meeting.4">запись</span></span></button>
+    <button class="icon-action" id="meetingPanelsToggle" type="button" aria-expanded="false" hidden><span data-meeting-key="meeting.5">все панели</span></button>
+  </div>
+  <div class="header-context">
+    <span class="sess" id="sess"></span>
+    <span class="status" id="status" role="status" aria-live="polite"></span>
+  </div>
+  <nav class="header-modes" aria-label="Режимы работы" data-meeting-aria-label="meeting.6">
+    <a class="icon-action" href="/projects" aria-label="Проекты и задачи" data-meeting-aria-label="meeting.7"><span class="action-label"><span data-meeting-key="meeting.8">проекты</span></span></a>
+    <button class="icon-action" id="calendarBtn" data-tooltip="Календарь — день и неделя" aria-label="Календарь — день и неделя" data-meeting-aria-label="meeting.9" data-meeting-data-tooltip="meeting.9"><svg class="ui-icon" aria-hidden="true"><use href="#icon-calendar"/></svg><span class="action-label"><span data-meeting-key="meeting.10">календарь</span></span></button>
+  </nav>
+  <details class="header-more">
+    <summary class="icon-action" data-tooltip="Инструменты" aria-label="Инструменты" data-meeting-aria-label="meeting.11" data-meeting-data-tooltip="meeting.11"><svg class="ui-icon" aria-hidden="true"><use href="#icon-tools"/></svg><span class="action-label"><span data-meeting-key="meeting.12">инструменты</span></span></summary>
+    <div class="header-more-menu">
+      <button id="settingsBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-settings"/></svg><span><span data-meeting-key="meeting.13">настройки</span></span></button>
+      <button id="analysisBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-analysis"/></svg><span><span data-meeting-key="meeting.14">аудио и говорящие</span></span></button>
+      <button id="archiveBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-archive"/></svg><span><span data-meeting-key="meeting.15">архив</span></span></button>
+      <button id="memoryBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-memory"/></svg><span><span data-meeting-key="meeting.16">память клиента и проекта</span></span></button>
+      <button id="modelsBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-models"/></svg><span><span data-meeting-key="meeting.17">локальные модели</span></span></button>
+      <button id="updatesBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-update"/></svg><span><span data-meeting-key="meeting.18">обновления</span></span></button>
+      <button id="recoveryBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-recovery"/></svg><span><span data-meeting-key="meeting.19">восстановление</span></span><b id="recoveryCount" class="tool-count" hidden></b></button>
+      <button id="commandBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-command"/></svg><span><span data-meeting-key="meeting.20">команды · Ctrl+K</span></span></button>
+      <button id="help"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-help"/></svg><span><span data-meeting-key="meeting.21">помощь</span></span></button>
+      <button class="danger-menu" id="shutdownBtn"><svg class="ui-icon menu-icon" aria-hidden="true"><use href="#icon-power"/></svg><span><span data-meeting-key="meeting.22">завершить работу</span></span></button>
+    </div>
+  </details>
+</header>
+<div class="quickbar">
+  <label><span data-meeting-key="meeting.23">Встреча </span><select id="selSession"></select></label>
+  <div class="contour-switch" id="contourSwitch" role="group" aria-label="Контур встреч" data-meeting-aria-label="meeting.24">
+    <button data-contour="work" aria-pressed="true"><span data-meeting-key="meeting.25">рабочий</span></button>
+    <button data-contour="test" aria-pressed="false"><span data-meeting-key="meeting.26">тестовый</span></button>
+  </div>
+  <details class="meeting-details"><summary data-meeting-source="Сведения о встрече">Сведения о встрече</summary><span id="meetSummary"></span></details>
+  <div class="quick-actions">
+    <button class="icon-action" id="preflightQuick" data-tooltip="Проверить звук, распознавание и ИИ" aria-label="Проверить звук, распознавание и ИИ" data-meeting-aria-label="meeting.27" data-meeting-data-tooltip="meeting.27"><svg class="ui-icon" aria-hidden="true"><use href="#icon-check"/></svg><span class="action-label"><span data-meeting-key="meeting.28">проверить всё</span></span></button>
+    <button class="primary icon-action" id="setupBtn" data-tooltip="Новая встреча" aria-label="Новая встреча" data-meeting-aria-label="meeting.29" data-meeting-data-tooltip="meeting.29"><svg class="ui-icon" aria-hidden="true"><use href="#icon-plus"/></svg><span class="action-label"><span data-meeting-key="meeting.30">новая встреча</span></span></button>
+    <button class="icon-action" id="agendaBtn" data-tooltip="Повестка и материалы встречи" aria-label="Повестка и материалы встречи" data-meeting-aria-label="meeting.31" data-meeting-data-tooltip="meeting.31"><svg class="ui-icon" aria-hidden="true"><use href="#icon-agenda"/></svg><span class="action-label"><span data-meeting-key="meeting.32">повестка</span></span></button>
+    <button class="report-action icon-action" id="report" data-tooltip="Проверить транскрипт и сформировать DOCX" aria-label="Проверить транскрипт и сформировать DOCX" data-meeting-aria-label="meeting.33" data-meeting-data-tooltip="meeting.33"><svg class="ui-icon" aria-hidden="true"><use href="#icon-report"/></svg><span class="action-label"><span data-meeting-key="meeting.34">отчёт</span></span></button>
+  </div>
+  <details class="output-tools" id="outputTools">
+    <summary class="icon-action" data-tooltip="Результаты и папка отчёта" aria-label="Результаты и папка отчёта" data-meeting-aria-label="meeting.35" data-meeting-data-tooltip="meeting.35"><svg class="ui-icon" aria-hidden="true"><use href="#icon-output"/></svg><span class="action-label"><span data-meeting-key="meeting.36">результаты</span></span></summary>
+    <div class="report-destination">
+      <label><span class="report-label"><span data-meeting-key="meeting.37">Папка отчёта</span></span>
+        <input id="reportFolderPath" type="text" readonly aria-label="Папка сохранения отчёта" data-meeting-aria-label="meeting.38"></label>
+      <button id="openReportFolder" title="открыть папку текущей встречи в Проводнике" data-meeting-title="meeting.39"><span data-meeting-key="meeting.40">
+        открыть папку</span></button>
+    </div>
+  </details>
+</div>
+<div class="workflow-next" id="workflowNext" data-state="prepare">
+  <span><span data-meeting-key="meeting.41">Следующий шаг</span></span>
+  <strong id="workflowNextText" role="status" aria-live="polite"><span data-meeting-key="meeting.42">Подготовьте встречу и проверьте оборудование.</span></strong>
+  <button id="workflowNextAction" data-action="setup"><span data-meeting-key="meeting.43">подготовить встречу</span></button>
+</div>
+<div class="overlay" id="recoveryOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="recoveryTitle">
+  <button class="ovclose" id="recoveryClose" title="решить позже" data-studio-title="remaining.0">&#10005;</button>
+  <div class="recovery-shell">
+    <div class="recovery-hero"><span class="model-kicker"><span data-studio-key="remaining.1">ВОССТАНОВЛЕНИЕ</span></span>
+      <h3 id="recoveryTitle" tabindex="-1"><span data-studio-key="remaining.2">Найдены незавершённые операции</span></h3>
+      <p><span data-studio-key="remaining.3">Blatero отличает оборванную запись, фоновую задачу и схему данных. Аудио
+        чинится только после резервной копии. Отчёт продолжится из проверенной
+        контрольной точки, а неизвестный формат сессии не открывается наугад.</span></p></div>
+    <div id="recoveryEmpty" class="recovery-empty"><span data-studio-key="remaining.4">Незавершённых операций нет.</span></div>
+    <div id="recoveryList" class="recovery-list"></div>
+    <div id="recoveryJobs" class="recovery-list recovery-jobs"></div>
+    <div id="recoverySchemas" class="recovery-list recovery-jobs"></div>
+    <div class="recovery-foot"><span><span data-studio-key="remaining.5">Действия на этом экране не удаляют запись встречи или готовые результаты.</span></span>
+      <button id="recoveryLater"><span data-studio-key="remaining.0">решить позже</span></button></div>
+  </div>
+</div>
+<div class="overlay" id="startOverlay" role="dialog" aria-modal="true" aria-labelledby="startTitle">
+  <button class="ovclose" id="startClose" title="отмена" data-meeting-title="meeting.44">&#10005;</button>
+  <section class="start-panel">
+    <h3 id="startTitle" tabindex="-1"><span data-meeting-key="meeting.45">Начать запись текущей встречи?</span></h3>
+    <p id="startMeetingSummary"><span data-meeting-key="meeting.46">Используется формат выбранной встречи.</span></p>
+    <button id="startChangeMode" type="button"><span data-meeting-key="meeting.47">изменить формат</span></button>
+    <div class="mode-grid" id="startModes" role="group" aria-label="Роль в текущей записи" data-meeting-aria-label="meeting.48"></div>
+    <div id="startModeHint"><span data-meeting-key="meeting.49">Выберите один вариант.</span></div>
+    <div class="start-calibration" id="startCalibration">
+      <div><strong id="startCalibrationTitle"><span data-meeting-key="meeting.50">Проверяю калибровку…</span></strong>
+        <span id="startCalibrationText"></span></div>
+      <div class="start-calibration-actions">
+        <button class="primary" id="startCalibrate"><span data-meeting-key="meeting.51">калибровать сейчас</span></button>
+        <button id="startWithoutCalibration"><span data-meeting-key="meeting.52">продолжить без калибровки</span></button>
+      </div>
+    </div>
+    <label class="start-recording-ack" id="startRecordingAckWrap" hidden>
+      <input id="startRecordingAck" type="checkbox">
+      <span><b><span data-meeting-key="meeting.53">Запись рабочего разговора</span></b><br><span data-meeting-key="meeting.54">
+        Подтверждаю: участники уведомлены о записи или есть иное применимое основание.
+        Это не юридическое согласие и не заменяет проверку применимых правил.</span></span>
+    </label>
+    <div class="start-actions">
+      <button class="primary" id="startConfirm" disabled><span data-meeting-key="meeting.55">начать запись</span></button>
+      <button id="startCancel"><span data-meeting-key="meeting.44">отмена</span></button>
+    </div>
+  </section>
+</div>
+<div class="overlay" id="setupOverlay" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+  <button class="ovclose" id="setupClose" title="закрыть" data-i18n-title="wizard.close">&#10005;</button>
+  <section class="wizard-panel">
+    <h3 id="setupTitle" tabindex="-1"><span data-i18n="wizard.title">Подготовка новой встречи</span></h3>
+    <p class="wizard-lead"><span data-i18n="wizard.lead">Мастер создаст отдельную сессию, сохранит цель встречи,
+      проверит локальную папку проекта и — по вашему выбору — подготовит контекст
+      и вопросы. Запись начнётся только после отдельной кнопки «начать запись».</span></p>
+    <div class="setup-contour" hidden>
+      <div><strong><span data-i18n="wizard.environment">Контур данных</span></strong><span id="setupContourHint">Рабочие встречи и тестовые прогоны показываются отдельно.</span></div>
+      <div class="contour-switch" id="setupContourSwitch" role="group" aria-label="Контур новой встречи" data-i18n-aria="wizard.environmentAria">
+        <button data-contour="work" aria-pressed="true"><span data-i18n="wizard.work">рабочий</span></button>
+        <button data-contour="test" aria-pressed="false"><span data-i18n="wizard.test">тестовый</span></button>
+      </div>
+    </div>
+    <div class="wizard-progress" id="setupProgress" aria-label="Этапы подготовки встречи" data-i18n-aria="wizard.progress">
+      <span data-step="1" data-i18n="wizard.step1">1 · формат</span><span data-step="2" data-i18n="wizard.step2">2 · цель</span>
+      <span data-step="3" data-i18n="wizard.step3">3 · материалы</span><span data-step="4" data-i18n="wizard.step4">4 · проверка</span>
+    </div>
+    <div class="wizard-step" data-step="1">
+      <h4 id="setupStepTitle1" tabindex="-1"><span data-i18n="wizard.roleTitle">Как вы участвуете?</span></h4>
+      <p><span data-i18n="wizard.roleHelp">Формат определяет роль подсказок, сценарий вопросов, режим эмуляции и структуру отчёта.</span></p>
+      <div class="mode-grid" id="setupModes" role="group" aria-label="Формат новой встречи" data-i18n-aria="wizard.roleAria"></div>
+      <div class="workspace-status" id="setupModeStatus">Выберите формат встречи.</div>
+    </div>
+    <div class="wizard-step" data-step="2">
+      <h4 id="setupStepTitle2" tabindex="-1"><span data-i18n="wizard.goalTitle">Кого или что готовим?</span></h4>
+      <p id="setupGoalHint">Для интервью укажите кандидата и фокус проверки; для консалтинга — клиента,
+        проблему и ожидаемый результат разговора.</p>
+      <div class="wizard-fields">
+        <label><span id="setupNameLabel">Название / участник</span><input id="setupName" maxlength="200" placeholder="Александр · разработчик 1С"></label>
+        <label><span data-i18n="wizard.duration">Длительность</span><select id="setupDuration"><option value="" data-i18n="wizard.unlimited">без лимита</option>
+          <option value="30" data-i18n="wizard.minutes30">30 минут</option><option value="45" data-i18n="wizard.minutes45">45 минут</option>
+          <option value="60" data-i18n="wizard.minutes60">60 минут</option><option value="90" data-i18n="wizard.minutes90">90 минут</option></select></label>
+        <label><span data-i18n="wizard.client">Клиент / компания</span><input id="setupClient" maxlength="160" placeholder="необязательно" data-i18n-placeholder="wizard.optional"></label>
+        <label><span data-i18n="wizard.project">Название проекта</span><input id="setupProject" maxlength="160" placeholder="необязательно · иначе имя папки" data-i18n-placeholder="wizard.projectExample"></label>
+        <label class="wide"><span id="setupBriefLabel">Цель, роль и темы</span><textarea id="setupBrief"
+          placeholder="Что нужно выяснить, проверить или решить? Какие темы обязательны?"></textarea></label>
+      </div>
+    </div>
+    <div class="wizard-step" data-step="3">
+      <h4 id="setupStepTitle3" tabindex="-1"><span data-i18n="wizard.folderTitle">Рабочая папка проекта</span></h4>
+      <p id="setupWorkspaceHint">Укажите абсолютный путь к локальной папке с кодом и материалами.</p>
+      <div class="wizard-fields"><label class="wide"><span data-i18n="wizard.path">Путь
+        </span><input class="workspace-path" id="setupWorkspace" placeholder="C:/Projects/meetings"></label></div>
+      <label class="workspace-check"><input id="setupInitialize" type="checkbox" checked>
+        <span><b><span data-i18n="wizard.aiPrepare">После создания запустить ИИ-подготовку</span></b><br><span data-i18n="wizard.aiScope">
+          Сначала выполняется локальный отбор. В LLM уйдут только ограниченные
+          текстовые фрагменты без файлов секретов; при пустой папке вызова LLM не будет.</span></span></label>
+      <div class="setting-actions">
+        <button class="primary" id="setupBrowse"><span data-i18n="wizard.browse">выбрать папку…</span></button>
+        <button id="setupProbe"><span data-i18n="wizard.checkPath">проверить введённый путь</span></button>
+      </div>
+      <div class="workspace-status" id="setupProbeStatus">Папка ещё не проверена. Её можно оставить пустой и подготовить встречу вручную.</div>
+    </div>
+    <div class="wizard-step" data-step="4">
+      <h4 id="setupStepTitle4" tabindex="-1"><span data-i18n="wizard.reviewTitle">Проверка перед созданием</span></h4>
+      <p><span data-i18n="wizard.reviewHelp">После создания откроется новая сессия. Проверьте звук отдельно, затем нажмите «начать запись».</span></p>
+      <div class="setup-summary" id="setupSummary"></div>
+      <div class="workspace-status" id="setupReadyStatus"></div>
+      <div class="setup-remediation" id="setupRemediation" hidden>
+        <button id="setupConfigureAi"><span data-i18n="wizard.configureAi">настроить подключение к ИИ</span></button>
+        <button id="setupConfigurePrivacy"><span data-i18n="wizard.configurePrivacy">проверить согласие и приватность</span></button>
+        <button id="setupWithoutAi"><span data-i18n="wizard.withoutAi">создать без ИИ-подготовки</span></button>
+      </div>
+    </div>
+    <div class="wizard-actions">
+      <button id="setupBack"><span data-i18n="wizard.back">назад</span></button><span class="wizard-action-status" id="setupActionStatus" role="status" aria-live="polite">Шаг 1 из 4</span>
+      <button class="primary" id="setupNext">продолжить</button>
+      <button class="primary" id="setupCreate" style="display:none">создать и подготовить</button>
+    </div>
+  </section>
+</div>
+<div class="overlay settings-v2" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+  <div class="settings-shell">
+    <header class="settings-head">
+      <div><h3 id="settingsTitle" tabindex="-1">Настройки программы</h3><p id="settingsModeNote">Подключения, звук и оформление.</p></div>
+      <button id="settingsHome" class="settings-home" type="button"><span data-i18n="settings.3">Вернуться к встрече ↗</span></button>
+      <button class="ovclose" data-close-overlay aria-label="Закрыть настройки" data-i18n-aria="settings.4">×</button>
+    </header>
+    <div class="settings-layout">
+      <aside class="settings-sidebar">
+        <label class="sr-only" for="settingsSearch"><span data-i18n="settings.5">Найти настройку</span></label>
+        <input id="settingsSearch" type="search" placeholder="Найти настройку…" autocomplete="off" data-i18n-placeholder="settings.6">
+        <nav id="settingsNav" aria-label="Разделы настроек" data-i18n-aria="settings.7"></nav>
+        <label class="settings-mobile-nav" for="settingsSectionSelect"><span data-i18n="settings.8">Раздел</span><select id="settingsSectionSelect"></select></label>
+        <div class="settings-scope"><strong><span data-i18n="settings.9">На этом компьютере</span></strong><p><span data-i18n="settings.10">Общие настройки Blatero.</span></p>
+          <button type="button" data-settings-target="meeting"><span data-i18n="settings.11">Параметры встречи →</span></button>
+          <button type="button" id="settingsGuide"><span data-i18n="settings.12">Помощь</span></button>
+        </div>
+      </aside>
+      <div class="settings-content">
+        <div id="settingsSearchResults" hidden></div>
+        <section class="setting-card settings-page" id="settingsOverview" data-settings-page="overview">
+          <h4><span data-i18n="settings.13">Готовность к встрече</span></h4><p><span data-i18n="settings.14">Проверьте звук, подключение ИИ и передачу данных.</span></p>
+          <div class="settings-overview-cards">
+            <article><h5><span data-i18n="settings.15">Звук</span></h5><p id="settingsSoundState">Состояние загружается…</p><button type="button" data-settings-target="sound"><span data-i18n="settings.17">Настроить звук →</span></button></article>
+            <article><h5><span data-i18n="settings.18">ИИ</span></h5><p id="settingsAiState">Состояние загружается…</p><button type="button" data-settings-target="ai"><span data-i18n="settings.20">Открыть подключение →</span></button></article>
+            <article><h5><span data-i18n="settings.21">Данные</span></h5><p id="settingsDataState">Состояние загружается…</p><button type="button" data-settings-target="privacy"><span data-i18n="settings.23">Передача данных →</span></button></article>
+          </div>
+          <div class="settings-check-route"><div><h5><span data-i18n="settings.24">Перед встречей</span></h5><p><span data-i18n="settings.25">Проверка попросит произнести фразу и включить звук собеседников.</span></p></div><button id="settingsPreflight" class="primary" type="button"><span data-i18n="settings.26">Проверить всё</span></button></div>
+        </section>
+        <section class="setting-card settings-page" id="settingsAudio" data-settings-page="sound" hidden>
+          <h4><span data-i18n="settings.27">Звук и речь</span></h4>
+          <div class="setting-row"><label for="selMic"><span data-i18n="settings.28">Микрофон</span></label><select id="selMic" aria-label="Микрофон" data-i18n-aria="settings.29"></select></div>
+          <div class="setting-row"><label for="selOutput"><span data-i18n="settings.30">Звук собеседников</span></label><select id="selOutput" aria-label="Звук приложения встречи" data-i18n-aria="settings.31"></select></div>
+          <div class="setting-row"><label for="selSpeech"><span data-i18n="settings.32">Распознавание речи</span></label><select id="selSpeech" aria-label="Движок распознавания речи" data-i18n-aria="settings.33"></select></div>
+          <p id="settingsSpeechRoute" class="settings-help"></p>
+          <button id="settingsApplySpeech" type="button" hidden>Применить распознавание</button>
+          <div class="setting-actions"><button id="settingsMicTest" class="primary"><span data-i18n="settings.35">Проверить микрофон</span></button><button id="audioBtn"><span data-i18n="settings.36">Все проверки звука</span></button></div>
+          <p class="settings-help"><span data-i18n="settings.37">Нажмите, когда будете готовы говорить. После отсчёта запишутся 12 секунд — пробу можно прослушать.</span></p>
+          <details id="settingsSoundDetails"><summary><span data-i18n="settings.38">Дополнительно: эхо и локальная модель</span></summary>
+            <div class="setting-row" id="whisperModelCtl"><label for="selWhisper"><span data-i18n="settings.39">Локальная модель</span></label><select id="selWhisper" aria-label="Локальная модель распознавания" data-i18n-aria="settings.40"></select></div>
+            <div class="setting-row"><label for="selAecBackend"><span data-i18n="settings.41">Очистка эха</span></label><select id="selAecBackend" aria-label="Движок очистки эха" data-i18n-aria="settings.42"></select></div>
+            <label class="consent-check"><input id="acousticEchoSuppression" type="checkbox"><span><strong><span data-i18n="settings.43">Убирать акустическое эхо до распознавания</span></strong><span class="consent-detail"><span data-i18n="settings.44">Используется выбранный системный выход. Исходный WAV не меняется.</span></span></span></label>
+            <label class="consent-check"><input id="echoSuppression" type="checkbox"><span><strong><span data-i18n="settings.45">Убирать текстовые дубли</span></strong><span class="consent-detail"><span data-i18n="settings.46">Если фраза распознана в обоих каналах, остаётся системная копия. Настройки эха применятся со следующей записи.</span></span></span></label>
+            <div class="setting-actions"><button id="aecTestStart"><span data-i18n="settings.47">Калибровать эхо</span></button><button id="aecNativeInstall"><span data-i18n="settings.48">Установить WebRTC AEC3</span></button></div>
+            <div class="workspace-status" id="aecNativeStatus" role="status" aria-live="polite">Проверяю WebRTC AEC3…</div>
+            <div class="workspace-status" id="aecTestStatus" role="status" aria-live="polite">Калибровка не запускалась.</div>
+          </details>
+          <details><summary><span data-i18n="settings.51">Озвучка и голоса</span></summary>
+            <div class="setting-row"><label for="selQuestionVoice"><span data-i18n="settings.52">Голос вопросов</span></label><select id="selQuestionVoice" aria-label="Голос для вопросов" data-i18n-aria="settings.53"></select></div>
+            <div class="setting-row"><label for="selVoice"><span data-i18n="settings.54">Голос эмуляции / резерв</span></label><select id="selVoice" aria-label="Голос эмуляции и резервный голос" data-i18n-aria="settings.55"></select></div>
+            <div class="setting-actions"><button id="voiceTestBtn"><span data-i18n="settings.56">Проверить голос</span></button><button id="speakerBankBtn"><span data-i18n="settings.57">Банк голосов</span></button></div>
+            <p class="settings-help"><span data-i18n="settings.58">Микрофон и системный звук разделяются по источнику. Имена из банка голосов применяются после проверки.</span></p>
+          </details>
+        </section>
+        <section class="setting-card settings-page llm-card" id="settingsAi" data-settings-page="ai" hidden>
+          <h4><span data-i18n="settings.59">ИИ и подсказки</span></h4>
+          <div class="setting-row"><label for="selProvider"><span data-i18n="settings.60">Подключение</span></label><select id="selProvider" aria-label="Провайдер LLM" data-i18n-aria="settings.61"></select></div>
+          <div class="llm-connect">
+            <div class="provider-guide" id="llmProviderGuide"></div><a id="llmProviderHelp" href="#" target="_blank" rel="noopener"><span data-i18n="settings.62">Где получить доступ ↗</span></a>
+            <p id="settingsConnectionHelp" class="settings-help"></p>
+            <div class="setting-row" id="llmKeyRow"><label for="inpLlmApiKey">API-токен</label><div class="secret-control"><input id="inpLlmApiKey" type="password" aria-label="API-токен LLM" autocomplete="new-password" spellcheck="false" placeholder="Новый токен" data-i18n-aria="settings.64"><button id="toggleLlmKey" type="button">Показать</button></div></div>
+            <div class="setting-row" id="llmBaseUrlRow"><label for="inpLlmBaseUrl"><span data-i18n="settings.67">Адрес API</span></label><input id="inpLlmBaseUrl" type="url" spellcheck="false" aria-label="Base URL LLM" placeholder="http://127.0.0.1:11434/v1"></div>
+            <div class="setting-actions"><button id="llmSave"><span data-i18n="settings.68">Сохранить подключение</span></button><button class="primary" id="llmTest"><span data-i18n="settings.69">Проверить соединение</span></button><button id="llmDelete" class="danger"><span data-i18n="settings.70">Удалить токен</span></button></div>
+            <div class="workspace-status" id="llmConnectionStatus" role="status" aria-live="polite">Подключение не проверено.</div>
+            <p class="settings-help" id="settingsCredentialNote">Проверка не отправляет материалы встречи.</p>
+          </div>
+          <div class="setting-row"><label for="selAuto"><span data-i18n="settings.73">Когда предлагать подсказки</span></label><select id="selAuto" aria-label="Автоподсказки" data-i18n-aria="settings.74"></select></div>
+          <div class="setting-row"><label for="selSceneCoach"><span data-i18n="settings.75">Подсказки ИИ-сценки</span></label><select id="selSceneCoach" title="Маршрут помощника сценки; оценка и остальные операции не переключаются" data-i18n-title="settings.76"><option value="inherit" data-i18n="settings.77">Основное подключение</option><option value="openrouter_flash" data-i18n="settings.78">DeepSeek Flash · OpenRouter · платный API</option></select></div>
+          <details id="settingsAiDetails"><summary><span data-i18n="settings.79">Дополнительно: модели, вопросы и инструкции</span></summary>
+            <datalist id="llmModelSuggestions"></datalist>
+            <div class="setting-row" id="pulseModelCtl"><label for="inpPulseModel"><span data-i18n="settings.80">Модель подсказок</span></label><input id="inpPulseModel" list="llmModelSuggestions" maxlength="150" aria-label="Модель для подсказок" data-i18n-aria="settings.81"></div>
+            <div class="setting-row" id="reportModelCtl"><label for="inpReportModel"><span data-i18n="settings.82">Модель отчёта</span></label><input id="inpReportModel" list="llmModelSuggestions" maxlength="150" aria-label="Модель для отчёта и анализа" data-i18n-aria="settings.83"></div>
+            <p id="providerHint" hidden></p>
+            <div class="setting-row"><label for="selStyle"><span data-i18n="settings.84">Стиль вопросов</span></label><select id="selStyle" aria-label="Стиль вопросов" data-i18n-aria="settings.85"></select></div>
+            <p class="settings-help"><span data-i18n="settings.86">Стиль применяется при следующей генерации вопросов.</span></p>
+            <button id="promptEditorBtn"><span data-i18n="settings.87">Системные инструкции</span></button>
+          </details>
+        </section>
+        <section class="setting-card settings-page" id="settingsReports" data-settings-page="reports" hidden>
+          <h4><span data-i18n="settings.88">Отчёты</span></h4><p><span data-i18n="settings.89">Для новых отчётов. Сохранённые документы не меняются.</span></p>
+          <label class="consent-check"><input id="reportReviewBeforeFinalize" type="checkbox"><span><strong><span data-i18n="settings.90">Показывать черновик перед DOCX</span></strong><span class="consent-detail"><span data-i18n="settings.91">Выводы можно исправить без повторного запроса к ИИ.</span></span></span></label>
+          <label class="consent-check"><input id="reportTimestamps" type="checkbox"><span><strong><span data-i18n="settings.92">Добавлять таймкоды и ссылки</span></strong><span class="consent-detail"><span data-i18n="settings.93">Переходы к моментам записи в evidence.html. По умолчанию выключены.</span></span></span></label>
+        </section>
+        <section class="setting-card settings-page" id="settingsPrivacy" data-settings-page="privacy" hidden>
+          <h4><span data-i18n="settings.94">Данные и приватность</span></h4>
+          <div class="setting-row"><label for="selPrivacy"><span data-i18n="settings.95">Текст для ИИ</span></label><select id="selPrivacy" aria-label="Режим обработки текста для LLM" data-i18n-aria="settings.96"></select></div>
+          <label class="consent-check"><input id="cloudAck" type="checkbox"><span><strong><span data-i18n="settings.97">Согласие на облачную обработку получено</span></strong><span class="consent-detail"><span data-i18n="settings.98">Разрешение общее для программы. Перед новой встречей снимите галочку, если основания нет. Согласие не определяется по речи.</span></span></span></label>
+          <p class="small-note" data-i18n="cloudPermissionScope">Снятие разрешения блокирует новые облачные операции, но не отменяет уже отправленные запросы и активный поток SpeechKit. Для прекращения этого потока остановите запись или переключитесь на локальное распознавание; дождитесь завершения хвоста.</p>
+          <div class="provider-contract-status" id="providerContractStatus"></div>
+          <p class="settings-help"><span data-i18n="settings.99">Локальный Whisper не отправляет аудио. SpeechKit отправляет звук в Яндекс. ИИ получает текст в выбранном режиме обработки.</span></p>
+          <button type="button" data-settings-target="service"><span data-i18n="settings.100">Хранение и удаление данных →</span></button>
+        </section>
+        <section class="setting-card settings-page" id="settingsInterface" data-settings-page="appearance" hidden>
+          <h4><span data-i18n="settings.101">Внешний вид</span></h4><p><span data-i18n="settings.102">Предпросмотр применяется сразу. Вид панелей и тема сохраняются в этом браузере; размер текста — в настройках программы.</span></p>
+          <div class="setting-actions" id="workspaceAppearanceSettings"><button id="themeToggle" type="button"><span data-i18n="settings.103">Тема</span></button><button id="motionToggle" type="button"><span data-i18n="settings.104">Анимация</span></button></div>
+          <div class="setting-row"><label for="selFont"><span data-i18n="settings.105">Размер текста</span></label><select id="selFont" aria-label="Размер текста" data-i18n-aria="settings.106"></select></div>
+          <div class="setting-row"><label for="layoutPreset"><span data-i18n="settings.107">Рабочий вид</span></label><select id="layoutPreset" aria-label="Рабочий вид" data-i18n-aria="settings.108"><option value="custom" data-i18n="settings.109">Текущая настройка</option><option value="standard" data-i18n="settings.110">Обычный</option><option value="focus" data-i18n="settings.111">Только подсказки и звук</option><option value="review" data-i18n="settings.112">Крупная история</option></select></div>
+          <details><summary><span data-i18n="settings.113">Компоновка панелей</span></summary>
+            <div class="setting-row focus-width-row"><label for="sideWidth"><span data-i18n="settings.114">Ширина сценария</span></label><div class="range-control"><input id="sideWidth" type="range" min="320" max="900" step="20" value="620" aria-label="Ширина сценария" data-i18n-aria="settings.115"><output id="sideWidthValue" for="sideWidth">620 px</output></div></div>
+            <div class="layout-panel-toggles" role="group" aria-label="Видимость рабочих панелей" data-i18n-aria="settings.116"><label><input id="layoutSideVisible" type="checkbox"><span data-i18n="settings.117"> Сценарий справа</span></label><label><input id="layoutFeedVisible" type="checkbox"><span data-i18n="settings.118"> История транскрипта</span></label><label><input id="layoutFeedTall" type="checkbox"><span data-i18n="settings.119"> Крупная история</span></label></div>
+            <div class="setting-actions"><button id="sideToggleSettings"><span data-i18n="settings.120">Свернуть / показать сценарий</span></button><button id="layoutReset"><span data-i18n="settings.121">Обычный вид</span></button></div>
+          </details>
+        </section>
+        <section class="setting-card settings-page" id="settingsConnections" data-settings-page="connections" hidden>
+        </section>
+        <section class="setting-card settings-page" id="settingsPractice" data-settings-page="practice" hidden>
+          <h4><span data-i18n="settings.122">Практика</span></h4><p><span data-i18n="settings.123">Выберите, кто спрашивает и отвечает. Новая попытка сохраняется отдельно от рабочих встреч.</span></p>
+          <div class="settings-practice">
+            <button type="button" data-practice="personal"><strong><span data-i18n="settings.124">Я отвечаю</span></strong><span><span data-i18n="settings.125">ИИ задаёт вопросы, вы отвечаете в микрофон.</span></span><b aria-hidden="true">→</b></button>
+            <button type="button" data-practice="interviewer"><strong><span data-i18n="settings.126">Я спрашиваю</span></strong><span><span data-i18n="settings.127">Вы ведёте интервью, ИИ играет кандидата.</span></span><b aria-hidden="true">→</b></button>
+            <button type="button" data-practice="ai"><strong><span data-i18n="settings.128">Оба ИИ</span></strong><span><span data-i18n="settings.129">Два ИИ ведут разговор. Вы разбираете запись.</span></span><b aria-hidden="true">→</b></button>
+          </div>
+          <button id="trainingBtn" type="button">Открыть текущую тренировку / мастер</button>
+          <details><summary><span data-i18n="settings.131">Эмуляция текущей встречи</span></summary><p><span data-i18n="settings.132">Голосовой бот отвечает за второго участника в выбранной встрече.</span></p><button id="emuBtn" type="button">Включить эмуляцию</button><button type="button" data-settings-field="inpEmulationRole"><span data-i18n="settings.134">Изменить роль бота →</span></button></details>
+        </section>
+        <section class="setting-card settings-page" id="settingsService" data-settings-page="service" hidden>
+          <h4><span data-i18n="settings.135">Обслуживание</span></h4>
+          <div class="settings-service-row"><div><h5><span data-i18n="settings.136">Компоненты</span></h5><p><span data-i18n="settings.137">Модели речи, голоса и очистка эха</span></p></div><button id="modelManagerSettings"><span data-i18n="settings.138">Локальные модели</span></button></div>
+          <div class="settings-service-row"><div><h5><span data-i18n="settings.139">Установка и обновления</span></h5><p><span data-i18n="settings.140">Версия, проверка пакета и откат</span></p></div><button id="updateManagerSettings"><span data-i18n="settings.141">Открыть обновления</span></button></div>
+          <div class="settings-service-row"><div><h5><span data-i18n="settings.142">Диагностика</span></h5><p><span data-i18n="settings.143">Каналы записи, говорящие и Replay Lab</span></p></div><button id="settingsAnalysis" type="button"><span data-i18n="settings.144">Разобрать аудио</span></button></div>
+          <details><summary><span data-i18n="settings.145">Восстановление и удаление данных</span></summary><p><span data-i18n="settings.146">Перед удалением показывается список файлов.</span></p><div class="setting-actions"><button id="settingsRecovery" type="button"><span data-i18n="settings.147">Восстановление</span></button><button id="settingsData" type="button"><span data-i18n="settings.148">Данные встречи</span></button><button class="danger" id="clearResults"><span data-i18n="settings.149">Очистить результат встречи</span></button></div><p class="settings-help"><span data-i18n="settings.150">Очистка удаляет аудио, транскрипт, подсказки и отчёт. Резюме, досье и сценарий сохраняются.</span></p></details>
+          <div class="setting-actions"><button id="commandSettings"><span data-i18n="settings.151">Команды · Ctrl+K</span></button><button id="settingsShutdown" type="button" class="danger"><span data-i18n="settings.152">Завершить Blatero</span></button></div>
+        </section>
+        <section class="setting-card settings-page workspace-card" id="settingsMeeting" data-settings-page="meeting" hidden>
+          <h4><span data-i18n="settings.153">Параметры встречи</span></h4><p id="settingsMeetingLabel"></p>
+          <div class="setting-row"><label for="inpName" id="settingsNameLabel">Тема встречи</label><input id="inpName" type="text" aria-label="Тема встречи" maxlength="200"></div>
+          <div class="setting-row"><label for="selMType"><span data-i18n="settings.156">Формат и роль</span></label><select id="selMType" aria-label="Формат и роль" data-i18n-aria="settings.157"></select></div>
+          <div class="setting-row"><label for="selDur"><span data-i18n="settings.158">Длительность, минут</span></label><select id="selDur" aria-label="Длительность встречи" data-i18n-aria="settings.159"><option value="" data-i18n="settings.160">Без лимита</option><option>30</option><option>45</option><option>60</option><option>90</option></select></div>
+          <div class="setting-row"><label for="inpClient"><span data-i18n="settings.161">Клиент / компания</span></label><input id="inpClient" type="text" maxlength="160" aria-label="Клиент или компания" data-i18n-aria="settings.162"></div>
+          <section id="settingsWorkspace">
+            <h5><span data-i18n="settings.163">Материалы встречи</span></h5>
+            <div class="setting-row"><label for="inpProject"><span data-i18n="settings.164">Название проекта</span></label><input id="inpProject" type="text" maxlength="160" aria-label="Название проекта" data-i18n-aria="settings.165"></div>
+            <div class="setting-row"><label for="inpWorkspace"><span data-i18n="settings.166">Рабочая папка</span></label><input class="workspace-path" id="inpWorkspace" type="text" aria-label="Рабочая папка" placeholder="Путь к папке проекта" data-i18n-aria="settings.167" data-i18n-placeholder="settings.168"></div>
+            <div class="workspace-status" id="workspaceStatus" role="status" aria-live="polite">Рабочая папка не указана.</div>
+            <div class="setting-actions"><button id="workspaceBrowse"><span data-i18n="settings.170">Выбрать папку…</span></button><button id="workspaceProbe"><span data-i18n="settings.171">Проверить путь</span></button><button class="primary" id="workspaceInit">Подготовить контекст</button></div>
+            <p class="settings-help"><span data-i18n="settings.173">Перед ИИ-подготовкой откроется проверка передаваемых материалов.</span></p>
+          </section>
+          <details><summary><span data-i18n="settings.174">Участники, эмуляция и контур данных</span></summary>
+            <div class="setting-row"><label for="inpSpeakerMe"><span data-i18n="settings.175">Имя в микрофоне</span></label><input id="inpSpeakerMe" type="text" maxlength="40" aria-label="Подпись микрофона" placeholder="Я" data-i18n-aria="settings.176" data-i18n-placeholder="settings.177"></div>
+            <div class="setting-row"><label for="inpSpeakerGuest"><span data-i18n="settings.178">Имя в системном звуке</span></label><input id="inpSpeakerGuest" type="text" maxlength="40" aria-label="Подпись системного звука" placeholder="Собеседник" data-i18n-aria="settings.179" data-i18n-placeholder="settings.180"></div>
+            <div class="setting-row"><label for="inpEmulationRole"><span data-i18n="settings.181">Роль бота</span></label><input id="inpEmulationRole" type="text" maxlength="60" aria-label="Роль бота в эмуляции" data-i18n-aria="settings.182"></div>
+            <div class="setting-row"><label for="selContour"><span data-i18n="settings.183">Контур данных</span></label><select id="selContour" aria-label="Контур данных" data-i18n-aria="settings.184"><option value="work" data-i18n="settings.185">Рабочий</option><option value="test" data-i18n="settings.186">Тестовый</option></select></div>
+          </details>
+          <div class="setting-actions"><button id="newMeet"><span data-i18n="settings.187">Новая встреча</span></button><button id="importTranscript"><span data-i18n="settings.188">Импорт транскрипта</span></button></div>
+        </section>
+        <div class="settings-footer"><div id="settingsSaveState" role="status" aria-live="polite">Изменений нет</div><div class="setting-actions"><button id="settingsDiscard" type="button" hidden><span data-i18n="settings.190">Отменить изменения</span></button><button id="settingsApply" type="button" class="primary" hidden><span data-i18n="settings.191">Сохранить изменения</span></button></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="promptOverlay" role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+  <button class="ovclose" id="promptClose" title="закрыть" data-studio-title="remaining.6">&#10005;</button>
+  <div class="prompt-shell">
+    <h3 id="promptTitle" tabindex="-1"><span data-studio-key="remaining.7">Системные промпты</span></h3>
+    <p class="prompt-lead"><span data-studio-key="remaining.8">Здесь собраны системные инструкции и шаблоны запросов,
+      которые определяют подсказки, отчёты, вопросы и режим эмуляции. Изменения хранятся
+      только на этом компьютере и применяются к следующему запросу модели.
+      Защитные правила остаются включены независимо от текста ниже.</span></p>
+    <div class="prompt-layout">
+      <nav class="prompt-nav" id="promptList" aria-label="Список промптов" data-studio-aria-label="remaining.9"><span data-studio-key="remaining.10">
+        Загружаю реестр…
+      </span></nav>
+      <section class="prompt-editor">
+        <h4 id="promptLabel"><span data-studio-key="remaining.11">Выберите промпт слева</span></h4>
+        <div class="prompt-description" id="promptDescription"></div>
+        <div class="prompt-key" id="promptKey"></div>
+        <textarea id="promptText" disabled spellcheck="true"
+          aria-label="Текст выбранного системного промпта" data-studio-aria-label="remaining.12"></textarea>
+        <div class="prompt-placeholders" id="promptPlaceholders"></div>
+        <details class="prompt-default" id="promptDefaultBox">
+          <summary><span data-studio-key="remaining.13">посмотреть заводской вариант</span></summary>
+          <pre id="promptDefault"></pre>
+        </details>
+        <div class="setting-actions">
+          <button class="primary" id="promptSave" disabled><span data-studio-key="remaining.14">сохранить локальную версию</span></button>
+          <button id="promptReset" disabled><span data-studio-key="remaining.15">сбросить к заводскому</span></button>
+          <span id="promptStatus"></span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="calendarOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="calendarTitle">
+  <button class="ovclose" data-close-overlay title="закрыть">&#10005;</button>
+  <h3 id="calendarTitle" tabindex="-1">Расписание</h3>
+  <div class="cal-toolbar">
+    <button id="calPrev" title="назад">&#8592;</button>
+    <button id="calToday">сегодня</button>
+    <button id="calNext" title="вперёд">&#8594;</button>
+    <span id="calRange"></span>
+    <button id="calDay" class="primary">день</button>
+    <button id="calWeek">неделя</button>
+    <button id="calSync">синхронизировать</button>
+  </div>
+  <div id="calStatus"></div>
+  <div id="calAllDay" class="cal-all-day"></div>
+  <div class="cal-scroll"><div id="calTimeline"></div></div>
+  <details class="cal-connect">
+    <summary>Подключения календарей</summary>
+    <div class="privacy-note">События загружаются read-only, хранятся локально и
+      не передаются LLM. Пароль CalDAV сохраняется в Windows Credential Manager.
+      Добавлять и удалять подключения можно только с этого компьютера.</div>
+    <div class="cal-form">
+      <label>провайдер<select id="calProvider">
+        <option value="google">Google Calendar</option>
+        <option value="yandex">Яндекс Календарь</option>
+        <option value="mail">Календарь Mail</option>
+        <option value="caldav">Другой CalDAV</option>
+      </select></label>
+      <label>название<input id="calLabel" placeholder="Рабочий календарь"></label>
+      <label class="cal-caldav">логин<input id="calUsername" autocomplete="username" placeholder="name@example.ru"></label>
+      <label class="cal-caldav">пароль приложения<input id="calPassword" type="password" autocomplete="new-password"></label>
+      <label class="cal-caldav">адрес CalDAV<input id="calUrl" placeholder="подставится автоматически"></label>
+      <label class="cal-google" style="display:none">OAuth credentials JSON
+        <input id="calCredentials" placeholder="google-calendar-credentials.json"></label>
+    </div>
+    <div class="setting-actions"><button class="primary" id="calAddSource">добавить источник</button></div>
+    <div id="calSources"></div><div id="calErrors" class="cal-errors"></div>
+  </details>
+</div>
+<div class="overlay" id="archOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="archiveTitle">
+  <button class="ovclose" data-close-overlay title="закрыть">&#10005;</button>
+  <div class="archive-head"><div><span class="model-kicker">ЛОКАЛЬНЫЙ АРХИВ</span>
+    <h3 id="archiveTitle" tabindex="-1">Архив встреч</h3></div>
+    <button id="lifecycleOpen">данные и перенос</button></div>
+  <div id="archList"></div>
+</div>
+<div class="overlay" id="lifecycleOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="lifecycleTitle">
+  <button class="ovclose" id="lifecycleClose" title="закрыть">&#10005;</button>
+  <div class="lifecycle-shell">
+    <div class="lifecycle-head"><div><span class="model-kicker">ДАННЫЕ И ПЕРЕНОС</span>
+      <h3 id="lifecycleTitle" tabindex="-1">Данные, хранение и перенос</h3>
+      <p>Зашифрованная резервная копия, проверяемый импорт и явное удаление.
+        Парольная фраза не сохраняется. Никакое правило не применяется без
+        отдельного подтверждения.</p></div>
+      <div class="lifecycle-state" id="lifecycleState">готово</div></div>
+    <section class="lifecycle-grid">
+      <article class="lifecycle-card lifecycle-package-card">
+        <span class="model-kicker">AES-256-GCM / SCRYPT</span>
+        <h4>Переносимый пакет</h4>
+        <p>В открытом заголовке нет имени, текста или названия встречи. Импорт
+          публикует новую сессию только после проверки всех SHA-256 и путей.</p>
+        <div class="lifecycle-selected">выбрано: <strong id="lifecycleSession">—</strong></div>
+        <label>Парольная фраза
+          <input id="lifecyclePassword" type="password" minlength="10" maxlength="256"
+            autocomplete="new-password" placeholder="не менее 10 символов"></label>
+        <div class="lifecycle-actions">
+          <button class="primary" id="lifecycleExport">зашифровать и скачать</button>
+          <button id="lifecycleImport">импортировать пакет</button>
+          <button id="lifecycleOpenFolder">папка пакетов</button>
+        </div>
+        <div class="lifecycle-packages" id="lifecyclePackages"></div>
+      </article>
+      <article class="lifecycle-card lifecycle-purge-card">
+        <span class="model-kicker">ВЫБОР · ПРОВЕРКА · ПОДТВЕРЖДЕНИЕ</span>
+        <h4>Выборочное удаление</h4>
+        <p>Сначала Blatero покажет число файлов и объём. Полная сессия не
+          удаляется, пока она открыта.</p>
+        <div class="lifecycle-checks" id="lifecyclePurgeChecks">
+          <label><input type="checkbox" value="audio"> аудио</label>
+          <label><input type="checkbox" value="video"> <span data-video-text="videoFiles">видео и предпросмотры</span></label>
+          <label><input type="checkbox" value="transcripts"> транскрипты</label>
+          <label><input type="checkbox" value="reports"> отчёты и доказательства</label>
+          <label><input type="checkbox" value="derived"> производные разборы</label>
+          <label class="danger"><input type="checkbox" value="all"> вся сессия</label>
+        </div>
+        <div class="lifecycle-actions">
+          <button id="lifecyclePurgePreview">рассчитать удаление</button>
+          <button class="danger" id="lifecyclePurgeApply" disabled>удалить рассчитанное</button>
+        </div>
+        <div class="lifecycle-preview" id="lifecyclePurgeResult">Ничего не рассчитано.</div>
+      </article>
+    </section>
+    <section class="lifecycle-retention">
+      <div><span class="model-kicker">СРОКИ ХРАНЕНИЯ</span>
+        <h4>Сроки хранения</h4>
+        <p>0 означает «хранить бессрочно». Политика сохраняется локально, но
+          применяется только кнопкой ниже после просмотра очереди.</p></div>
+      <div class="retention-fields">
+        <label>аудио, дней<input data-retention="audio" type="number" min="0" max="36500" value="0"></label>
+        <label><span data-video-text="videoDays">видео, дней</span><input data-retention="video" type="number" min="0" max="36500" value="0"></label>
+        <label>транскрипты<input data-retention="transcripts" type="number" min="0" max="36500" value="0"></label>
+        <label>отчёты<input data-retention="reports" type="number" min="0" max="36500" value="0"></label>
+        <label>разборы<input data-retention="derived" type="number" min="0" max="36500" value="0"></label>
+        <label class="danger">вся сессия<input data-retention="all" type="number" min="0" max="36500" value="0"></label>
+      </div>
+      <div class="lifecycle-actions">
+        <button id="retentionSave">сохранить и пересчитать</button>
+        <button class="danger" id="retentionApply" disabled>применить очередь</button>
+      </div>
+      <div class="retention-preview" id="retentionPreview">Очередь пуста.</div>
+    </section>
+    <section class="lifecycle-retention privacy-inventory">
+      <div><span class="model-kicker">КАРТА ЛОКАЛЬНЫХ ДАННЫХ</span>
+        <h4>Карта персональных данных</h4>
+        <p>Показывает известные Blatero локальные хранилища. Внешние копии,
+          Credential Manager, backup и синхронизация проверяются отдельно.</p></div>
+      <div class="privacy-inventory-list" id="privacyInventory">Считаю локальные данные…</div>
+    </section>
+    <p class="privacy-note">Шифрование защищает переносимые и архивные копии.
+      Активная рабочая папка остаётся доступной приложению; для полного
+      шифрования диска используйте BitLocker или корпоративное шифрование ОС.</p>
+  </div>
+</div>
+<div class="overlay" id="analysisOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="analysisTitle">
+  <button class="ovclose" id="analysisClose" title="закрыть" data-meeting-title="meeting.56">&#10005;</button>
+  <div class="analysis-shell">
+    <div class="analysis-head">
+      <div><span class="model-kicker"><span data-meeting-key="meeting.57">АУДИО И ГОВОРЯЩИЕ</span></span>
+        <h3 id="analysisTitle"><span data-meeting-key="meeting.58">Аудио и говорящие</span></h3>
+        <p><span data-meeting-key="meeting.59">Единое место для проверки каналов, повторного распознавания,
+          разделения голосов и назначения участникам имён.</span></p></div>
+      <div class="analysis-flow" aria-label="Порядок разбора записи" data-meeting-aria-label="meeting.60">
+        <span><b>01</b><span data-meeting-key="meeting.61"> выбрать запись</span></span><i>→</i>
+        <span><b>02</b><span data-meeting-key="meeting.62"> разделить голоса</span></span><i>→</i>
+        <span><b>03</b><span data-meeting-key="meeting.63"> прослушать и назвать</span></span><i>→</i>
+        <span><b>04</b><span data-meeting-key="meeting.64"> проверить отчёт</span></span>
+      </div>
+    </div>
+    <div class="analysis-tools">
+      <button id="analysisAudio"><svg class="ui-icon" aria-hidden="true"><use href="#icon-check"/></svg>
+        <span><strong><span data-meeting-key="meeting.65">Проверить каналы</span></strong><small><span data-meeting-key="meeting.66">микрофон, звук встречи, эхо и распознавание</span></small></span></button>
+      <button id="analysisImport"><svg class="ui-icon" aria-hidden="true"><use href="#icon-output"/></svg>
+        <span><strong><span data-meeting-key="meeting.67">Импортировать транскрипт</span></strong><small><span data-meeting-key="meeting.68">Teams, Zoom, Телемост или Контур.Толк</span></small></span></button>
+      <button id="analysisSpeakerBank"><svg class="ui-icon" aria-hidden="true"><use href="#icon-emulation"/></svg>
+        <span><strong><span data-meeting-key="meeting.69">Открыть банк голосов</span></strong><small><span data-meeting-key="meeting.70">локальные отпечатки для подсказки имён</span></small></span></button>
+      <button id="analysisReport"><svg class="ui-icon" aria-hidden="true"><use href="#icon-report"/></svg>
+        <span><strong><span data-meeting-key="meeting.71">Проверить отчёт</span></strong><small><span data-meeting-key="meeting.72">контроль спорных мест и создание DOCX</span></small></span></button>
+      <button id="analysisBenchmark"><svg class="ui-icon" aria-hidden="true"><use href="#icon-benchmark"/></svg>
+        <span><strong><span data-meeting-key="meeting.73">Эталон качества</span></strong><small><span data-meeting-key="meeting.74">проверка ошибок текста и разделения голосов по исходному аудио</span></small></span></button>
+      <button id="analysisGuardCalibration"><svg class="ui-icon" aria-hidden="true"><use href="#icon-check"/></svg>
+        <span><strong><span data-meeting-key="meeting.75">Калибровка Аудиосторожа</span></strong><small><span data-meeting-key="meeting.76">пороги задержки, диска и перегрузки по реальным встречам</span></small></span></button>
+      <button id="analysisArchive"><svg class="ui-icon" aria-hidden="true"><use href="#icon-archive"/></svg>
+        <span><strong><span data-meeting-key="meeting.77">Открыть весь архив</span></strong><small><span data-meeting-key="meeting.78">транскрипты, записи и отчёты встреч</span></small></span></button>
+    </div>
+    <section class="analysis-sessions">
+      <div class="analysis-section-head"><div><h4><span data-meeting-key="meeting.79">Записи для разбора</span></h4>
+        <p><span data-meeting-key="meeting.80">Выберите встречу. Replay Lab создаёт отдельный результат и не меняет исходник.</span></p></div>
+        <button id="analysisRefresh"><span data-meeting-key="meeting.81">обновить</span></button></div>
+      <div id="analysisSessionList" class="analysis-session-list">
+        <div class="analysis-empty"><span data-meeting-key="meeting.82">Загружаю архив…</span></div>
+      </div>
+    </section>
+    <aside class="analysis-note"><strong><span data-meeting-key="meeting.83">Чтобы назвать говорящих, банк голосов не нужен.</span></strong><span data-meeting-key="meeting.84">
+      Сначала Replay Lab делит запись на голосовые кластеры. Затем нажмите
+      «Переименовать говорящих», прослушайте примеры, укажите имена и сохраните.
+      После этого нажмите «Проверить отчёт»: Blatero покажет спорные места перед
+      созданием DOCX. Банк голосов —
+      отдельный необязательный шаг: он помогает предлагать эти имена в будущих
+      встречах, но никогда не применяет их без вашего подтверждения.</span></aside>
+  </div>
+</div>
+<div class="overlay" id="guardCalibrationOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="guardCalibrationTitle">
+  <button class="ovclose" id="guardCalibrationClose" title="закрыть" data-studio-title="tool.260">&#10005;</button>
+  <div class="guard-calibration-shell">
+    <div class="guard-calibration-head">
+      <div><span class="model-kicker"><span data-studio-key="tool.261">ЛОКАЛЬНАЯ ПРОВЕРКА ЗВУКА</span></span>
+        <h3 id="guardCalibrationTitle" tabindex="-1"><span data-studio-key="tool.262">Калибровка Аудиосторожа</span></h3>
+        <p><span data-studio-key="tool.263">Blatero сравнивает текущие пороги с обезличенными числовыми срезами
+          реальных записей. Никаких автоматических изменений: применение
+          появится только после достаточной ручной выборки и подтверждения.</span></p></div>
+      <div class="guard-calibration-readiness" id="guardCalibrationReadiness">—</div>
+    </div>
+    <section class="guard-calibration-summary" id="guardCalibrationSummary"></section>
+    <section class="guard-calibration-table-wrap">
+      <table class="guard-calibration-table">
+        <thead><tr><th><span data-studio-key="tool.264">сигнал</span></th><th><span data-studio-key="tool.265">наблюдение</span></th><th><span data-studio-key="tool.266">сейчас</span></th>
+          <th><span data-studio-key="tool.267">рекомендация</span></th><th><span data-studio-key="tool.268">решение</span></th></tr></thead>
+        <tbody id="guardCalibrationRows"></tbody>
+      </table>
+    </section>
+    <div class="guard-calibration-actions">
+      <button id="guardCalibrationRefresh"><span data-studio-key="tool.269">пересчитать локально</span></button>
+      <label class="consent-check"><input id="guardCalibrationConfirmed" type="checkbox">
+        <span><strong><span data-studio-key="tool.270">Применить только показанный профиль</span></strong>
+          <span class="consent-detail"><span data-studio-key="tool.271">При изменении архива потребуется новый расчёт.</span></span></span></label>
+      <button class="primary" id="guardCalibrationApply" disabled><span data-studio-key="tool.272">применить рекомендации</span></button>
+      <span id="guardCalibrationStatus" role="status"><span data-studio-key="tool.273">Загружаю локальные измерения…</span></span>
+    </div>
+    <aside class="analysis-note" id="guardCalibrationBlockers"></aside>
+    <p class="privacy-note" id="guardCalibrationPrivacy"></p>
+  </div>
+</div>
+<div class="overlay" id="qualityOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="qualityTitle">
+  <button class="ovclose" id="qualityClose" title="закрыть" data-studio-title="tool.260">&#10005;</button>
+  <div class="quality-shell">
+    <div class="quality-head">
+      <div><span class="model-kicker"><span data-studio-key="tool.274">ЭТАЛОН КАЧЕСТВА</span></span>
+        <h3 id="qualityTitle" tabindex="-1"><span data-studio-key="tool.275">Эталон качества</span></h3>
+        <p><span data-studio-key="tool.276">Сверяйте архивный транскрипт с исходным звуком. Черновик хранится
+          отдельно и не меняет запись, рабочий транскрипт или отчёт.</span></p></div>
+      <div class="quality-progress" id="qualityProgress">—</div>
+    </div>
+    <section class="quality-metrics" id="qualityMetrics"></section>
+    <div class="quality-toolbar" id="qualityToolbar">
+      <label><span data-studio-key="tool.277">показать</span><select id="qualityFilter">
+        <option value="all" data-studio-key="tool.278">все записи</option><option value="draft" data-studio-key="tool.279">черновики</option>
+        <option value="reviewed" data-studio-key="tool.280">подтверждённые</option><option value="missing" data-studio-key="tool.281">без эталона</option>
+      </select></label>
+      <button id="qualityRefresh"><span data-studio-key="tool.282">обновить</span></button>
+      <span id="qualityStatus" role="status"><span data-studio-key="tool.283">Загружаю локальный набор…</span></span>
+    </div>
+    <div class="quality-list" id="qualityList"></div>
+    <section class="quality-editor" id="qualityEditor" hidden>
+      <div class="quality-editor-head">
+        <div><span class="model-kicker"><span data-studio-key="tool.284">ПРОСЛУШАТЬ · ИСПРАВИТЬ · СОХРАНИТЬ</span></span>
+          <h4 id="qualityEditorTitle"><span data-studio-key="tool.285">Разметка</span></h4>
+          <p id="qualityEditorMeta"></p></div>
+        <button id="qualityEditorBack"><span data-studio-key="tool.286">к списку</span></button>
+      </div>
+      <div class="quality-editor-toolbar">
+        <label><span data-studio-key="tool.287">поиск</span><input id="qualitySearch" type="search"
+          placeholder="текст, имя, роль" autocomplete="off" data-studio-placeholder="tool.288"></label>
+        <label class="quality-confirm"><input id="qualityConfirmed" type="checkbox">
+          <span><span data-studio-key="tool.289">Я прослушал спорные места и сверил текст, роль и канал</span></span></label>
+        <button class="primary" id="qualityFinalize"><span data-studio-key="tool.290">подтвердить эталон</span></button>
+        <button id="qualityReopen" hidden><span data-studio-key="tool.291">вернуть в черновик</span></button>
+      </div>
+      <audio id="qualityAudio" controls preload="metadata" hidden></audio>
+      <div class="quality-utterances" id="qualityUtterances"></div>
+    </section>
+    <p class="privacy-note"><span data-studio-key="tool.292">Корпус и метрики находятся только в локальном архиве.
+      В общую статистику входят лишь вручную подтверждённые эталоны. Цель первого
+      измеримого релиза — 10–20 реальных встреч.</span></p>
+  </div>
+</div>
+<div class="overlay" id="replayOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="replayTitle">
+  <button class="ovclose" id="replayClose" title="закрыть" data-studio-title="tool.260">&#10005;</button>
+  <div class="replay-shell">
+    <h3 id="replayTitle">Replay Lab</h3>
+    <p class="settings-lead"><span data-studio-key="tool.293">Повторный локальный прогон архивной записи через
+      выбранные распознавание речи, очистку эха и разделение голосов. Исходные аудио, транскрипт и отчёт не
+      изменяются; каждый эксперимент сохраняется отдельно и удаляется целиком.</span></p>
+    <section class="replay-setup">
+      <div class="replay-session"><span><span data-studio-key="tool.294">архивная встреча</span></span>
+        <strong id="replaySessionLabel">—</strong></div>
+      <div class="replay-fields">
+        <label><span data-studio-key="tool.295">Дорожка</span><select id="replayAudio"></select></label>
+        <label>Whisper<select id="replayModel">
+          <option value="tiny" data-studio-key="tool.296">tiny · быстро</option>
+          <option value="base">base</option><option value="small" selected data-studio-key="tool.297">small · баланс</option>
+          <option value="medium" data-studio-key="tool.298">medium · точнее</option>
+          <option value="large-v3" data-studio-key="tool.299">large-v3 · медленно</option></select></label>
+        <label>AEC<select id="replayAec"><option value="off" data-studio-key="tool.118">выключен</option>
+          <option value="correlation" data-studio-key="tool.300">встроенный корреляционный</option>
+          <option value="auto">WebRTC AEC3 → fallback</option>
+          <option value="native" data-studio-key="tool.301">только WebRTC AEC3 → fallback при сбое</option></select></label>
+        <label><span data-studio-key="tool.302">Ожидается голосов</span><input id="replaySpeakers" type="number" min="0" max="20" value="2">
+          <small><span data-studio-key="tool.303">0 — авто; на шумных звонках лучше указать число</span></small></label>
+        <label><span data-studio-key="tool.304">Признаки голоса</span><select id="replayEmbedding">
+          <option value="nemo" selected data-studio-key="tool.305">NeMo TitaNet · рекомендуется</option>
+          <option value="3dspeaker" data-studio-key="tool.306">3D-Speaker · прежний</option></select></label>
+        <label><span data-studio-key="tool.307">Порог кластеризации</span><select id="replayThreshold"><option value="0.4" data-studio-key="tool.308">0,40 · разделять чаще</option>
+          <option value="0.5" selected data-studio-key="tool.309">0,50 · базовый</option>
+          <option value="0.6" data-studio-key="tool.310">0,60 · объединять чаще</option></select></label>
+        <label><span data-studio-key="tool.370">Точность распознавания</span><select id="replayBeam">
+          <option value="1" selected data-studio-key="tool.371">1 · быстрее</option>
+          <option value="3" data-studio-key="tool.372">3 · точнее</option></select></label>
+      </div>
+      <div class="replay-toggles">
+        <label class="consent-check"><input id="replayDiarization" type="checkbox" checked>
+          <span><strong><span data-studio-key="tool.311">Разделить голосовые кластеры</span></strong>
+            <span class="consent-detail"><span data-studio-key="tool.312">Локальная CPU-диаризация после Whisper.</span></span></span></label>
+        <label class="consent-check"><input id="replayHint" type="checkbox">
+          <span><strong><span data-studio-key="tool.313">Контрольная подсказка после прогона</span></strong>
+            <span class="consent-detail"><span data-studio-key="tool.314">Не симуляция тайминга: один финальный pulse.
+              Может использовать выбранный LLM и требует облачного согласия.</span></span></span></label>
+        <label class="consent-check"><input id="replayReuse" type="checkbox" checked>
+          <span><strong><span data-studio-key="tool.368">Использовать готовый транскрипт</span></strong>
+            <span class="consent-detail"><span data-studio-key="tool.369">Если такой же прогон уже распознан,
+              Whisper не запускается повторно.</span></span></span></label>
+      </div>
+      <div class="replay-actions"><button class="primary" id="replayStart"><span data-studio-key="tool.315">
+        запустить один вариант</span></button>
+        <label class="replay-matrix-choice"><span data-studio-key="tool.316">Что сравнить</span><select id="replayMatrix">
+          <option value="stt">STT · base / small / medium</option>
+          <option value="aec" data-studio-key="tool.317">AEC · выкл / корреляция / WebRTC</option>
+          <option value="speakers" data-studio-key="tool.318">Голоса · 4 варианта кластеризации</option>
+        </select></label>
+        <button id="replayMatrixStart"><span data-studio-key="tool.319">запустить несколько и сравнить</span></button>
+        <span id="replayStatus"><span data-studio-key="tool.320">Выберите настройки варианта.</span></span></div>
+    </section>
+    <div class="replay-history-head"><h4><span data-studio-key="tool.321">Прогоны и сравнение</span></h4>
+      <div><span id="replayCompareCount"><span data-studio-key="tool.122">выберите 2–4 готовых варианта</span></span>
+        <button id="replayCompare" disabled><span data-studio-key="tool.322">сравнить расхождения</span></button>
+        <button id="replayRefresh"><span data-studio-key="tool.282">обновить</span></button></div></div>
+    <section id="replayComparePanel" class="replay-compare-panel" hidden>
+      <div class="replay-compare-head"><div><span class="model-kicker"><span data-studio-key="tool.323">СРАВНЕНИЕ И ПРОСЛУШИВАНИЕ</span></span>
+        <h4><span data-studio-key="tool.324">Где варианты услышали разное</span></h4>
+        <p id="replayCompareSummary"></p></div>
+        <button id="replayCompareClose" title="свернуть сравнение" data-studio-title="tool.325"><span data-studio-key="tool.326">свернуть</span></button></div>
+      <div id="replayCompareVariants" class="replay-compare-variants"></div>
+      <div id="replayCompareRows" class="replay-compare-rows"></div>
+      <audio id="replayCompareAudio" preload="metadata"></audio>
+    </section>
+    <section id="replayTimelinePanel" class="replay-timeline-panel" hidden>
+      <div class="replay-compare-head"><div><span class="model-kicker"><span data-studio-key="tool.327">ТАЙМЛАЙН И ЗАДЕРЖКИ</span></span>
+        <h4><span data-studio-key="tool.328">Встреча в исходном темпе</span></h4>
+        <p id="replayTimelineSummary"></p></div>
+        <button id="replayTimelineClose" title="закрыть таймлайн" data-studio-title="tool.329"><span data-studio-key="tool.260">закрыть</span></button></div>
+      <div id="replayTimelineMetrics" class="replay-timeline-metrics"></div>
+      <div class="replay-timeline-controls">
+        <audio id="replayTimelineAudio" controls preload="metadata"></audio>
+        <label><span data-studio-key="tool.330">скорость</span><select id="replayTimelineSpeed">
+          <option value="0.5">0,5×</option><option value="1" selected>1×</option>
+          <option value="1.5">1,5×</option><option value="2">2×</option>
+          <option value="4">4×</option></select></label>
+        <label><span data-studio-key="tool.331">ответ LLM, сек</span><input id="replayTimelineLlm" type="number"
+          min="0.2" max="120" step="0.1" value="6"></label>
+        <label><span data-studio-key="tool.332">тишина до запроса, сек</span><input id="replayTimelineSilence" type="number"
+          min="0.5" max="30" step="0.5" value="4"></label>
+      </div>
+      <div id="replayTimelineSimulation" class="replay-timeline-simulation"></div>
+      <div class="replay-timeline-body">
+        <div><h5><span data-studio-key="tool.333">Реплики</span></h5><div id="replayTimelineUtterances"
+          class="replay-timeline-utterances"></div></div>
+        <div><h5><span data-studio-key="tool.334">Окна для подсказки</span></h5><div id="replayTimelineWindows"
+          class="replay-timeline-windows"></div></div>
+      </div>
+    </section>
+    <div id="replayRuns" class="replay-runs"></div>
+  </div>
+</div>
+<div class="overlay" id="agendaOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="agendaTitle">
+  <button class="ovclose" data-close-overlay title="закрыть" data-studio-title="tool.260">&#10005;</button>
+  <h3 id="agendaTitle" tabindex="-1"><span data-studio-key="tool.335">Повестка</span></h3>
+  <textarea id="agendaTa"></textarea><br><br>
+  <button class="primary" id="agendaSave"><span data-studio-key="tool.336">Сохранить</span></button>
+</div>
+<div class="overlay" id="importOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="importTitle">
+  <button class="ovclose" data-close-overlay title="закрыть" data-studio-title="tool.260">&#10005;</button>
+  <h3 id="importTitle" tabindex="-1"><span data-studio-key="tool.337">Импорт транскрипта</span></h3>
+  <div class="soundbox transcript-import-box">
+    <p class="privacy-note"><span data-studio-key="tool.338">Адаптеры понимают выгрузки Microsoft Teams, Zoom,
+      Яндекс Телемоста и Контур.Толка. Файл обрабатывается на этом компьютере и
+      добавляется новым сегментом — существующая запись не перезаписывается.</span></p>
+    <label><span data-studio-key="tool.339">Источник
+      </span><select id="transcriptImportAdapter"></select>
+    </label>
+    <div class="privacy-note" id="transcriptImportHelp"><span data-studio-key="tool.340">Выберите источник или оставьте автоопределение.</span></div>
+    <label><span data-studio-key="tool.341">Файл до 2 МБ
+      </span><input id="transcriptImportFile" type="file" accept=".srt,.vtt,.json,.txt,.docx,.pdf">
+    </label>
+    <label><span data-studio-key="tool.342">Как в файле подписан мой голос
+      </span><input id="transcriptMySpeaker" type="text" maxlength="80"
+        placeholder="например, Роман; можно оставить пустым" data-studio-placeholder="tool.343"></label>
+    <div class="workspace-status" id="transcriptImportStatus"><span data-studio-key="tool.203">Файл ещё не выбран.</span></div>
+    <div class="sound-actions">
+      <button class="primary" id="transcriptImportStart" disabled><span data-studio-key="tool.344">добавить в текущую встречу</span></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="speakerBankOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="speakerBankTitle">
+  <button class="ovclose" id="speakerBankClose" title="закрыть" data-studio-title="tool.260">&#10005;</button>
+  <h3 id="speakerBankTitle" tabindex="-1"><span data-studio-key="tool.345">Локальный банк голосов</span></h3>
+  <p class="settings-lead"><span data-studio-key="tool.346">Blatero хранит только числовые голосовые отпечатки и
+    имя профиля. Исходная запись в банк не копируется, данные не отправляются в
+    облако, а найденное имя всегда требует ручного подтверждения.</span></p>
+  <div class="speaker-bank-layout">
+    <section class="soundbox speaker-enroll-card">
+      <h4><span data-studio-key="tool.347">Добавить мой голос</span></h4>
+      <p class="privacy-note"><span data-studio-key="tool.348">Рекомендуется калибровка по нескольким архивным
+        встречам: она отбракует дорожки с эхом и несогласованные фрагменты.
+        Отдельный образец для синтеза голоса доступен как запасной вариант.</span></p>
+      <label><span data-studio-key="tool.349">Имя профиля
+        </span><input id="speakerProfileName" type="text" maxlength="80"
+          placeholder="например, Роман" data-studio-placeholder="tool.350"></label>
+      <label class="consent-check"><input id="speakerProfileConsent" type="checkbox">
+        <span><strong><span data-studio-key="tool.351">Создать локальный голосовой отпечаток</span></strong>
+          <span class="consent-detail"><span data-studio-key="tool.352">Подтверждаю, что это мой голос и согласен
+            хранить его отпечаток на этом компьютере до ручного удаления.</span></span></span></label>
+      <div class="sound-actions">
+        <button class="primary" id="speakerCalibrateMyVoice"><span data-studio-key="tool.353">калибровать по архиву</span></button>
+        <button id="speakerEnrollMyVoice"><span data-studio-key="tool.354">использовать образец голоса</span></button>
+        <button id="speakerOpenAudio"><span data-studio-key="tool.355">записать образец…</span></button>
+      </div>
+      <div class="workspace-status" id="speakerBankStatus"><span data-studio-key="tool.356">Загружаю банк…</span></div>
+    </section>
+    <section class="speaker-profile-section">
+      <div class="speaker-profile-head"><h4><span data-studio-key="tool.357">Сохранённые профили</span></h4>
+        <button id="speakerBankRefresh"><span data-studio-key="tool.282">обновить</span></button></div>
+      <p class="privacy-note"><span data-studio-key="tool.358">У каждого профиля можно изменить только подпись,
+        либо записать отдельные 15 секунд для проверки. Проверочная запись
+        удаляется сразу; автоматическое назначение имён отключено.</span></p>
+      <div id="speakerProfileList" class="speaker-profile-list"></div>
+    </section>
+  </div>
+</div>
+<div class="overlay" id="audioOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="audioTitle">
+  <div class="audio-dialog-toolbar">
+    <h3 id="audioTitle" tabindex="-1"><span data-studio-key="remaining.16">Проверка и настройка звука</span></h3>
+    <button class="ovclose" data-close-overlay title="закрыть" aria-label="Закрыть проверку звука" data-studio-title="remaining.6" data-studio-aria-label="remaining.17">&#10005;</button>
+  </div>
+  <div class="soundbox preflight-box">
+    <div class="preflight-head">
+      <div><h4><span data-studio-key="remaining.18">Готовность к встрече</span></h4>
+        <div class="privacy-note"><span data-studio-key="remaining.19">Одна проверка микрофона, звука приложения встречи,
+          очистки эха, распознавания речи и записи. Сначала говорите, затем замолчите для тестового сигнала.
+          Для STT используется отдельная встроенная фраза: Whisper проверяется локально в двух каналах,
+          при выбранном SpeechKit эта фраза отправляется в Яндекс. Речь из проверки микрофона не отправляется.</span></div></div>
+      <div class="sound-actions">
+        <button class="primary" id="preflightStart"><span data-studio-key="remaining.20">проверить всё</span></button>
+        <button id="diagnosticsBuild"><span data-studio-key="remaining.21">скачать диагностику</span></button>
+      </div>
+    </div>
+    <div class="workspace-status" id="preflightStatus" role="status" aria-live="polite"><span data-studio-key="remaining.22">Проверка ещё не запускалась.</span></div>
+    <div class="preflight-checks" id="preflightChecks"></div>
+  </div>
+  <div class="audio-source-grid">
+  <div class="soundbox mic-test-panel" id="micTestPanel">
+    <label><span data-studio-key="remaining.23">Микрофон </span><select id="testMic"></select></label>
+    <p class="mic-test-phrase"><span data-studio-key="remaining.24">После отсчёта скажите: «Проверяю микрофон перед встречей. Меня хорошо слышно».</span></p>
+    <div id="micTestCountdown" class="mic-test-countdown" hidden aria-hidden="true"></div>
+    <div class="meter"><div id="micMeter" role="progressbar" aria-label="Уровень микрофона" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-studio-aria-label="remaining.25"></div></div>
+    <div id="micTestStatus" role="status" aria-live="polite"><span data-studio-key="remaining.26">Нажмите кнопку, когда будете готовы говорить. Проба остаётся в памяти этой вкладки; в облако и папку встречи не попадает.</span></div>
+    <div id="micTestTime" class="mic-test-time" role="timer" aria-live="off"></div>
+    <div class="sound-actions">
+      <button class="primary" id="micTestStart"><span data-studio-key="remaining.27">Начать проверку микрофона</span></button>
+      <button id="micTestCancel" hidden><span data-studio-key="remaining.28">Отменить</span></button>
+      <button id="refreshMics"><span data-studio-key="remaining.29">обновить список устройств</span></button>
+    </div>
+    <div id="micTestPreview" hidden>
+      <label for="micTestPlayback"><span data-studio-key="remaining.30">Ваша проба</span></label>
+      <audio id="micTestPlayback" controls preload="metadata" aria-label="Прослушать проверочную запись микрофона" data-studio-aria-label="remaining.31"></audio>
+      <button id="micTestClear"><span data-studio-key="remaining.32">Удалить пробу</span></button>
+    </div>
+  </div>
+  <div class="soundbox">
+    <label><span data-studio-key="remaining.33">Системный звук встречи </span><select id="testOutput"></select></label>
+    <div class="meter"><div id="outputMeter" role="progressbar" aria-label="Уровень системного звука" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-studio-aria-label="remaining.34"></div></div>
+    <div id="outputTestStatus" role="status" aria-live="polite"><span data-studio-key="remaining.35">Выберите тот же выход, который указан в приложении встречи. Во время проверки включите тестовый звук или видео.</span></div>
+    <div class="sound-actions">
+      <button class="primary" id="outputTestStart"><span data-studio-key="remaining.36">проверить 8 секунд</span></button>
+    </div>
+  </div>
+  </div>
+  <h3><span data-studio-key="remaining.37">Мой голос · Chatterbox локально</span></h3>
+  <div class="soundbox">
+    <div class="voice-profile-grid">
+      <div><span data-studio-key="remaining.38">Прочитайте спокойным естественным голосом текст ниже, без длинных пауз и постороннего шума.</span></div>
+      <label><span data-studio-key="remaining.39">длительность </span><select id="voiceSeconds"><option value="15" selected data-studio-key="remaining.40">15 с · рекомендуется</option><option value="30" data-studio-key="remaining.41">30 с</option><option value="60" data-studio-key="remaining.42">60 с</option></select></label>
+    </div>
+    <div class="privacy-note"><span data-studio-key="remaining.43">Сегодня я говорю спокойно и уверенно. Мне важно, чтобы каждое слово звучало ясно и естественно. Я делаю небольшие паузы между предложениями, сохраняю ровный темп и обычную интонацию. Этот образец поможет программе воспроизвести особенности моего голоса.</span></div>
+    <div class="meter"><div id="voiceMeter" role="progressbar" aria-label="Уровень записи образца голоса" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-studio-aria-label="remaining.44"></div></div>
+    <div id="localVoiceStatus" role="status" aria-live="polite"><span data-studio-key="remaining.45">Проверяю локальный движок и образец…</span></div>
+    <div class="sound-actions">
+      <button class="primary" id="voiceRecord"><span data-studio-key="remaining.46">записать образец</span></button>
+      <button id="localVoiceTest"><span data-studio-key="remaining.47">проверить мой голос</span></button>
+      <button id="voiceCache"><span data-studio-key="remaining.48">подготовить вопросы встречи</span></button>
+      <button class="danger" id="voiceDelete"><span data-studio-key="remaining.49">удалить мой голос</span></button>
+    </div>
+    <div class="privacy-note"><strong><span data-studio-key="remaining.50">Локально:</span></strong><span data-studio-key="remaining.51"> образец, модель и готовые WAV находятся только в папке Blatero. Если вопрос ещё не подготовлен или движок ошибся, Яндекс используется лишь в режиме «мой голос → Яндекс» и при включённом согласии.</span></div>
+  </div>
+  <h3><span data-studio-key="remaining.52">Резервный голос Яндекс SpeechKit</span></h3>
+  <div class="soundbox">
+    <div><span data-studio-key="remaining.53">Для проверки выберите конкретный голос в настройках.</span></div>
+    <div id="voiceTestStatus"><span data-studio-key="remaining.54">В SpeechKit уйдёт только фиксированная тестовая фраза, без данных встречи.</span></div>
+    <button class="primary" id="voiceTestModal"><span data-studio-key="remaining.55">прослушать выбранный голос</span></button>
+  </div>
+</div>
+<div class="overlay" id="workspacePrivacyOverlay" role="dialog" aria-modal="true" aria-labelledby="workspacePrivacyTitle">
+  <button class="ovclose" id="workspacePrivacyClose" title="отменить отправку" data-studio-title="service.71">&#10005;</button>
+  <div class="privacy-review-shell">
+    <h3 id="workspacePrivacyTitle" tabindex="-1"><span data-studio-key="service.72">Что уйдёт в облако</span></h3>
+    <p id="workspacePrivacyDestination"></p>
+    <p id="workspacePrivacyStatus" role="status" aria-live="polite"></p>
+    <p><span data-studio-key="service.73">Оригиналы остаются на компьютере. Проверка может пропустить данные, особенно после OCR.
+      Это не гарантия анонимности: проверьте текст справа. Согласие на облачную обработку настраивается отдельно.</span></p>
+    <div class="privacy-review-grid">
+      <section>
+        <h4><span data-studio-key="service.74">Включённые файлы</span></h4>
+        <p><span data-studio-key="service.75">Снимите галочку, чтобы исключить файл. При исключениях прежний анализ проекта не используется.</span></p>
+        <div id="workspacePrivacyFiles"></div>
+        <label for="workspacePrivacyCustom"><span data-studio-key="service.76">Дополнительно скрыть — каждый фрагмент с новой строки</span></label>
+        <textarea id="workspacePrivacyCustom" rows="5" placeholder="Имя, адрес, название клиента или другой фрагмент" data-studio-placeholder="service.77"></textarea>
+        <p id="workspacePrivacyCount"></p>
+        <details><summary><span data-studio-key="service.78">Исходный запрос с подсветкой — только локально</span></summary><pre id="workspacePrivacySource"></pre></details>
+      </section>
+      <section>
+        <h4><span data-studio-key="service.79">Точный текст отправки</span></h4>
+        <details><summary><span data-studio-key="service.80">Системная инструкция</span></summary><pre id="workspacePrivacySystem"></pre></details>
+        <pre id="workspacePrivacyUser"></pre>
+      </section>
+    </div>
+    <section id="workspaceVisualSection" hidden>
+      <h4><span data-studio-key="service.81">Визуальный анализ картинок — отдельно от текста</span></h4>
+      <p id="workspaceVisualNotice"></p>
+      <p><span data-studio-key="service.82">Картинки не обезличиваются автоматически. Выберите нужные, закрасьте личные данные
+        прямоугольником на картинке и нажмите «Перепроверить локально».
+        В ИИ уйдут только выбранные изображения в показанном виде, без исходных метаданных.</span></p>
+      <p><span data-studio-key="service.83">Для выбранных картинок исходный OCR и прежний анализ проекта не используются,
+        чтобы скрытые сведения не вернулись через текст.</span></p>
+      <div id="workspaceVisuals"></div>
+      <label class="privacy-image-ack"><input type="checkbox" id="workspaceImagesAck"><span data-studio-key="service.84">
+        Я проверил выбранные картинки и разрешаю отправить именно эти изображения.</span></label>
+    </section>
+    <div class="privacy-review-actions">
+      <button id="workspacePrivacyRecheck"><span data-studio-key="service.85">перепроверить локально</span></button>
+      <button class="primary" id="workspacePrivacyApprove"><span data-studio-key="service.45">подтверждаю текст — отправить и подготовить</span></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="helpOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="helpTitle">
+  <button class="ovclose" id="helpClose" title="закрыть">&#10005;</button>
+  <div class="help-shell">
+    <span class="model-kicker">БЫСТРЫЙ СТАРТ</span>
+    <h3 id="helpTitle">Как пользоваться Blatero</h3>
+    <p class="settings-lead">Встречи, задачи, план и знания в одном пространстве.
+      Выберите короткий маршрут; задачи доступны без записи и обращения к ИИ.</p>
+    <div class="help-preference">
+      <label><input type="checkbox" id="helpShowOnStartup" checked
+        aria-describedby="helpPreferenceHint"> Показывать обучение при запуске</label>
+      <small id="helpPreferenceHint">Закрытие окна и переход в настройки не отключают обучение.
+        Его всегда можно открыть через «Помощь».</small>
+      <small id="helpPreferenceStatus" role="status" aria-live="polite"></small>
+    </div>
+    <div class="help-steps illustrated">
+      <article><img src="/assets/onboarding-prepare.png" alt="Подготовка встречи" loading="lazy">
+        <div><b>01</b><strong>Подготовьте встречу</strong><span>Укажите формат, участника и материалы. Blatero соберёт контекст и вопросы.</span></div></article>
+      <article><img src="/assets/onboarding-audio.png" alt="Проверка звука" loading="lazy">
+        <div><b>02</b><strong>Проверьте звук</strong><span>Скажите фразу в микрофон и включите звук встречи. Оба индикатора должны двигаться отдельно.</span></div></article>
+      <article><img src="/assets/onboarding-live.png" alt="Разговор с подсказками" loading="lazy">
+        <div><b>03</b><strong>Ведите разговор</strong><span>Запись и расшифровка идут в фоне. Подсказку можно вызвать, когда она действительно нужна.</span></div></article>
+      <article><img src="/assets/onboarding-review.png" alt="Проверка и создание отчёта" loading="lazy">
+        <div><b>04</b><strong>Проверьте результат</strong><span>Исправьте текст и имена говорящих, затем просмотрите выводы и создайте DOCX.</span></div></article>
+    </div>
+    <div class="help-start-note"><strong>Начните с обзора настроек.</strong>
+      Проверьте звук, подключение ИИ и передачу данных.</div>
+    <div class="help-actions">
+      <p id="helpTourIntro" class="help-tour-note" data-i18n="tourInvite" hidden>Впервые здесь? За пять шагов найдите основные кнопки встречи.</p>
+      <button class="primary" id="helpQuickSettings">открыть настройки</button>
+      <button id="helpTourStart" type="button" data-i18n="tourStart">Показать на экране</button>
+      <button id="helpSetup">создать встречу</button>
+      <button id="helpDone">перейти к главному экрану</button>
+      <p id="helpTourBusy" class="help-tour-note" data-i18n="tourBusy" hidden>Тур доступен после остановки записи.</p>
+    </div>
+    <p class="quiet help-actions-note">Проверка звука, подключение ИИ и разбор записи —
+      внутри шагов 01–04 выше. Завершить работу можно через «Инструменты» в шапке.</p>
+    <details class="help-details"><summary>Показать снимки настоящего интерфейса</summary>
+      <div class="help-shots">
+        <figure><img src="/assets/help-main.png" alt="Главный экран Blatero" loading="lazy"><figcaption>Главный экран и быстрые действия</figcaption></figure>
+        <figure><img src="/assets/help-analysis.png" alt="Панель аудио и говорящих" loading="lazy"><figcaption>Разбор записи и назначение имён</figcaption></figure>
+        <figure><img src="/assets/help-audio.png" alt="Проверка звуковых каналов" loading="lazy"><figcaption>Проверка каналов до встречи</figcaption></figure>
+        <figure><img src="/assets/help-speakers.png" alt="Локальный банк голосов" loading="lazy"><figcaption>Банк голосов: профили и проверка отпечатков</figcaption></figure>
+      </div>
+    </details>
+  </div>
+</div>
+<dialog id="meetingTour" class="meeting-tour" role="dialog" aria-modal="true" aria-labelledby="meetingTourTitle" aria-describedby="meetingTourText">
+  <svg aria-hidden="true" class="meeting-tour-spotlight" width="100%" height="100%">
+    <path id="meetingTourMask" fill-rule="evenodd"></path>
+    <g id="meetingTourRings"></g>
+  </svg>
+  <section class="meeting-tour-card">
+    <p id="meetingTourProgress" class="meeting-tour-progress"></p>
+    <h2 id="meetingTourTitle" tabindex="-1"></h2>
+    <p id="meetingTourText"></p>
+    <p id="meetingTourLayoutNote" class="quiet" hidden></p>
+    <div class="meeting-tour-actions">
+      <button id="meetingTourExit" type="button" data-i18n="tourExit">Выйти из тура</button>
+      <button id="meetingTourBack" type="button" data-i18n="tourBack">Назад</button>
+      <button id="meetingTourNext" type="button" class="primary">Далее</button>
+    </div>
+  </section>
+</dialog>
+<div class="overlay shutdown-overlay" id="shutdownOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="shutdownTitle">
+  <section class="shutdown-card">
+    <svg class="shutdown-icon" aria-hidden="true"><use href="#icon-power"/></svg>
+    <span class="model-kicker">РАБОТА ЗАВЕРШЕНА</span>
+    <h3 id="shutdownTitle" tabindex="-1">Blatero остановлен</h3>
+    <p>Записи и настройки сохранены. Эту вкладку браузера можно закрыть.</p>
+  </section>
+</div>
+<div class="overlay" id="reportReviewOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="reportReviewTitle">
+  <button class="ovclose" id="reportReviewClose" title="закрыть" data-meeting-title="meeting.56">&#10005;</button>
+  <div class="report-review-shell">
+    <div class="report-review-head">
+      <div><span class="report-review-kicker"><span data-meeting-key="meeting.85">ПРОВЕРКА ОТЧЁТА</span></span>
+        <h3 id="reportReviewTitle" tabindex="-1"><span data-meeting-key="meeting.86">Контроль перед отчётом</span></h3>
+        <p id="reportReviewLead"><span data-meeting-key="meeting.87">Проверяю транскрипт, голоса и доказательность выводов.</span></p></div>
+      <div class="report-review-score" id="reportReviewScore"></div>
+    </div>
+    <div class="report-review-notice" id="reportReviewNotice"></div>
+    <div class="report-review-issues" id="reportReviewIssues"></div>
+    <section class="report-conclusions" id="reportConclusions" hidden>
+      <div class="report-draft-head">
+        <div><strong><span data-meeting-key="meeting.88">Выводы и их опоры</span></strong>
+          <small><span data-meeting-key="meeting.89">Локальная проверка находит связанную реплику и уверенность распознавания,
+            но не подменяет содержательную проверку человеком.</span></small></div>
+        <span id="reportConclusionMeta"></span>
+      </div>
+      <div class="report-conclusion-list" id="reportConclusionList"></div>
+    </section>
+    <details class="report-calibration" id="reportCalibration" open hidden>
+      <summary><span><strong><span data-meeting-key="meeting.90">Калибровка проверки выводов</span></strong>
+        <small><span data-meeting-key="meeting.91">Сравнение автоматического статуса с вашими решениями</span></small></span>
+        <b id="reportCalibrationProgress">—</b></summary>
+      <div class="report-calibration-body">
+        <div class="report-calibration-metrics" id="reportCalibrationMetrics"></div>
+        <div class="report-calibration-current" id="reportCalibrationCurrent"></div>
+        <aside class="report-calibration-note" id="reportCalibrationNote"></aside>
+        <div class="report-calibration-signals" id="reportCalibrationSignals"></div>
+      </div>
+    </details>
+    <section class="report-draft-editor" id="reportDraftEditor" hidden>
+      <div class="report-draft-head">
+        <div><strong><span data-meeting-key="meeting.92">Черновик итогового отчёта</span></strong>
+          <small><span data-meeting-key="meeting.93">Правки сохраняются локально и не вызывают LLM.</span></small></div>
+        <span id="reportDraftMeta"></span>
+      </div>
+      <textarea id="reportDraftText" maxlength="1000000" spellcheck="true"
+        aria-label="Черновик итогового отчёта" data-meeting-aria-label="meeting.92"></textarea>
+      <div class="report-draft-actions">
+        <span id="reportDraftStatus"><span data-meeting-key="meeting.94">Черновик не загружен.</span></span>
+        <button class="primary" id="reportDraftSave" disabled><span data-meeting-key="meeting.95">сохранить правки</span></button>
+      </div>
+    </section>
+    <div class="report-review-actions">
+      <div class="report-review-action-group">
+        <span><span data-meeting-key="meeting.96">1 · проверить исходные данные</span></span>
+        <button id="reportReviewTimeline"><span data-meeting-key="meeting.97">прослушать спорные места</span></button>
+        <button id="reportReviewSpeakers"><span data-meeting-key="meeting.98">переименовать говорящих</span></button>
+        <button id="reportReviewTranscript"><span data-meeting-key="meeting.99">исправить текст</span></button>
+      </div>
+      <div class="report-review-action-group">
+        <span><span data-meeting-key="meeting.100">2 · обновить выводы</span></span>
+        <button id="reportReviewRegenerate"><span data-meeting-key="meeting.101">обновить после исправлений</span></button>
+      </div>
+      <div class="report-review-action-group finish">
+        <span><span data-meeting-key="meeting.102">3 · создать документ</span></span>
+        <button id="reportReviewSkip"><span data-meeting-key="meeting.103">DOCX с предупреждениями</span></button>
+        <button class="primary" id="reportReviewApprove"><span data-meeting-key="meeting.104">создать проверенный DOCX</span></button>
+      </div>
+      <details class="report-review-more">
+        <summary><span data-meeting-key="meeting.105">дополнительно</span></summary>
+        <button id="reportEvidenceExport"><span data-meeting-key="meeting.106">экспорт доказательств JSON</span></button>
+      </details>
+    </div>
+    <p class="privacy-note report-review-foot"><span data-meeting-key="meeting.107">Черновик и очередь сомнений хранятся
+      локально. Повторный запрос к LLM выполняется только по кнопке «пересобрать»;
+      подтверждение собирает DOCX без нового обращения к модели.</span></p>
+  </div>
+</div>
+<div class="overlay" id="transcriptEditorOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="transcriptEditorTitle">
+  <button class="ovclose" id="transcriptEditorClose" title="закрыть" data-meeting-title="meeting.56">&#10005;</button>
+  <div class="transcript-editor-shell">
+    <div class="transcript-editor-head">
+      <div><span class="report-review-kicker"><span data-meeting-key="meeting.108">ЛОКАЛЬНЫЙ ТРАНСКРИПТ</span></span>
+        <h3 id="transcriptEditorTitle" tabindex="-1"><span data-meeting-key="meeting.109">Исправление реплик</span></h3>
+        <p><span data-meeting-key="meeting.110">Правится канонический JSONL, а читаемый Markdown пересобирается
+          автоматически. Исходная версия и журнал изменений остаются локально.</span></p></div>
+      <div class="transcript-editor-count" id="transcriptEditorCount">—</div>
+    </div>
+    <div class="transcript-editor-toolbar">
+      <label class="transcript-editor-search"><span data-meeting-key="meeting.111">поиск
+        </span><input id="transcriptEditorSearch" type="search"
+          placeholder="текст, имя или роль" autocomplete="off" data-meeting-placeholder="meeting.112"></label>
+      <button id="transcriptEditorReload"><span data-meeting-key="meeting.81">обновить</span></button>
+      <span id="transcriptEditorStatus" role="status"><span data-meeting-key="meeting.113">Редактор не загружен.</span></span>
+    </div>
+    <audio id="transcriptEditorAudio" controls preload="metadata" hidden></audio>
+    <div class="transcript-editor-list" id="transcriptEditorList"></div>
+    <p class="privacy-note transcript-editor-foot"><span data-meeting-key="meeting.114">Редактирование доступно после
+      остановки записи и только на этом компьютере. Если реплика успела измениться
+      в другом окне, Blatero потребует перезагрузить данные.</span></p>
+  </div>
+</div>
+<div class="overlay" id="modelOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="modelTitle">
+  <button class="ovclose" id="modelClose" title="закрыть" data-studio-title="service.86">&#10005;</button>
+  <div class="model-shell">
+    <div class="model-head">
+      <div><span class="model-kicker"><span data-studio-key="service.87">ЛОКАЛЬНЫЕ МОДЕЛИ</span></span>
+        <h3 id="modelTitle" tabindex="-1"><span data-studio-key="service.88">Локальные модели</span></h3>
+        <p><span data-studio-key="service.89">Установка, требования и место на диске. Удаляются только каталоги,
+          которыми управляет Blatero; образец вашего голоса сохраняется отдельно.</span></p></div>
+        <button id="modelRefresh"><span data-studio-key="service.90">обновить</span></button>
+    </div>
+    <div class="model-summary" id="modelSummary"></div>
+    <div class="workspace-status" id="modelStatus"><span data-studio-key="service.91">Проверяю локальные компоненты…</span></div>
+    <div class="model-grid" id="modelList"></div>
+    <section class="model-external" id="modelExternal" hidden></section>
+  </div>
+</div>
+<div class="overlay" id="updateOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="updateTitle">
+  <button class="ovclose" id="updateClose" title="закрыть" data-studio-title="service.86">&#10005;</button>
+  <div class="update-shell">
+    <div class="model-head">
+      <div><span class="model-kicker"><span data-studio-key="service.92">ПОДПИСЬ И ОТКАТ</span></span>
+        <h3 id="updateTitle" tabindex="-1"><span data-studio-key="service.93">Установка и обновления</span></h3>
+        <p><span data-studio-key="service.94">Blatero проверяет подпись Ed25519 и контрольную сумму каждого файла.
+          Обновление применяется только после остановки сервера; записи, модели,
+          токены, память и голосовой профиль находятся в отдельном каталоге данных.</span></p></div>
+      <button id="updateRefresh"><span data-studio-key="service.90">обновить</span></button>
+    </div>
+    <div class="model-summary" id="updateSummary"></div>
+    <div class="workspace-status" id="updateStatus"><span data-studio-key="service.95">Проверяю состояние установки…</span></div>
+    <div class="update-grid">
+      <section class="update-card">
+        <span class="model-kind">RELEASE PACKAGE</span><h4><span data-studio-key="service.96">Подготовить обновление</span></h4>
+        <p><span data-studio-key="service.97">Выберите локальный ZIP-релиз. Файл будет дважды проверен и скопирован
+          в защищённую очередь; текущий процесс не меняется.</span></p>
+        <div class="update-package" id="updatePackage"><span data-studio-key="service.29">Релиз ещё не выбран.</span></div>
+        <div class="model-actions">
+          <button id="updateBrowse"><span data-studio-key="service.98">выбрать и проверить ZIP</span></button>
+          <button class="primary" id="updateStage" disabled><span data-studio-key="service.99">подготовить</span></button>
+          <button class="danger" id="updateCancel" hidden><span data-studio-key="service.100">отменить</span></button>
+        </div>
+      </section>
+      <section class="update-card">
+        <span class="model-kind">ONE-STEP SAFETY</span><h4><span data-studio-key="service.101">Откат</span></h4>
+        <p id="updateRollbackText"><span data-studio-key="service.32">После первого пакетного обновления здесь
+          появится возврат к предыдущей версии.</span></p>
+        <div class="model-actions">
+          <button class="danger" id="updateRollback" disabled><span data-studio-key="service.102">подготовить откат</span></button>
+        </div>
+      </section>
+    </div>
+    <div class="update-note" id="updateNote"></div>
+  </div>
+</div>
+<div class="overlay command-overlay" id="commandOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="commandTitle">
+  <div class="command-shell">
+    <div class="command-head"><span class="nav-code">Ctrl+K</span>
+      <h3 id="commandTitle"><span data-studio-key="remaining.56">Быстрое действие</span></h3><kbd>Esc</kbd>
+      <button id="commandClose" title="закрыть" aria-label="Закрыть палитру" data-studio-title="remaining.6" data-studio-aria-label="remaining.57">&#10005;</button></div>
+    <input id="commandSearch" type="search" autocomplete="off" role="combobox"
+      placeholder="Начните вводить: запись, отчёт, звук, настройки…"
+      aria-label="Поиск команды" aria-autocomplete="list" aria-controls="commandList"
+      aria-expanded="false" data-studio-aria-label="remaining.58" data-studio-placeholder="remaining.59">
+    <div id="commandList" class="command-list" role="listbox" aria-label="Доступные команды" data-studio-aria-label="remaining.60"></div>
+    <div class="command-foot"><span data-studio-key="remaining.61">↑ ↓ — выбрать · Enter — выполнить · можно искать по русским словам</span></div>
+  </div>
+</div>
+<div class="overlay focus-answer-overlay" id="focusAnswerOverlay" role="dialog" aria-modal="true"
+  aria-labelledby="focusAnswerTitle">
+  <button class="ovclose" id="focusAnswerClose" title="закрыть" data-meeting-title="meeting.56">&#10005;</button>
+  <div class="focus-answer-shell">
+    <span class="focus-answer-kicker"><span data-meeting-key="meeting.115">КРУПНАЯ ПОДСКАЗКА</span></span>
+    <h3 id="focusAnswerTitle"><span data-meeting-key="meeting.116">Ответ крупно</span></h3>
+    <div id="focusAnswerText" class="focus-answer-text"></div>
+    <div class="focus-answer-actions"><button class="primary" id="focusAnswerCopy"><span data-meeting-key="meeting.117">скопировать</span></button>
+      <button id="focusAnswerUnpin"><span data-meeting-key="meeting.118">открепить</span></button></div>
+  </div>
+</div>
+<main>
+ <div id="hintzone">
+  <section id="pinnedHint" class="pinned-hint" hidden>
+    <div><span id="pinnedHintLabel">Закреплено</span><strong id="pinnedHintText"></strong></div>
+    <div class="pinned-hint-actions"><button id="pinnedHintFocus" title="показать ответ крупно">крупно</button>
+      <button id="pinnedHintCopy" title="скопировать">копировать</button>
+      <button id="pinnedHintClear" title="открепить">&#10005;</button></div>
+  </section>
+  <section id="trainingPanel" class="training-panel" hidden>
+    <div class="training-head">
+      <div><span class="training-kicker"><span data-studio-key="studio.256">ТРЕНИРОВКА СОБЕСЕДОВАНИЯ</span></span>
+        <h2 id="trainingTitle"><span data-studio-key="studio.15">Тренировка собеседования</span></h2>
+        <p id="trainingStatus"><span data-studio-key="studio.18">Задайте роль и материалы — тренажёр подготовит вопросы.</span></p></div>
+      <div class="training-progress"><div class="training-ring" id="trainingRing">
+        <strong id="trainingProgress">0 / 0</strong></div>
+        <span id="trainingScore"><span data-studio-key="studio.16">оценок пока нет</span></span></div>
+    </div>
+    <div class="training-mode-switch" role="tablist" aria-label="Сценарий тренировки" data-studio-aria-label="studio.257">
+      <button id="trainingPersonalTab" class="active" role="tab" aria-selected="true"
+        aria-controls="personalTraining"><span data-studio-key="studio.258">Я отвечаю </span><small><span data-studio-key="studio.259">ИИ задаёт вопросы</span></small></button>
+      <button id="trainingInterviewerTab" role="tab" aria-selected="false"
+        aria-controls="sceneTraining"><span data-studio-key="studio.260">Я спрашиваю </span><small><span data-studio-key="studio.261">ИИ играет кандидата</span></small></button>
+      <button id="trainingSceneTab" role="tab" aria-selected="false"
+        aria-controls="sceneTraining"><span data-studio-key="studio.262">Оба ИИ </span><small><span data-studio-key="studio.263">наблюдать за сценкой</span></small></button>
+      <button id="trainingSpeechTab" role="tab" aria-selected="false"
+        aria-controls="speechTraining"><span data-studio-key="studio.264">Речь </span><small><span data-studio-key="studio.265">выступить и повторить</span></small></button>
+    </div>
+    <section id="speechTraining" class="training-view" role="tabpanel" aria-labelledby="trainingSpeechTab" hidden>
+      <header class="speech-header"><span class="speech-eyebrow"><span data-studio-key="studio.266">ПРАКТИКА РЕЧИ</span></span>
+        <h2 id="speechTitle"><span data-studio-key="studio.141">Объяснить проект за две минуты</span></h2>
+        <p id="speechLead"><span data-studio-key="studio.143">Кому он нужен, как работает на примере и что делать дальше.</span></p>
+        <button id="speechEdit" hidden><span data-studio-key="studio.99">Тема и параметры</span></button>
+      </header>
+      <ol class="speech-route" aria-label="Этапы упражнения" data-studio-aria-label="studio.267">
+        <li id="speechStep1">01 <span><span data-studio-key="studio.268">Запись</span></span></li><li id="speechStep2">02 <span><span data-studio-key="studio.135">Разбор</span></span></li>
+        <li id="speechStep3">03 <span><span data-studio-key="studio.175">Повтор</span></span></li><li id="speechStep4">04 <span><span data-studio-key="studio.134">Сравнение</span></span></li>
+      </ol>
+      <div id="speechSetup" class="speech-setup">
+        <div class="training-fields" id="speechPlanFields">
+          <label><span data-studio-key="studio.269">О каком проекте расскажете?</span><input id="speechTopic" maxlength="300" placeholder="Название и назначение проекта" data-studio-placeholder="studio.270"></label>
+          <label><span data-studio-key="studio.271">Кто слушает</span><input id="speechAudience" maxlength="300" value="Коллега, который впервые слышит о проекте"></label>
+          <details class="wide" id="speechAdvanced"><summary><span data-studio-key="studio.272">Цель и другие упражнения</span></summary>
+            <div class="training-fields">
+              <label><span data-studio-key="studio.273">Упражнение</span><select id="speechPreset"><option value="project" data-studio-key="studio.142">Объяснить проект</option><option value="intro" data-studio-key="studio.139">Представиться</option><option value="answer" data-studio-key="studio.140">Ответить на возражение</option></select></label>
+              <label><span data-studio-key="studio.274">Ориентир, секунд</span><input id="speechSeconds" type="number" min="30" max="600" value="120"></label>
+              <label class="wide"><span data-studio-key="studio.275">Что слушатель должен понять или сделать</span><input id="speechGoal" maxlength="1000" value="Понять назначение проекта, увидеть пример и следующий шаг"></label>
+              <label class="wide"><span data-studio-key="studio.276">Одна задача для первой попытки</span><input id="speechFocus" maxlength="1000" placeholder="Например, начать с результата" data-studio-placeholder="studio.277"></label>
+            </div>
+          </details>
+        </div>
+        <div class="speech-actions"><button id="speechPrepare"><span data-studio-key="studio.278">Подготовить упражнение</span></button></div>
+      </div>
+      <section id="speechPractice" class="speech-practice" aria-labelledby="speechCue">
+        <div class="speech-practice-top"><strong id="speechCue" aria-live="polite"><span data-studio-key="studio.279">Сначала укажите тему</span></strong>
+          <output id="speechClock" aria-live="off" aria-label="Время выступления" data-studio-aria-label="studio.280">2:00</output></div>
+        <progress id="speechProgress" max="120" value="0" aria-label="Время относительно ориентира" data-studio-aria-label="studio.281"></progress>
+        <p id="speechCurrentFocus"></p><div id="speechOutline"></div>
+        <div class="speech-actions"><button id="speechStart" class="primary" disabled><span data-studio-key="studio.101">Записать попытку</span></button><button id="speechFinish" class="primary" disabled><span data-studio-key="studio.282">Завершить и сохранить</span></button><button id="speechCancel" disabled><span data-studio-key="studio.283">Отменить попытку</span></button><button id="speechCountdownCancel" hidden><span data-studio-key="studio.284">Отменить старт и остановить запись</span></button></div>
+      </section>
+      <div class="speech-busy" id="speechBusy" hidden><span class="speech-spinner" aria-hidden="true"></span><span id="speechBusyText"></span></div>
+      <p id="speechStatus" role="status" aria-live="polite"><span data-studio-key="studio.133">Укажите проект и подготовьте упражнение. Микрофон пока выключен.</span></p>
+      <details id="speechTextFallback"><summary><span data-studio-key="studio.285">Попробовать на тексте без микрофона</span></summary><label><span data-studio-key="studio.286">Текст выступления</span><textarea id="speechText" maxlength="30000" rows="5"></textarea></label><button id="speechTextRun" disabled><span data-studio-key="studio.287">Сохранить текстовую попытку</span></button></details>
+      <section id="speechResult" hidden>
+        <h3 id="speechResultTitle"><span data-studio-key="studio.155">Попытка сохранена</span></h3>
+        <div class="speech-actions"><button id="speechCoach" class="primary"><span data-studio-key="studio.104">Получить разбор</span></button><button id="speechCompare" class="primary" hidden><span data-studio-key="studio.106">Сравнить по выбранной правке</span></button><span id="speechCompareState" role="status" hidden></span></div>
+        <p id="speechProvider" class="privacy-note"></p>
+        <div id="speechReview"></div>
+        <div id="speechComparison" class="speech-comparison" aria-live="polite"></div>
+        <div class="speech-repeat-box"><label><span data-studio-key="studio.288">Одна правка для следующей попытки</span><input id="speechRepeatFocus" maxlength="1000" placeholder="Что попробуете сделать иначе?" data-studio-placeholder="studio.289"></label><button id="speechRepeat"><span data-studio-key="studio.290">Подготовить повтор</span></button></div>
+        <audio id="speechAudio" controls preload="none" hidden></audio>
+        <details id="speechTranscript"><summary><span data-studio-key="studio.291">Транскрипт и прослушивание</span></summary><div id="speechSegments"></div></details>
+        <details id="speechMeasurements"><summary><span data-studio-key="studio.292">Наблюдения и ограничения</span></summary><p id="speechMetrics"></p><p id="speechLimits" class="privacy-note"></p></details>
+      </section>
+      <details id="speechHistory"><summary><span data-studio-key="studio.293">Предыдущие попытки</span></summary><div id="speechHistoryList"></div></details>
+    </section>
+    <section id="trainingStage" class="training-stage" aria-label="Участники тренировочного разговора" data-studio-aria-label="studio.294">
+      <article class="training-avatar" data-speaker="interviewer">
+        <div class="avatar-top"><h3><span data-studio-key="studio.72">Интервьюер</span></h3><span data-avatar-source><span data-studio-key="studio.214">ИИ</span></span></div>
+        <canvas width="400" height="180" aria-hidden="true"></canvas>
+        <div class="avatar-bottom"><span data-avatar-state><span data-studio-key="studio.245">готов</span></span><span data-avatar-mood><span data-studio-key="studio.251">спокойный</span></span></div>
+      </article>
+      <article class="training-avatar" data-speaker="candidate">
+        <div class="avatar-top"><h3><span data-studio-key="studio.73">Кандидат</span></h3><span data-avatar-source><span data-studio-key="studio.246">вы · микрофон</span></span></div>
+        <canvas width="400" height="180" aria-hidden="true"></canvas>
+        <div class="avatar-bottom"><span data-avatar-state><span data-studio-key="studio.245">готов</span></span><span data-avatar-mood></span></div>
+      </article>
+    </section>
+    <details class="studio-appearance training-setup">
+      <summary><span data-studio-key="studio.295">Вид и игровой характер персонажей</span></summary>
+      <label class="consent-check"><input id="studioShowAvatars" type="checkbox" checked><span data-studio-key="studio.296"> Показывать звуковые аватары</span></label>
+      <div class="studio-moods">
+        <label><span data-studio-key="studio.297">Интервьюер ИИ</span><select id="studioInterviewerMood"><option value="calm" data-studio-key="studio.251">спокойный</option><option value="friendly" data-studio-key="studio.252">доброжелательный</option><option value="cautious" data-studio-key="studio.253">вдумчивый</option><option value="tense" data-studio-key="studio.298">напряжённый, без хамства</option></select></label>
+        <label><span data-studio-key="studio.299">Кандидат ИИ</span><select id="studioCandidateMood"><option value="calm" data-studio-key="studio.251">спокойный</option><option value="friendly" data-studio-key="studio.252">доброжелательный</option><option value="cautious" data-studio-key="studio.253">вдумчивый</option><option value="tense" data-studio-key="studio.300">волнуется</option></select></label>
+      </div>
+      <p><span data-studio-key="studio.301">Цвет — заданный стиль ИИ-персонажа. Настроение человека не определяется.
+        В сценке стиль влияет на следующие реплики, но не на знания и факты профиля.
+        Движение отключается общей настройкой интерфейса.</span></p>
+    </details>
+    <div id="personalTraining" class="training-view" role="tabpanel" aria-labelledby="trainingPersonalTab">
+    <details id="trainingSetup" class="training-setup" open>
+      <summary><span data-studio-key="studio.302">Роль и материалы тренировки</span></summary>
+      <div class="training-fields">
+        <label class="wide"><span data-studio-key="studio.303">Профиль компетенций</span><select id="trainingPack">
+          <option value="" data-studio-key="studio.304">свободная роль — без готового профиля</option></select></label>
+        <div class="training-pack-hint wide" id="trainingPackHint"></div>
+        <label><span data-studio-key="studio.305">Целевая роль</span><input id="trainingRole" maxlength="200"
+          placeholder="Product manager, архитектор, бухгалтер, разработчик…" data-studio-placeholder="studio.306"></label>
+        <label><span data-studio-key="studio.307">Уровень</span><select id="trainingDifficulty"><option value="mixed" data-studio-key="studio.308">смешанный</option>
+          <option value="junior">junior</option><option value="middle">middle</option>
+          <option value="senior">senior</option></select></label>
+        <label><span data-studio-key="studio.309">Вопросов</span><select id="trainingCount"><option>5</option><option selected>8</option>
+          <option>12</option><option>15</option></select></label>
+        <label class="wide"><span data-studio-key="studio.310">Резюме, вакансия, ссылки и любой контекст
+          </span><textarea id="trainingSource" placeholder="Вставьте текст резюме, описание вакансии, публичную HTTPS-ссылку или любые заметки. Рабочая папка из настроек тоже учитывается." data-studio-placeholder="studio.311"></textarea></label>
+      </div>
+      <label class="consent-check training-adaptive-toggle">
+        <input id="trainingAdaptive" type="checkbox" checked>
+        <span><strong><span data-studio-key="studio.312">Адаптивный маршрут</span></strong>
+          <span class="consent-detail"><span data-studio-key="studio.313">Слабые и давно не повторявшиеся темы идут
+            раньше, а сложность растёт только после устойчивых ответов.</span></span></span></label>
+      <div class="training-actions">
+        <button class="primary" id="trainingPrepare"><span data-studio-key="studio.314">подготовить вопросы</span></button>
+        <button id="trainingStart"><span data-studio-key="studio.26">начать тренировку</span></button>
+        <button id="trainingReset"><span data-studio-key="studio.315">сбросить попытку</span></button>
+      </div>
+      <div class="training-warnings" id="trainingWarnings"></div>
+    </details>
+    <section class="training-adaptation" id="trainingAdaptation" hidden>
+      <div class="training-adaptation-head">
+        <div><span class="training-kicker"><span data-studio-key="studio.316">КАРТА НАВЫКОВ</span></span>
+          <h3><span data-studio-key="studio.317">Карта компетенций</span></h3></div>
+        <button id="trainingProgressReset" class="danger"><span data-studio-key="studio.318">сбросить историю</span></button>
+      </div>
+      <div class="training-adaptation-summary" id="trainingAdaptationSummary"></div>
+      <div class="training-competencies" id="trainingCompetencies"></div>
+    </section>
+    <article id="trainingQuestionCard" class="training-question" hidden>
+      <div class="training-meta"><span id="trainingCategory"></span><span id="trainingWhy"></span>
+        <span id="trainingAdaptiveReason"></span></div>
+      <div class="training-question-row"><h3 id="trainingQuestion"></h3>
+        <button class="speak-q" id="trainingSpeak" title="повторить вопрос голосом" data-studio-title="studio.319">▶</button></div>
+      <div id="trainingHint" class="training-hint" hidden></div>
+      <label class="training-fallback"><span data-studio-key="studio.320">Текст ответа (необязательно — только если речь не распозналась)
+        </span><textarea id="trainingAnswer" placeholder="Обычно оставьте пустым: ответ берётся из микрофона." data-studio-placeholder="studio.321"></textarea></label>
+      <div class="training-actions">
+        <button id="trainingHintBtn"><span data-studio-key="studio.34">подсказка</span></button>
+        <button class="primary" id="trainingAnswerBtn"><span data-studio-key="studio.322">оценить и дальше</span></button>
+        <button id="trainingFinish"><span data-studio-key="studio.323">завершить и сделать отчёт</span></button>
+      </div>
+    </article>
+    <article id="trainingEvaluation" class="training-evaluation" hidden></article>
+    </div>
+    <section id="sceneTraining" class="training-view scene-training" role="tabpanel" aria-labelledby="trainingSceneTab" hidden>
+      <details id="sceneSetup" class="training-setup" open>
+        <summary><span data-studio-key="studio.324">Роли, материалы и постановка</span></summary>
+        <p class="scene-explain"><span data-studio-key="studio.325">Интервьюер не видит скрытый профиль кандидата.
+          Кандидат не видит цели проверки. Полную картину получает только тренер после остановки.</span></p>
+        <div class="training-fields scene-fields">
+          <label class="wide"><span data-studio-key="studio.303">Профиль компетенций</span><select id="scenePack">
+            <option value="" data-studio-key="studio.304">свободная роль — без готового профиля</option></select></label>
+          <div class="training-pack-hint wide" id="scenePackHint"></div>
+          <label><span data-studio-key="studio.305">Целевая роль</span><input id="sceneRole" maxlength="200"
+            placeholder="Архитектор, аналитик, руководитель проекта…" data-studio-placeholder="studio.326"></label>
+          <label><span data-studio-key="studio.307">Уровень</span><select id="sceneDifficulty"><option value="mixed" data-studio-key="studio.308">смешанный</option>
+            <option value="junior">junior</option><option value="middle">middle</option>
+            <option value="senior">senior</option></select></label>
+          <label><span data-studio-key="studio.327">Раундов</span><select id="sceneRounds"><option>3</option><option>5</option>
+            <option selected>6</option><option>8</option><option>10</option></select></label>
+          <label><span data-studio-key="studio.328">Стиль интервьюера</span><select id="sceneStyle">
+            <option value="classic" data-studio-key="studio.329">деловой</option><option value="supportive" data-studio-key="studio.330">поддерживающий</option>
+            <option value="cases" data-studio-key="studio.331">через кейсы</option><option value="stress" data-studio-key="studio.332">жёсткий, без хамства</option>
+          </select></label>
+          <label><span data-studio-key="studio.333">Голос интервьюера</span><select id="sceneInterviewerVoice"></select></label>
+          <label><span data-studio-key="studio.334">Голос кандидата</span><select id="sceneCandidateVoice"></select></label>
+          <label><span data-studio-key="studio.335">Подсказки для</span><select id="sceneCoachAudience">
+            <option value="candidate" data-studio-key="studio.336">кандидата · ответ с помощью</option>
+            <option value="interviewer" data-studio-key="studio.337">интервьюера · независимые участники</option>
+          </select></label>
+          <label class="wide"><span data-studio-key="studio.338">Резюме, вакансия, ссылки и контекст
+            </span><textarea id="sceneSource" placeholder="Можно использовать те же материалы, что и в личной тренировке." data-studio-placeholder="studio.339"></textarea></label>
+        </div>
+        <div class="training-actions">
+          <button class="primary" id="scenePrepare"><span data-studio-key="studio.340">подготовить роли</span></button>
+          <button id="sceneStart"><span data-studio-key="studio.52">начать сценку</span></button>
+          <button id="sceneReset"><span data-studio-key="studio.341">сбросить ходы</span></button>
+        </div>
+        <div class="training-warnings" id="sceneWarnings"></div>
+      </details>
+      <div class="scene-controls" id="sceneControls" hidden>
+        <label><span data-studio-key="studio.342">Темп</span><select id="sceneControl"><option value="step" data-studio-key="studio.343">по шагам</option>
+          <option value="auto" data-studio-key="studio.344">автоматически</option></select></label>
+        <label><span data-studio-key="studio.345">Занять роль</span><select id="sceneTakeover"><option value="observer" data-studio-key="studio.346">наблюдатель</option>
+          <option value="interviewer" data-studio-key="studio.235">интервьюер</option><option value="candidate" data-studio-key="studio.234">кандидат</option></select></label>
+        <span id="sceneCounter">0 / 0</span>
+      </div>
+      <div class="scene-cast" id="sceneCast" hidden></div>
+      <div class="scene-workspace">
+        <section class="scene-transcript-pane">
+          <header class="scene-feed-heading"><div><span class="scene-eyebrow"><span data-studio-key="studio.347">Живой разговор</span></span><h3><span data-studio-key="studio.348">Расшифровка</span></h3></div>
+            <span id="sceneLiveStatus" role="status"><span data-studio-key="studio.194">Готовы слушать</span></span>
+            <button id="sceneReplayRun" type="button" hidden><span data-studio-key="studio.226">▶ Прослушать диалог</span></button></header>
+          <div class="scene-dialogue" id="sceneDialogue" role="log" aria-label="Расшифровка диалога" aria-live="off" data-studio-aria-label="studio.349"></div>
+          <details id="sceneSourceText" hidden><summary><span data-studio-key="studio.350">Исходный текст реплик</span></summary><p id="sceneSourceContent"></p></details>
+        </section>
+        <aside class="scene-coach" aria-labelledby="sceneCoachTitle">
+          <h3 id="sceneCoachTitle"><span data-studio-key="studio.351">Подсказки</span></h3>
+          <p class="scene-coach-note" id="sceneCoachNote"><span data-studio-key="studio.352">Только по услышанному.</span></p>
+          <div id="sceneAidStage" class="scene-aid-stage" role="status" hidden></div>
+          <button id="sceneCoach" type="button"><span data-studio-key="studio.55">получить подсказки</span></button>
+          <div id="sceneCoachContent" aria-live="polite"><span data-studio-key="studio.353">Появятся после первого вопроса.</span></div>
+          <button id="sceneContinueAnswer" type="button" hidden><span data-studio-key="studio.354">Продолжить ответ</span></button>
+        </aside>
+      </div>
+      <label class="training-fallback" id="sceneTakeoverBox" hidden><span data-studio-key="studio.355">
+        Ваша реплика за выбранную роль
+        </span><textarea id="sceneTakeoverText" placeholder="Введите реплику — ИИ продолжит со второй стороны." data-studio-placeholder="studio.63"></textarea>
+      </label>
+      <div class="training-actions scene-actions" id="sceneActions" hidden>
+        <button class="primary" id="sceneNext"><span data-studio-key="studio.61">следующий ход</span></button>
+        <button id="sceneSpeak" title="повторить последнюю реплику голосом" data-studio-title="studio.356"><span data-studio-key="studio.357">▶ повторить</span></button>
+        <button id="sceneFinish"><span data-studio-key="studio.358">остановить и разобрать</span></button>
+      </div>
+      <article id="sceneReview" class="training-evaluation scene-review" hidden></article>
+      <details id="sceneSavedAudio" class="training-setup" hidden></details>
+    </section>
+  </section>
+  <div id="answers"></div>
+  <div id="tags"></div>
+  <div id="questions"></div>
+  <div id="flags"></div>
+  <div id="uncovered"></div>
+  <div id="empty">
+    <div class="empty-kicker"><span data-meeting-key="meeting.119">ГОТОВ К ВСТРЕЧЕ</span></div>
+    <h2><span data-meeting-key="meeting.120">Меньше заметок — больше разговора</span></h2>
+    <p><span data-meeting-key="meeting.121">Blatero записывает звук, расшифровывает речь и помогает собрать проверяемый отчёт.</span></p>
+    <div class="empty-steps">
+      <button class="empty-step" data-action="setup"><span>01</span><b><span data-meeting-key="meeting.122">Подготовить</span></b>
+        <small><span data-meeting-key="meeting.123">роль, цель, материалы и вопросы</span></small></button>
+      <button class="empty-step" data-action="check"><span>02</span><b><span data-meeting-key="meeting.124">Проверить</span></b>
+        <small><span data-meeting-key="meeting.125">микрофон, звук встречи и ИИ</span></small></button>
+      <button class="empty-step" data-action="record"><span>03</span><b><span data-meeting-key="meeting.126">Записать</span></b>
+        <small><span data-meeting-key="meeting.127">запись, подсказки и транскрипт</span></small></button>
+      <button class="empty-step" data-action="analysis"><span>04</span><b><span data-meeting-key="meeting.128">Разобрать</span></b>
+        <small><span data-meeting-key="meeting.129">говорящие, спорные места и DOCX</span></small></button>
+    </div>
+    <div class="empty-flow"><span><i class="cyan"></i><span data-meeting-key="meeting.130">после подготовки вопросы появятся справа</span></span>
+      <span><i class="green"></i><span data-meeting-key="meeting.131">подсказку можно вызвать кнопкой сверху или клавишей P</span></span>
+      <span><i class="yellow"></i><span data-meeting-key="meeting.132">отчёт собирается после проверки говорящих</span></span></div>
+  </div>
+ </div>
+ <aside id="side">
+  <div id="sideResize" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Изменить ширину сценария" aria-valuemin="320" aria-valuemax="900" aria-valuenow="620" data-meeting-aria-label="meeting.133"></div>
+  <div id="sidetabs" role="tablist" aria-label="Рабочие материалы" data-meeting-aria-label="meeting.134"><button id="sideTabBank" class="stab sel" data-t="bank" role="tab" aria-selected="true" aria-controls="bank" tabindex="0"><span data-meeting-key="meeting.135">сценарий</span></button><button id="sideTabDossier" class="stab" data-t="dossier" role="tab" aria-selected="false" aria-controls="dossier" tabindex="-1"><span data-meeting-key="meeting.136">досье</span></button><button id="sideTabProject" class="stab" data-t="workspaceContext" role="tab" aria-selected="false" aria-controls="workspaceContext" tabindex="-1"><span data-meeting-key="meeting.137">проект</span></button><button id="sideTabMemory" class="stab" data-t="memoryPanel" role="tab" aria-selected="false" aria-controls="memoryPanel" tabindex="-1"><span data-meeting-key="meeting.138">память</span></button>
+    <button id="sideCollapse" title="свернуть сценарий · Ctrl+B" aria-label="Свернуть сценарий" data-meeting-title="meeting.139" data-meeting-aria-label="meeting.140">&#10095;</button></div>
+  <div id="bank" role="tabpanel" aria-labelledby="sideTabBank"></div>
+  <div id="dossier" role="tabpanel" aria-labelledby="sideTabDossier" hidden></div>
+  <div id="workspaceContext" role="tabpanel" aria-labelledby="sideTabProject" hidden></div>
+  <div id="memoryPanel" role="tabpanel" aria-labelledby="sideTabMemory" hidden>
+    <div class="memory-head">
+      <div><b><span data-meeting-key="meeting.141">Память между встречами</span></b><span id="memoryStatus"><span data-meeting-key="meeting.142">Не настроена.</span></span></div>
+      <button id="memoryExtract"><span data-meeting-key="meeting.143">из отчёта</span></button>
+    </div>
+    <div id="memoryScopes" class="memory-scopes"></div>
+    <section id="memoryDraft" class="memory-draft" hidden>
+      <h4><span data-meeting-key="meeting.144">Черновик · ещё не сохранён</span></h4>
+      <div id="memoryDraftEntries"></div>
+      <div class="memory-actions"><button class="primary" id="memoryAccept"><span data-meeting-key="meeting.145">принять выбранное</span></button>
+        <button id="memoryDiscard"><span data-meeting-key="meeting.146">отклонить</span></button></div>
+    </section>
+    <details class="memory-add"><summary><span data-meeting-key="meeting.147">+ добавить вручную</span></summary>
+      <div class="memory-add-grid">
+        <select id="memoryAddScope" aria-label="Область новой записи памяти" data-meeting-aria-label="meeting.148"></select>
+        <select id="memoryAddKind" aria-label="Тип новой записи памяти" data-meeting-aria-label="meeting.149"><option value="decision" data-meeting-key="meeting.150">решение</option>
+          <option value="commitment" data-meeting-key="meeting.151">обещание</option><option value="open_question" data-meeting-key="meeting.152">открытый вопрос</option>
+          <option value="fact" data-meeting-key="meeting.153">проверенный факт</option></select>
+        <textarea id="memoryAddText" aria-label="Текст новой записи памяти"
+          placeholder="Короткая самостоятельная формулировка" data-meeting-aria-label="meeting.154" data-meeting-placeholder="meeting.155"></textarea>
+        <input id="memoryAddOwner" maxlength="160" aria-label="Ответственный по новой записи"
+          placeholder="ответственный · необязательно" data-meeting-aria-label="meeting.156" data-meeting-placeholder="meeting.157">
+        <input id="memoryAddDue" maxlength="160" aria-label="Срок новой записи"
+          placeholder="срок · необязательно" data-meeting-aria-label="meeting.158" data-meeting-placeholder="meeting.159">
+        <button class="primary" id="memoryAdd"><span data-meeting-key="meeting.160">сохранить</span></button>
+      </div>
+    </details>
+    <details id="memoryLink" class="memory-add" hidden>
+      <summary><span data-meeting-key="meeting.161">Папка проекта изменилась?</span></summary>
+      <div class="memory-link-grid">
+        <p><span data-meeting-key="meeting.162">Свяжите новую рабочую папку с прежней памятью. Записи не копируются:
+          обе папки продолжат видеть одну историю проекта.</span></p>
+        <select id="memoryLinkSource" aria-label="Прежняя память проекта" data-meeting-aria-label="meeting.163"></select>
+        <button class="primary" id="memoryLinkApply"><span data-meeting-key="meeting.164">связать память</span></button>
+      </div>
+    </details>
+    <div id="memoryEntries" class="memory-entries"></div>
+  </div>
+ </aside>
+ <button id="sideRestore" title="показать сценарий · Ctrl+B">сценарий</button>
+</main>
+<footer>
+  <div id="recrow"><span id="recdot">&#9679;</span> <span id="rectext"><span data-meeting-key="meeting.165">запись не запущена · нажмите «Проверить всё» перед встречей</span></span>
+    <span style="margin-left:auto"><span style="color:var(--acc)">&#9644;</span> <span id="waveMeLabel">я</span>
+      <span style="color:var(--green)">&#9644;</span> <span id="waveGuestLabel">собеседник</span></span></div>
+  <details id="audioGuard" class="audio-guard off">
+    <summary>
+      <strong id="audioGuardSummary"><span data-meeting-key="meeting.166">Звук в порядке</span></strong>
+      <span id="audioGuardCount"></span></summary>
+    <div id="audioGuardIssues" class="audio-guard-issues"></div>
+  </details>
+  <canvas id="wave" height="44"></canvas>
+  <div class="feed-toolbar" id="feedToolbar">
+    <span id="feedCount"><span data-meeting-key="meeting.167">История · реплик пока нет</span></span>
+    <button id="feedVisibility" aria-pressed="true"><span data-meeting-key="meeting.168">скрыть историю</span></button>
+    <button id="feedExpand"><span data-meeting-key="meeting.169">развернуть</span></button>
+    <button id="feedMore" hidden><span data-meeting-key="meeting.170">показать всю историю</span></button>
+    <a id="feedFull" target="_blank" rel="noopener"><span data-meeting-key="meeting.171">открыть полный транскрипт</span></a>
+  </div>
+  <div id="feed" role="log" aria-live="off" aria-label="История транскрипта" data-meeting-aria-label="meeting.172"></div>
+  <div id="transcriptAnnouncement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+</footer>
+<script src="/assets/brand.js"></script>
+<script src="/assets/scene-live.js"></script>
+<script src="/assets/scene-audio.js"></script>
+<script src="/assets/app.js"></script>
+<script src="/assets/live-materials.js"></script>
+<script src="/assets/i18n.js"></script>
+<script src="/assets/settings-i18n.js"></script>
+<script src="/assets/wizard-i18n.js"></script>
+<script src="/assets/meeting-i18n.js"></script>
+<script src="/assets/studio-i18n.js"></script>
+<script src="/assets/tools-i18n.js"></script>
+<script src="/assets/workspace.js"></script>
+<script src="/assets/workspace-guide.js"></script>
+<script src="/assets/meeting-tour.js"></script>
+<script src="/assets/workspace-preferences.js"></script>
+<script src="/assets/meeting-focus.js"></script>
+<script src="/assets/preflight-guide.js"></script>
+<script src="/assets/meeting-results.js"></script>
+<script src="/assets/memory-review.js"></script>
+<script src="/assets/hint-lifecycle.js"></script>
+<script src="/assets/meeting-finish.js"></script>
+<script src="/assets/voice-review.js"></script>
+<script src="/assets/training-avatars.js"></script>
+<script src="/assets/speech-training.js"></script>
+<script src="/assets/settings.js"></script>
+<script src="/assets/video-capture.js"></script>
+</body></html>

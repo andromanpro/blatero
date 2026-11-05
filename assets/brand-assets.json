@@ -1,0 +1,18 @@
+{
+  "source": "assets/blatero-mark.svg",
+  "source_sha256": "a6d8617e8181e179aa8f76c2d05d42c4de6211d150773547be805ecb757bd9ac",
+  "sizes": [
+    16,
+    20,
+    24,
+    32,
+    48,
+    64,
+    128,
+    256
+  ],
+  "outputs": {
+    "blatero.ico": "4e82d8ecae6938e6c099191f861d0091102c40823b635c92a03ad508849083f0",
+    "blatero-icon-256.png": "529d12d9d4eb524afc848027c999c9b0c680be8853f390ed1c12f17d7c790b74"
+  }
+}

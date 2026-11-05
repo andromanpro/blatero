@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" style="color:#d6ff62">
+  <defs>
+    <path id="brand-glyph" d="M17 7c5.2 0 8.5 3.7 8.5 9.5v9c3.2-2.8 7.1-4.2 11.5-4.2C48 21.3 56 28.6 56 39.3 56 51.1 46.7 59 34.5 59 19.8 59 9 49 9 35V17C9 11 12.2 7 17 7Zm8.5 32.2c0 5.6 3.7 9.5 9.1 9.5 6 0 10.4-4 10.4-9.7 0-5.4-3.7-9.1-9.2-9.1-5.8 0-10.3 3.9-10.3 9.3Z" fill-rule="evenodd"/>
+    <clipPath id="brand-clip"><use href="#brand-glyph" clip-rule="evenodd"/></clipPath>
+    <linearGradient id="brand-light">
+      <stop stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect class="brand-tile" width="64" height="64" rx="14" fill="#10171c"/>
+  <circle class="brand-halo" cx="32" cy="32" r="29" stroke="currentColor" stroke-width="2" opacity="0"/>
+  <g class="brand-body">
+    <use href="#brand-glyph" fill="currentColor"/>
+    <g clip-path="url(#brand-clip)">
+      <rect class="brand-sweep" x="-42" y="0" width="42" height="64" fill="url(#brand-light)" opacity="0"/>
+    </g>
+  </g>
+  <g class="brand-sound" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0">
+    <path d="M5 24Q-1 32 5 40M0 18Q-10 32 0 46M60 24Q66 32 60 40M65 18Q75 32 65 46"/>
+  </g>
+</svg>
