@@ -1,5 +1,7 @@
 # User guide
 
+[Русский](../User-Guide.md)
+
 Blatero combines meetings, projects, a plan and a knowledge library. You can use
 task tracking without a microphone or model. **Help** in the shared header offers
 three routes: hold a meeting, track tasks, plan and recall.
@@ -21,13 +23,22 @@ readiness checks, recording and hints, and reports. Choose **Exit tour** or
 press Esc to leave. The tour does not start recording or make AI requests
 and is unavailable while recording. Reopen it from **Help** whenever needed.
 
-Create a meeting by topic or project/tasks/time. Creation is local and silent.
-Run **Check all** when ready to speak. Choose audio or audio+video, confirm the
-recording basis, then use hints while talking. Stop, review conclusions, export
-DOCX and confirm useful agreements for next time. Detailed speaker editing is
-not mandatory. [Full route](End-to-End-Processes.md).
+1. Choose **New meeting**. Enter a topic or select a project, tasks and time.
+   Use the test environment for practice. Creating a meeting does not start a recording.
+2. Add the participant, company or project and any supporting materials.
+   Check the selected folder before using it as meeting context.
+3. Run **Check all** when you are ready to speak. Verify the microphone, meeting
+   audio and recognition; check AI access if you plan to use it.
+4. Choose audio or audio with video. Confirm the basis for recording when
+   prompted. You can request a hint during the conversation.
+5. Stop the recording, create the report and check any uncertain conclusions
+   against the transcript or audio. Export DOCX if needed. Confirm which agreements
+   to keep in project memory; saving a report does not automatically accept tasks.
 
-![Main workspace](../images/en/help-main.png)
+![New meeting wizard showing four preparation steps and the available meeting formats](../images/en/new-meeting.png)
+
+Read the [full meeting route](End-to-End-Processes.md) or
+[audio and speaker review](Audio-and-Speakers.md) for the steps after recording.
 
 ## Work and test data
 
