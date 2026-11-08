@@ -4,6 +4,7 @@ from __future__ import annotations
 import contextlib
 import datetime as dt
 from bisect import bisect_right
+from functools import lru_cache
 import json
 import os
 import re
@@ -55,6 +56,12 @@ def sanitize(text):
     return SECRET_VALUE.sub(r"\1[секрет скрыт]", redact(text))
 
 
+@lru_cache(maxsize=64)
+def _source_paths(roots):
+    """Cache lexical paths only; resolution and link checks stay live."""
+    return tuple(Path(root) for root in roots)
+
+
 def safe_path(path, roots, *, suffixes=SUFFIXES):
     if str(path).startswith(("\\\\","//")) or "://" in str(path):
         raise ValueError("Нужен выбранный локальный файл")
@@ -62,7 +69,13 @@ def safe_path(path, roots, *, suffixes=SUFFIXES):
     if path.suffix.lower() not in suffixes or path.name.startswith((".", "~$")) or SECRET_NAME.search(path.name):
         raise ValueError("Файл исключён из каталога знаний")
     # Reject unrelated trees before filesystem resolution (dead network paths can block).
-    selected = [Path(root).absolute() for root in roots if path == Path(root).absolute() or path.is_relative_to(Path(root).absolute())]
+    normalized = os.path.normcase(str(path))
+    selected = []
+    for root in _source_paths(tuple(os.fspath(root) for root in roots)):
+        root = root.absolute()
+        # Avoid ancestor walks for unrelated prefixes; the exact check still decides.
+        if normalized.startswith(os.path.normcase(str(root))) and (path == root or path.is_relative_to(root)):
+            selected.append(root)
     if not selected:
         raise ValueError("Файл находится вне выбранных источников")
     nearest=max(selected,key=lambda r:len(r.parts))
@@ -98,9 +111,15 @@ def scope_for(cwd, projects, config=None):
         return None
     target = Path(cwd).absolute()
     roots = shared_workspace_roots(config, projects)
-    candidates = [(len(Path(p["workspace"]).parts), p["id"]) for p in projects if p.get("workspace") and
-                  target.is_relative_to(Path(p["workspace"]).absolute())
-                  and Path(p["workspace"]).absolute() not in roots]
+    selected = [project for project in projects if project.get("workspace")]
+    paths = _source_paths(tuple(os.fspath(project["workspace"]) for project in selected))
+    normalized = os.path.normcase(str(target))
+    candidates = []
+    for project, path in zip(selected, paths):
+        absolute = path.absolute()
+        if (normalized.startswith(os.path.normcase(str(absolute)))
+                and target.is_relative_to(absolute) and absolute not in roots):
+            candidates.append((len(path.parts), project["id"]))
     if not candidates:
         return None
     maximum = max(c[0] for c in candidates)

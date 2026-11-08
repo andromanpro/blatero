@@ -260,49 +260,55 @@ class Worker:
         consume_signals(hub)
         clock=time.monotonic()
         if clock-self.last_board>=60:
-            if hub.config.get("board_delivery", True):
-                from project_queue import drain
-                from project_store import Store
-                from project_materials import Materials
-                board_store=Store(Path(hub.config["board"]).parent,initialize=False)
-                drain(board_store,limit=25)
-                Materials(board_store,root=Path(hub.config["board"]).parent.parent).refresh()
-            def pulse():
-                state["heartbeat"]=time.time()
-                hub.set_value("worker",state)
-                serve_commands(hub)
-            collect.mirror_board(hub,pulse=pulse)
-            self.last_board=clock
-            # Check deletion and edits only among already selected paths.
-            with hub.connect() as conn:
-                files=[dict(r) for r in conn.execute("SELECT * FROM files")]
-            for f in files:
-                try:
-                    collect.register_file(hub,f["path"],f["project_id"],f["task_id"])
-                except (OSError,ValueError):
-                    pass
-            for path in hub.config.get("extra_files",[]):
-                collect.register_file(hub,path)
-            for source in hub.config.get("structured_sources",[]):
-                collect.register_file(hub,source["path"],source["project_id"])
-            notes=hub.notes/"notes"
-            if notes.exists():
-                for path in notes.glob("*.md"):
+            try:
+                if hub.config.get("board_delivery", True):
+                    from project_queue import drain
+                    from project_store import Store
+                    from project_materials import Materials
+                    board_store=Store(Path(hub.config["board"]).parent,initialize=False)
+                    drain(board_store,limit=25)
+                    Materials(board_store,root=Path(hub.config["board"]).parent.parent).refresh()
+                def pulse():
+                    state["heartbeat"]=time.time()
+                    hub.set_value("worker",state)
+                    serve_commands(hub)
+                collect.mirror_board(hub,pulse=pulse)
+                # Check deletion and edits only among already selected paths.
+                with hub.connect() as conn:
+                    files=[dict(r) for r in conn.execute("SELECT * FROM files")]
+                for f in files:
+                    try:
+                        collect.register_file(hub,f["path"],f["project_id"],f["task_id"])
+                    except (OSError,ValueError):
+                        pass
+                for path in hub.config.get("extra_files",[]):
                     collect.register_file(hub,path)
+                for source in hub.config.get("structured_sources",[]):
+                    collect.register_file(hub,source["path"],source["project_id"])
+                notes=hub.notes/"notes"
+                if notes.exists():
+                    for path in notes.glob("*.md"):
+                        collect.register_file(hub,path)
+            finally:
+                self.last_board=time.monotonic()
         entries=hub.config.get("project_roots",[])
         interval=max(2,hub.config.get("reconcile_seconds",180)/max(1,len(entries)))
         if entries and clock-self.last_scan>=interval:
             entry=entries[self.scan_index%len(entries)]
-            result=collect.scan_documents(hub,entry)
+            try:
+                result=collect.scan_documents(hub,entry)
+            finally:
+                self.last_scan=time.monotonic()
             coverage=hub.value("coverage",{})
             coverage.setdefault("documents",{})[entry["path"]]=result
             hub.set_value("coverage",coverage)
             self.scan_index+=1
             hub.set_value("scan_index",self.scan_index)
-            self.last_scan=clock
         if clock-self.last_sessions>=hub.config.get("reconcile_seconds",180):
-            collect.discover_sessions(hub)
-            self.last_sessions=clock
+            try:
+                collect.discover_sessions(hub)
+            finally:
+                self.last_sessions=time.monotonic()
         result=None
         batch_started=time.monotonic()
         jobs=0
@@ -315,8 +321,10 @@ class Worker:
             result=latest
             jobs+=1
         if clock-self.last_git>=300:
-            snapshot_git(hub)
-            self.last_git=clock
+            try:
+                snapshot_git(hub)
+            finally:
+                self.last_git=time.monotonic()
         state["last_job"]=result
         state["batch_jobs"]=jobs
         state["heartbeat"]=time.time()
