@@ -2,6 +2,8 @@
 
 [Русский](../User-Guide.md)
 
+Worked example: [from a meeting decision to a task](Case-Meeting-to-Task.md).
+
 Blatero combines meetings, projects, a plan and a knowledge library. You can use
 task tracking without a microphone or model. **Help** in the shared header offers
 three routes: hold a meeting, track tasks, plan and recall.

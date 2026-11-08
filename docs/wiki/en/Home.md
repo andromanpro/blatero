@@ -28,6 +28,8 @@ report. Tasks retain the goal, method, rationale, evidence and next step.
 For experiments, use the test data environment in meeting settings. Switching
 recognizers does not stop the WAV capture. Offline help needs no Internet.
 
+Worked example: [verify a decision and link the meeting to a task](Case-Meeting-to-Task.md).
+
 ![Meeting workspace on synthetic data](../images/en/help-main.png)
 
 ## Contents
