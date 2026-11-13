@@ -20,6 +20,10 @@ config.json
 .audio-calibration.json
 .codex-runtime-model.json
 .quick-meetings/
+.call-watch-token
+.call-watch.lock
+.call-watch-receipts/
+call-watch-state.json
 prompt_overrides.json
 calendar_sources.json
 calendar_cache.json

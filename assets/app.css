@@ -2803,3 +2803,11 @@ body.training-mode #quickMeetingBtn{background:var(--panel);color:var(--text);bo
   #meetingTourMask { fill:transparent; }
   #meetingTourRings rect { stroke:Highlight; }
 }
+#captureContextDialog { width:min(660px,calc(100vw - 32px)); max-height:calc(100dvh - 40px); overflow:auto; color:var(--text); background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:24px; }
+#captureContextDialog::backdrop { background:rgba(0,0,0,.65); }
+#captureContextForm { display:grid; gap:16px; }
+#captureContextForm label { display:grid; gap:6px; }
+#captureContextForm input, #captureContextForm select { width:100%; min-width:0; box-sizing:border-box; min-height:44px; padding:10px 12px; color:var(--text); background:var(--bg-alt); border:1px solid var(--border-hi); border-radius:8px; font:inherit; }
+.capture-heading, .capture-actions { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+#captureContextTitle { margin:0; }
+#captureNotice { white-space:pre-wrap; margin:0; }

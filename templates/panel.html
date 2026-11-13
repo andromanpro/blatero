@@ -54,6 +54,8 @@
   <div class="header-primary">
     <button class="primary icon-action" id="pulse" data-tooltip="Подсказки — следующий вопрос" aria-label="Подсказки — следующий вопрос" data-meeting-aria-label="meeting.1" data-meeting-data-tooltip="meeting.1"><svg class="ui-icon" aria-hidden="true"><use href="#icon-spark"/></svg><span class="action-label"><span data-meeting-key="meeting.2">ещё подсказку</span></span></button>
     <button class="primary icon-action" id="recbtn" data-tooltip="Начать запись" aria-label="Начать запись" data-meeting-aria-label="meeting.3" data-meeting-data-tooltip="meeting.3"><svg class="ui-icon" aria-hidden="true"><use href="#icon-record"/></svg><span class="action-label"><span data-meeting-key="meeting.4">запись</span></span></button>
+    <button id="recordNow" type="button">Записать сейчас</button>
+    <button id="captureContextButton" type="button">Контекст записи</button>
     <button class="icon-action" id="meetingPanelsToggle" type="button" aria-expanded="false" hidden><span data-meeting-key="meeting.5">все панели</span></button>
   </div>
   <div class="header-context">
@@ -329,6 +331,14 @@
           </details>
         </section>
         <section class="setting-card settings-page" id="settingsConnections" data-settings-page="connections" hidden>
+          <h4 data-i18n="capture.calls">Запись встреч из приложений</h4>
+          <label class="consent-check"><input id="callAutoTelemost" type="checkbox"><span data-i18n="capture.telemost">Автоматически записывать Яндекс Телемост</span></label>
+          <label class="consent-check"><input id="callAutoTalk" type="checkbox"><span data-i18n="capture.talk">Автоматически записывать Контур.Толк</span></label>
+          <p class="settings-help" data-i18n="capture.trigger">Windows сообщает, когда приложение использует микрофон, включая проверку звука перед входом. Это запускает Blatero и новую аудиозапись. Если приложение открывает микрофон после снятия mute, запуск произойдёт в этот момент.</p>
+          <label class="consent-check"><input id="callAutoAck" type="checkbox"><span data-i18n="capture.ack">Разрешаю автоматическое начало записи выбранных приложений. Участники уведомлены или есть иное применимое основание.</span></label>
+          <p class="settings-help" data-i18n="capture.background">Фоновый помощник запускается при входе в Windows и работает при закрытом Blatero. Остановить запись можно кнопкой «Стоп» в Blatero.</p>
+          <p class="settings-help" data-i18n="capture.mute">Во время mute в Телемосте или Толке Blatero продолжает записывать выбранный микрофон, включая вашу речь. Завершение записи — кнопкой «Стоп» в Blatero.</p>
+          <p id="callWatchStatus" role="status"></p>
         </section>
         <section class="setting-card settings-page" id="settingsPractice" data-settings-page="practice" hidden>
           <h4><span data-i18n="settings.122">Практика</span></h4><p><span data-i18n="settings.123">Выберите, кто спрашивает и отвечает. Новая попытка сохраняется отдельно от рабочих встреч.</span></p>
@@ -1532,4 +1542,5 @@
 <script src="/assets/speech-training.js"></script>
 <script src="/assets/settings.js"></script>
 <script src="/assets/video-capture.js"></script>
+<script src="/assets/capture-context.js"></script>
 </body></html>

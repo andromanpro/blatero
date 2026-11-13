@@ -8,6 +8,23 @@ from application settings and are linked beneath the section menu.
 
 ![Settings overview](../images/en/settings-overview.png)
 
+## Automatic call recording
+
+**Integrations** has separate Telemost and Kontur.Talk switches and automatic
+recording permission. Saving starts the background helper for this Windows session
+and registers it for subsequent sign-ins. Its status and last error appear below
+the controls. Turning off both apps or the permission stops the helper.
+
+Windows microphone use by the selected native app triggers recording. Sound checks
+before joining can trigger it too. Joining muted can delay the start. Audio sources
+and transcription use the settings in **Audio and speech**. Finish with **Stop**
+in Blatero.
+
+In-app mute keeps an ongoing Blatero recording running. Blatero captures the
+selected microphone independently and includes your voice while the meeting app
+is muted. If the app opens the device when you unmute, the automatic start signal
+appears at that point.
+
 ## Saving and scope
 
 Application and meeting fields are drafts until **Save changes** succeeds.

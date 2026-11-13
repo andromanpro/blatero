@@ -3,6 +3,13 @@
 // device names, meeting names, paths, prompts, reports or documents.
 (() => {
   const entries = /* SETTINGS_ENTRIES */ {
+  "capture.calls": ["Запись встреч из приложений", "Record meetings from apps"],
+  "capture.telemost": ["Автоматически записывать Яндекс Телемост", "Automatically record Yandex Telemost"],
+  "capture.talk": ["Автоматически записывать Контур.Толк", "Automatically record Kontur.Talk"],
+  "capture.trigger": ["Windows сообщает, когда приложение использует микрофон, включая проверку звука перед входом. Это запускает Blatero и новую аудиозапись. Если приложение открывает микрофон после снятия mute, запуск произойдёт в этот момент.", "Windows reports when the app uses the microphone, including sound checks before joining. This opens Blatero and starts a new audio recording. If the app opens the microphone when you unmute, recording starts at that point."],
+  "capture.mute": ["Во время mute в Телемосте или Толке Blatero продолжает записывать выбранный микрофон, включая вашу речь. Завершение записи — кнопкой «Стоп» в Blatero.", "While Telemost or Kontur.Talk is muted, Blatero continues recording the selected microphone, including your voice. Use Stop in Blatero to finish recording."],
+  "capture.ack": ["Разрешаю автоматическое начало записи выбранных приложений. Участники уведомлены или есть иное применимое основание.", "Allow automatic recording for the selected apps. Participants have been informed or another applicable basis exists."],
+  "capture.background": ["Фоновый помощник запускается при входе в Windows и работает при закрытом Blatero. Остановить запись можно кнопкой «Стоп» в Blatero.", "The background helper starts at Windows sign-in and works while Blatero is closed. Use Stop in Blatero to end the recording."],
   "settings.audit.changes": ["Перейти к изменениям", "Go to changes"],
   "settings.1": [
     "Настройки программы",

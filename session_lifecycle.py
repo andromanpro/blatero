@@ -67,7 +67,7 @@ _DERIVED_PREFIXES = (
     "transcript.local", "transcript.refined", "transcript.reference",
     "hints", "asked", "emulation", "pulse-timing", "levels", "audio-watch",
     "preflight", "diagnostics", ".diagnostics", "training-", "training_", "ai-scene",
-    "workspace-", "dossier", "questions", "memory-draft",
+    "workspace-", "dossier", "questions", "memory-draft", "capture-",
 )
 _PERSONAL_GROUPS = {
     "sessions": ("встречи, аудио и отчёты", ("sessions",)),

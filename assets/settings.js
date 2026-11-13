@@ -18,6 +18,7 @@
     ['service','Обслуживание','M14 3a6 6 0 0 0-7 7L2 16l6 6 6-6a6 6 0 0 0 7-7l-5 3-4-4z']
   ];
   const config = {
+    callAutoTelemost:'call_auto_telemost',callAutoTalk:'call_auto_talk',callAutoAck:'call_auto_record_acknowledged',
     selMic:'mic_device',selOutput:'output_device',selSpeech:'speech_provider',
     selWhisper:'whisper_model',selAecBackend:'pre_stt_echo_backend',
     acousticEchoSuppression:'pre_stt_echo_suppression',echoSuppression:'cross_channel_echo_suppression',
@@ -285,6 +286,7 @@
   }
   function afterInit(m) {
     session = m.current_dir; revisions = m.settings_revisions || {};
+    for (const id of ['callAutoTelemost','callAutoTalk','callAutoAck']) put(byId(id),m.config[config[id]]);
     put(byId('selDur'),m.meta?.duration ? String(m.meta.duration) : '');
     put(byId('selMic'),m.mic_current || 'auto');
     put(byId('selOutput'),m.output_current || 'auto');

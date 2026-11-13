@@ -185,7 +185,7 @@ function send(o) {
   const scene = o.type.startsWith("scene_");
   const stops = (o.type === "rec" && o.action === "stop" && !o.speech_rec_token)
     || ["scene_finish","training_finish"].includes(o.type);
-  const scoped = memory || scene || ["rec","speech_start","speech_finish","speech_cancel","speech_text",
+  const scoped = memory || scene || ["rec","capture_context","speech_start","speech_finish","speech_cancel","speech_text",
     "training_answer","training_finish"].includes(o.type) || !!o.speech_rec_token;
   if (scoped) {
     if (ws?.readyState !== WebSocket.OPEN || !currentInit?.server_epoch) {
@@ -3428,7 +3428,7 @@ function renderStartModes(focusMode = "") {
 
 function updateStartConfirmState() {
   const acknowledgement = $("startRecordingAck");
-  const required = currentContour === "work";
+  const required = currentContour === "work" || speechStartRequest?.unplanned === true;
   $("startRecordingAckWrap").hidden = !required;
   $("startConfirm").disabled = !pendingStartMode || (required && !acknowledgement.checked);
 }
@@ -5308,7 +5308,7 @@ $("recbtn").onclick = () => {
 };
 $("startConfirm").onclick = () => {
   if (!pendingStartMode) return;
-  if (currentContour === "work" && !$("startRecordingAck").checked) {
+  if ((currentContour === "work" || speechStartRequest?.unplanned) && !$("startRecordingAck").checked) {
     $("startRecordingAck").focus();
     return;
   }

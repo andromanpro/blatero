@@ -10,6 +10,17 @@ Whether that is sufficient depends on your actual context; use the full policy.
 
 ## Separate purposes
 
+### The microphone button in a meeting app
+
+Blatero captures the selected microphone independently. Your voice continues to
+appear in its recording while Telemost or Kontur.Talk is muted. Use **Stop**
+in Blatero to finish recording.
+
+Automatic recording is enabled separately for each app in **Settings → Integrations**
+with permission to start automatically. Windows microphone use by the app triggers
+recording, including sound checks before joining. Inform participants before
+recording begins according to the applicable rules.
+
 - Work is for real meetings/decisions. Test is for experiments/training, not a
   blanket permission to record people without a basis.
 - Recording permission is separate from enabling cloud processing.

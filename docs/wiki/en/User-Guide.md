@@ -8,6 +8,29 @@ Blatero combines meetings, projects, a plan and a knowledge library. You can use
 task tracking without a microphone or model. **Help** in the shared header offers
 three routes: hold a meeting, track tasks, plan and recall.
 
+## Record immediately
+
+Use **Record now**, choose the meeting format and confirm the recording basis.
+Blatero creates a separate meeting and starts audio capture. During the conversation,
+**Recording context** lets you select a prepared meeting, project, task and workspace
+folder. **Connect materials** adds the task, project documents and prior agreements
+to subsequent hints.
+
+For an instant conversation, the selected AI identifies the topic from the transcript
+after at least 300 characters, with cloud processing enabled. It links an existing
+task or creates an inbox task with a supporting transcript quotation. You can adjust
+the selection in **Recording context** or use **Identify from conversation** manually.
+
+In Windows, open **Settings → Integrations**, select Telemost and/or Kontur.Talk,
+enable automatic recording permission and save. The background helper runs at Windows
+sign-in and works while the panel is closed. Microphone use by the selected app
+triggers a fresh recording, including sound checks before joining. If the app opens
+the device when you unmute, the start signal appears at that point. Use **Stop** in Blatero to finish.
+Microphone-use interruptions of up to two minutes belong to the same start event.
+An ongoing recording continues until **Stop**, including long in-app mute periods.
+Blatero captures the selected microphone independently, so your voice is included
+in its recording while Telemost or Kontur.Talk is muted.
+
 ## Quick start
 
 Extract the whole portable ZIP, start `Blatero.exe`, open **Settings** and choose

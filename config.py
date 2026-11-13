@@ -24,6 +24,9 @@ OLLAMA_EXAMPLE_MODEL = "llama3.2"
 DEFAULTS = {
     # Explicit opt-in: user-initiated loopback browser navigation can sign in.
     "local_browser_auto_login": False,
+    "call_auto_telemost": False,
+    "call_auto_talk": False,
+    "call_auto_record_acknowledged": False,
     "llm_provider": "openrouter",  # OpenRouter/Codex/direct API/compatible endpoint
     "scene_coach_route": "inherit",
     # Используется только для OpenAI-совместимого провайдера (Ollama/vLLM/LM Studio).
@@ -156,6 +159,7 @@ CHOICE_VALIDATORS = {
 }
 BOOLEAN_SETTINGS = frozenset({
     "local_browser_auto_login",
+    "call_auto_telemost", "call_auto_talk", "call_auto_record_acknowledged",
     "record_audio", "cloud_processing_acknowledged",
     "raw_text_acknowledged",
     "cross_channel_echo_suppression", "pre_stt_echo_suppression",

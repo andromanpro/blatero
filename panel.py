@@ -78,6 +78,8 @@ import panel_audio as panel_audio_devices
 import panel_jobs
 import panel_lifecycle
 import panel_transport
+import meeting_capture
+import call_watch
 import provider_contracts
 import preflight as preflight_check
 import evidence
@@ -132,6 +134,7 @@ FRONTEND_FILES = {
     "blatero-icon-256.png": "image/png",
     "settings.css": "text/css; charset=utf-8",
     "settings.js": "text/javascript; charset=utf-8",
+    "capture-context.js": "text/javascript; charset=utf-8",
     "app.css": "text/css; charset=utf-8",
     "app.js": "text/javascript; charset=utf-8",
     "meeting-focus.js": "text/javascript; charset=utf-8",
@@ -222,6 +225,7 @@ async def lifespan(_app: FastAPI):
     tasks = [asyncio.create_task(transcript_watcher()),
              asyncio.create_task(ensure_bank()),
              asyncio.create_task(project_api.queue_worker())]
+    sync_call_watch()
     try:
         yield
     finally:
@@ -2295,7 +2299,7 @@ def init_payload() -> dict:
                      for k in ("type", "duration", "name",
                                "speaker_me", "speaker_guest", "emulation_enabled",
                                "emulation_role", "workspace_path",
-                               "client_name", "project_name", "contour")},
+                               "client_name", "project_name", "project_id", "contour")},
             "contour": contour,
             "contours": [
                 {"value": CONTOUR_WORK, "label": "Рабочий"},
@@ -2308,6 +2312,11 @@ def init_payload() -> dict:
             "recording_ref": recording_ref(state["sdir"]),
             "recording_video": state.get("recording_video"),
             "recording_modes": {"audio": True, "combined_video": True},
+            "capture_context": {"automatic": bool(session_meta(state["sdir"]).get("capture_auto_context")),
+                                "origin": session_meta(state["sdir"]).get("capture_context_origin"),
+                                "task_ids": session_meta(state["sdir"]).get("task_ids", []),
+                                "error": state.get("capture_context_error", "")},
+            "call_watch": {**call_watch.status(BASE), "error": state.get("call_watch_error", "") or call_watch.status(BASE)["error"]},
             "recording_video_error": state.get("recording_video_error"),
             "mics": list_mics(), "mic_current": c.get("mic_device", "auto"),
             "outputs": list_outputs(),
@@ -2345,6 +2354,7 @@ def init_payload() -> dict:
             "recovery": recovery_payload(),
             "report_folder": str(state["sdir"].resolve()),
             "config": {"llm_provider": c["llm_provider"],
+                       **{key: c[key] for key in CALL_CONFIG_KEYS},
                        "scene_coach_route": c['scene_coach_route'],
                        "llm_base_url": c.get("llm_base_url", cfg.DEFAULTS["llm_base_url"]),
                        "pulse_model": c["pulse_model"],
@@ -3516,6 +3526,12 @@ async def run_watcher_tick(tick: int, now: float) -> None:
     await publish_live_levels(tick)
     await publish_session_list(tick)
     await publish_transcript_updates(tick, now)
+    if tick % 20 == 0:
+        maybe_capture_context(now)
+        watch = call_watch.status(BASE)
+        if watch != state.get("call_watch_status"):
+            state["call_watch_status"] = watch
+            await broadcast({"type": "call_watch_status", **watch})
 
 
 def log_watcher_failure(last_error_at: float) -> float:
@@ -5906,7 +5922,9 @@ PANEL_CONFIG_KEYS = frozenset({
     "question_voice_provider", "cross_channel_echo_suppression",
     "pre_stt_echo_suppression", "pre_stt_echo_backend",
     "report_include_timestamps", "report_review_before_finalize",
+    "call_auto_telemost", "call_auto_talk", "call_auto_record_acknowledged",
 })
+CALL_CONFIG_KEYS = frozenset({"call_auto_telemost", "call_auto_talk", "call_auto_record_acknowledged"})
 CONFIG_BROADCAST_KEYS = frozenset({
     "scene_coach_route",
     "mic_device", "output_device", "llm_provider", "font_scale",
@@ -5939,7 +5957,7 @@ async def handle_ws_config(ws: WebSocket, msg: dict) -> None:
     key = str(msg.get("key"))
     if key not in PANEL_CONFIG_KEYS:
         raise ValueError(f"настройка недоступна из панели: {key}")
-    if key in CLOUD_SENSITIVE_CONFIG_KEYS:
+    if key in CLOUD_SENSITIVE_CONFIG_KEYS or key in CALL_CONFIG_KEYS:
         require_websocket_loopback(
             ws, "Облачные и privacy-настройки меняются только с этого компьютера")
     restarted = False
@@ -5968,7 +5986,9 @@ async def handle_ws_config(ws: WebSocket, msg: dict) -> None:
             cfg.save({"text_privacy_mode": value})
     else:
         cfg.save({key: msg.get("value")})
-    if key in CONFIG_BROADCAST_KEYS:
+    if key in CALL_CONFIG_KEYS:
+        sync_call_watch()
+    if key in CONFIG_BROADCAST_KEYS or key in CALL_CONFIG_KEYS:
         await broadcast(init_payload())
     await broadcast({
         "type": "status",
@@ -6013,7 +6033,7 @@ async def apply_settings_request(ws: WebSocket, msg: dict) -> None:
                 require_websocket_loopback(ws, "Рабочая папка меняется только с этого компьютера")
             save_meta(updates)
         else:
-            if CLOUD_SENSITIVE_CONFIG_KEYS.intersection(updates):
+            if (CLOUD_SENSITIVE_CONFIG_KEYS | CALL_CONFIG_KEYS).intersection(updates):
                 require_websocket_loopback(ws, "Подключения и приватность меняются только с этого компьютера")
             checked = dict(updates)
             if "llm_provider" in checked:
@@ -6037,6 +6057,8 @@ async def apply_settings_request(ws: WebSocket, msg: dict) -> None:
                 for key in speech_keys:
                     validate_speech_setting(key, str(checked[key]))
                 cfg.save(checked)
+                if CALL_CONFIG_KEYS.intersection(checked):
+                    sync_call_watch()
             if "llm_provider" in checked:
                 state["llm_settings_revision"] += 1
         await broadcast(init_payload())
@@ -6079,6 +6101,124 @@ async def handle_ws_new_meeting(ws: WebSocket, msg: dict) -> None:
             do_workspace_initialize(meeting, ws), name="workspace-initialize")
 
 
+def sync_call_watch() -> None:
+    try:
+        call_watch.synchronize(APP_ROOT, BASE, state.get("access_token") or "",
+                               state.get("call_watch_port", 8777))
+        state["call_watch_error"] = ""
+    except (OSError, ValueError) as exc:
+        state["call_watch_error"] = str(exc)
+        LOGGER.exception("Не удалось настроить автоматическую запись звонков")
+
+
+def capture_store():
+    from project_store import Store
+    return Store(BASE / ".projects")
+
+
+async def do_capture_context(job: SessionJob, body: dict, *, automatic: bool = False) -> None:
+    revision = settings_revisions()["meta"]
+    try:
+        store = capture_store()
+        topic = None
+        if body.get("recognize"):
+            topic = await asyncio.to_thread(meeting_capture.recognize, store, job.sdir)
+            if not topic.get("ready"):
+                raise ValueError("Тема ещё не определилась. Продолжайте разговор или выберите её вручную.")
+            body = {**topic, "task_ids": [topic["task_id"]] if topic.get("task_id") else []}
+        prepared = await asyncio.to_thread(meeting_capture.prepare, store, BASE, job.sdir, body)
+        if not session_job_is_current(job) or settings_revisions()["meta"] != revision:
+            raise ValueError("Контекст встречи изменился во время подготовки. Повторите выбор.")
+        if topic and not topic.get("task_id"):
+            prepared["task_ids"] = [meeting_capture.task_from_topic(store, job.sdir, topic)]
+        result = meeting_capture.apply(store, BASE, job.sdir, prepared,
+                                       origin="conversation" if topic else "manual")
+        state["label"] = session_label(job.sdir)
+        state["capture_context_error"] = ""
+        await broadcast({"type": "capture_context_result", "ok": True, "session": job.sdir.name,
+                         "request_id": body.get("request_id"), **result})
+        await broadcast(init_payload())
+    except Exception as exc:
+        if session_job_is_current(job):
+            state["capture_context_error"] = str(exc)
+            await broadcast({"type": "capture_context_result", "ok": False, "session": job.sdir.name,
+                             "automatic": automatic, "message": str(exc)})
+    finally:
+        if state.get("capture_context_job") == job:
+            state["capture_context_job"] = None
+
+
+def maybe_capture_context(now: float) -> None:
+    if (state.get("capture_context_job") or not recording_active(state["sdir"])
+            or not session_meta(state["sdir"]).get("capture_auto_context")
+            or not cfg.load().get("cloud_processing_acknowledged")
+            or now - state.get("capture_context_at", 0) < 60):
+        return
+    text = meeting_capture.transcript(state["sdir"])
+    if len(text.strip()) < 300 or text == state.get("capture_context_text"):
+        return
+    state["capture_context_at"], state["capture_context_text"] = now, text
+    job = capture_session_job()
+    state["capture_context_job"] = job
+    spawn_session_background(do_capture_context(job, {"recognize": True}, automatic=True),
+                             name="capture-context")
+
+
+async def handle_ws_capture_context(ws: WebSocket, msg: dict) -> None:
+    require_websocket_loopback(ws, "Контекст записи настраивается с этого компьютера")
+    job = scoped_ws_job(msg)
+    if state.get("capture_context_job"):
+        raise ValueError("Подготовка контекста уже идёт.")
+    if session_job_active("memory"):
+        raise ValueError("Дождитесь сохранения памяти встречи.")
+    state["capture_context_job"] = job
+    spawn_session_background(do_capture_context(job, msg), name="capture-context")
+
+
+@app.get("/api/capture/options")
+async def capture_options(request: Request):
+    if not request_is_loopback(request):
+        return PlainTextResponse("только с этого компьютера", status_code=403)
+    result = await asyncio.to_thread(meeting_capture.options, capture_store())
+    sessions = list_sessions(session_contour(state["sdir"]))
+    return {**result, "sessions": [{**item, "meta": session_meta(BASE / "sessions" / item["dir"])}
+                                     for item in sessions]}
+
+
+@app.post("/api/call-watch/start")
+async def call_watch_start(request: Request):
+    if not request_is_loopback(request) or not request_origin_ok(request) or not request_is_json(request):
+        return PlainTextResponse("локальный JSON-запрос обязателен", status_code=403)
+    body = await request.json()
+    settings = cfg.load()
+    if (not isinstance(body, dict) or body.get("app") not in call_watch.APPS
+            or not call_watch.enabled(settings) or not settings.get("call_auto_" + body["app"])):
+        return JSONResponse({"state": "disabled"})
+    event = body.get("event")
+    if not isinstance(event, str) or not re.fullmatch(r"[0-9a-f]{64}", event):
+        return PlainTextResponse("неверный идентификатор звонка", status_code=400)
+    receipt = BASE / ".call-watch-receipts" / (event + ".json")
+    if receipt.is_file():
+        return {**json.loads(receipt.read_text(encoding="utf-8")), "replayed": True}
+    uses = await asyncio.to_thread(call_watch.microphone_uses)
+    if not any(all(use.get(key) == body.get(key) for key in ("app", "path", "start")) for use in uses):
+        return {"state": "ended"}
+    if recording_locked() or video_manager.is_active(state.get("sdir")):
+        result = {"state": "busy"}
+    else:
+        job = capture_session_job()
+        await handle_ws_recording(None, {"action": "start", "mtype": "встреча", "unplanned": True,
+            "recording_acknowledged": True, "request_id": event[:32], "session": job.sdir.name,
+            "generation": job.generation, "server_epoch": WS_SCOPE_EPOCH})
+        started = recording_active(state["sdir"])
+        result = {"state": "started" if started else "failed", "session": state["sdir"].name}
+        if not started:
+            result["error"] = state.get("last_recording_start_error") or "Автоматическая запись не запустилась. Проверьте устройства и распознавание в Blatero."
+    receipt.parent.mkdir(parents=True, exist_ok=True)
+    atomic_write_text(receipt, json.dumps(result, ensure_ascii=False))
+    return result
+
+
 async def handle_ws_recording(_ws: WebSocket, msg: dict) -> None:
     if state.get("rec_transition_busy"):
         await broadcast({"type": "status",
@@ -6086,6 +6226,7 @@ async def handle_ws_recording(_ws: WebSocket, msg: dict) -> None:
                          "busy": False})
         return
     action = msg.get("action")
+    unplanned = action == "start" and msg.get("unplanned") is True
     if action not in ("start", "stop"):
         raise ValueError("Неизвестное действие записи.")
     mtype = str(msg.get("mtype", "")).strip().lower()
@@ -6099,7 +6240,7 @@ async def handle_ws_recording(_ws: WebSocket, msg: dict) -> None:
                          "text": "запись: сначала создайте или выберите встречу",
                          "busy": False})
         return
-    if (action == "start" and session_contour(state["sdir"]) == CONTOUR_WORK
+    if (action == "start" and (unplanned or session_contour(state["sdir"]) == CONTOUR_WORK)
             and msg.get("recording_acknowledged") is not True):
         await broadcast({
             "type": "status",
@@ -6108,6 +6249,27 @@ async def handle_ws_recording(_ws: WebSocket, msg: dict) -> None:
             "busy": False})
         return
     job = scoped_ws_job(msg)
+    if unplanned:
+        request_id = str(msg.get("request_id") or "")
+        if not re.fullmatch(r"[0-9a-f]{32}", request_id):
+            raise ValueError("Некорректная команда быстрой записи.")
+        if session_meta(job.sdir).get("capture_request_id") == request_id:
+            await broadcast(init_payload())
+            return
+        if recording_locked() or video_manager.is_active(job.sdir):
+            raise ValueError("Сначала завершите текущую запись.")
+        if msg.get("video_run") or msg.get("speech_rec_token"):
+            raise ValueError("Быстрая запись начинается со звука.")
+        meeting = new_meeting("Разговор " + dt.datetime.now().strftime("%d.%m %H:%M"), mtype, None)
+        meta = session_meta(meeting)
+        meta.update(capture_auto_context=True, capture_request_id=request_id)
+        session_schema.write_meta(meeting, meta)
+        if not switch_session(meeting.name):
+            raise ValueError(state.get("last_session_error"))
+        job = capture_session_job()
+        state["capture_context_error"] = ""
+        state["capture_context_at"] = 0
+        state["capture_context_text"] = ""
     speech_token = msg.get("speech_rec_token")
     if action == "stop" and speech_token is None:
         require_recording_ref(job.sdir, msg.get("recording_ref"), required=True)
@@ -6134,6 +6296,7 @@ async def handle_ws_recording(_ws: WebSocket, msg: dict) -> None:
             raise RuntimeError("дождитесь завершения переключения распознавания")
         if action == "start":
             state['recording_video_error'] = None
+            state["last_recording_start_error"] = ""
             if session_contour(state["sdir"]) == CONTOUR_WORK:
                 session_lifecycle.record_recording_basis(state["sdir"])
             # Флаг перехода уже защищает от параллельной команды. Сохранение типа
@@ -6187,6 +6350,8 @@ async def handle_ws_recording(_ws: WebSocket, msg: dict) -> None:
             refresh = True
     except Exception as exc:
         text = f"запись: {exc}"
+        if action == "start":
+            state["last_recording_start_error"] = str(exc)
         if action == 'start' and video_run and not recording_active(job.sdir):
             try:
                 await asyncio.to_thread(video_manager.action, job.sdir, video_run, 'cancel')
@@ -6196,7 +6361,7 @@ async def handle_ws_recording(_ws: WebSocket, msg: dict) -> None:
         state["rec_transition_busy"] = False
     if session_job_is_current(job):
         await broadcast({"type": "status", "text": text, "busy": False})
-        if refresh:
+        if refresh or unplanned:
             await broadcast(init_payload())
 
 
@@ -6656,6 +6821,7 @@ WS_COMMAND_HANDLERS = {
     "session": handle_ws_session,
     "contour": handle_ws_contour,
     "rec": handle_ws_recording,
+    "capture_context": handle_ws_capture_context,
     "transcript_import": handle_ws_transcript_import,
     **dict.fromkeys((
         "diagnostics_build", "clear_results", "archive", "delete_audio",
@@ -6831,6 +6997,7 @@ def main():
         "--show-access-url", action="store_true",
         help="явно напечатать URL с токеном; не используйте при записи stdout в лог")
     args = ap.parse_args()
+    state["call_watch_port"] = args.port
 
     if args.session:
         candidate = Path(args.session)

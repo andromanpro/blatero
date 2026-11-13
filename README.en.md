@@ -12,10 +12,22 @@ with the project.** Blatero runs on your computer. It captures the microphone
 and meeting audio separately, offers transcripts and live hints, and helps you
 review a draft report and turn decisions into project tasks.
 
-[**Download the Windows portable preview**](https://github.com/andromanpro/blatero/releases/tag/v1.0.2-rc.8)
+[**Download the Windows portable preview**](https://github.com/andromanpro/blatero/releases/tag/v1.0.2-rc.9)
 · [Get started](docs/wiki/en/Home.md)
 
 ![Blatero's new meeting wizard in English](docs/wiki/images/en/new-meeting.png)
+
+## Record immediately
+
+**Record now** starts a new conversation. During recording, **Recording context**
+connects a prepared meeting, project, task and workspace folder. The selected AI can
+identify the topic from the transcript and create an inbox task.
+
+**Settings → Integrations** offers automatic recording triggered by Telemost or
+Kontur.Talk microphone use, with permission to start automatically. Blatero continues
+capturing the selected microphone, including your voice, while the meeting app is
+muted. Use **Stop** in Blatero to finish.
+[User guide](docs/wiki/en/User-Guide.md#record-immediately).
 
 ## From conversation to a project task
 
@@ -47,7 +59,7 @@ and keep the next step with the task.
 
 ## Try it with a sample meeting
 
-1. Extract the full [Windows archive](https://github.com/andromanpro/blatero/releases/tag/v1.0.2-rc.8)
+1. Extract the full [Windows archive](https://github.com/andromanpro/blatero/releases/tag/v1.0.2-rc.9)
    and run `Blatero.exe`.
 2. Choose **Help → Run a meeting → Show me around** to find the controls for
    preparation, audio checks, recording and results.
@@ -105,7 +117,7 @@ See [privacy and data flows](PRIVACY.md).
 
 ## Development status
 
-The [public Windows portable build](https://github.com/andromanpro/blatero/releases/tag/v1.0.2-rc.8)
+The [public Windows portable build](https://github.com/andromanpro/blatero/releases/tag/v1.0.2-rc.9)
 is a preview, not a stable release. The release page lists the checks performed
 and explains the difference between the project signature and Windows publisher signing.
 See [the pilot-testing guide](docs/wiki/en/Pilot-Testing.md) for steps to check
