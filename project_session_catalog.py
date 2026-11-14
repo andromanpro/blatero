@@ -18,7 +18,7 @@ from pathlib import Path
 from session_paths import codex_roots
 
 ROOT = Path(__file__).parent
-WORKAI = ROOT.parent
+WORKSPACE_ROOT = ROOT.parent
 SECRET = re.compile(r'(?i)(?:\b(?:sk-|ghp_|github_pat_|gitea_|xox[baprs]-)[A-Za-z0-9_\-]{15,}|'
                     r'\b(?:api[_ -]?key|access[_ -]?token|authorization|password|пароль|токен)\s*[:=]\s*["\']?[^\s"\',;]{8,})')
 INJECTED = ('# AGENTS.md instructions', '<external_codex_apps_open_page>', '<environment_context>', '<recommended_plugins>',
@@ -77,7 +77,10 @@ def add_message(record: dict, role: str, text: str, location: str, stamp=None):
     # Retain all human prompts and final assistant text as bounded previews.
     record['messages'].append(entry)
     record['tickets'].update(re.findall(r'\b(?:ITWMS|ITWMST|BHK|WMS)-\d{2,6}\b', text, re.I))
-    record['paths'].update(re.findall(r'(?i)(?:F:|F\\:)[/\\]WorkAI[/\\]([^\s/\\"\'<>;,]+)', text))
+    workspace = re.sub(r'\\+', '/', str(WORKSPACE_ROOT)).rstrip('/')
+    normalized = re.sub(r'\\+', '/', text.replace('\\:', ':'))
+    record['paths'].update(re.findall(re.escape(workspace) + r'/([^\s/"\'<>;,]+)',
+                                     normalized, re.I))
 
 
 def codex_catalog(home: Path, output: Path, conversations_only=False):
@@ -264,7 +267,7 @@ def write_record(output: Path, record: dict):
 def project_catalog(output: Path):
     records = []
     skip = re.compile(r'^(?:[._$]|tmp|temp$|backups$|outputs$|logs$|kernels$|apk-|.*-workspace$)', re.I)
-    for folder in WORKAI.iterdir():
+    for folder in WORKSPACE_ROOT.iterdir():
         if not folder.is_dir() or skip.search(folder.name):
             continue
         docs = []
@@ -280,10 +283,14 @@ def project_catalog(output: Path):
 
 
 def main():
+    global WORKSPACE_ROOT
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--workspace', type=Path, default=WORKSPACE_ROOT,
+                        help='родительский каталог проектов для импорта')
     parser.add_argument('--conversations-only', action='store_true', help='перечитать человеческие сессии, сохранив каталог технических запусков')
     args = parser.parse_args()
+    WORKSPACE_ROOT = args.workspace.resolve()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     projects = project_catalog(output)

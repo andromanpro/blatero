@@ -258,7 +258,7 @@ def diarize_audio(audio: Path, output: Path, *, audio_name: str,
     for model in (SEGMENTATION_MODEL, embedding_path):
         if not model.is_file():
             raise FileNotFoundError(
-                f"модель не установлена: {model}; см. TRANSCRIPT_FORMAT.md")
+                f"модель не установлена: {model}; см. раздел «Аудио и говорящие» в справке")
     threads = max(1, min(8, os.cpu_count() or 1))
     segmentation = sherpa_onnx.OfflineSpeakerSegmentationModelConfig(
         pyannote=sherpa_onnx.OfflineSpeakerSegmentationPyannoteModelConfig(

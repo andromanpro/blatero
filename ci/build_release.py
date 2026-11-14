@@ -24,8 +24,8 @@ except ModuleNotFoundError:  # pragma: no cover - direct script path
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_ROOT_FILES = {
-    "README.md", "README.en.md", "DEVLOG.md", "LICENSE", "PRIVACY.md", "THIRD_PARTY_NOTICES.md", "TRANSCRIPT_FORMAT.md",
-    "DIARIZATION_MODELS.md", "questions.md", "rubric.md", "pyproject.toml",
+    "README.md", "README.en.md", "CHANGELOG.md", "LICENSE", "PRIVACY.md", "THIRD_PARTY_NOTICES.md",
+    "questions.md", "rubric.md", "pyproject.toml",
     "requirements.lock", "requirements-portable.txt", "requirements-chatterbox.txt", "requirements-video.txt",
     "start_blatero.cmd", "install_blatero.cmd", "release_public_key.pem",
     "project-agent-event.schema.json",
@@ -36,6 +36,8 @@ RUNTIME_PREFIXES = (
     "ci/__init__.py",
     "ci/build_release.py",
     "ci/build_windows_portable.py",
+    "ci/check_public_content.py",
+    "ci/check_secrets.py",
     "ci/generate_sbom.py",
     "ci/offline_help.py",
     "ci/generate_release_key.py",
@@ -43,6 +45,7 @@ RUNTIME_PREFIXES = (
     "ci/release_step.py",
     "docs/legal/",
     "docs/wiki/",
+    "docs/development/",
 )
 DEVELOPMENT_ONLY = {"test_roundtrip.py", "debug_two_channels.py", "devices_check.py"}
 

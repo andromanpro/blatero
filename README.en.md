@@ -1,5 +1,7 @@
 # Blatero
 
+[Source map and developer documentation (RU)](docs/development/README.md) · [Release history (RU)](CHANGELOG.md)
+
 [Русский](README.md) · [English user guide](docs/wiki/en/Home.md)
 
 By **androman** · [androman.pro](https://androman.pro) · [Telegram](https://t.me/andromanpro1c)

@@ -53,9 +53,12 @@ PORTABLE_APP_EXCLUDES = {
     "test_roundtrip.py",
     "ci/generate_release_key.py",
     "ci/release_step.py",
+    "ci/check_public_content.py",
+    "ci/check_secrets.py",
 }
 PORTABLE_APP_EXCLUDE_PREFIXES = (
     "ci/portable_launcher/",
+    "docs/development/",
 )
 MAX_RUNTIME_ARCHIVE_BYTES = 32 * 1024**2
 MAX_RUNTIME_FILES = 100
